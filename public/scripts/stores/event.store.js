@@ -11,8 +11,6 @@ define(['dispatcher', 'actions', 'flux'],
 
   });
 
-  console.log(store);
-
   dispatcher.register(actions.UPDATE_EVENT, store.set);
 
   return store;
