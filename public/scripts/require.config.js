@@ -21,6 +21,9 @@ require.config({
     // api
     'insident.api': './api/insident.api',
 
+    // router
+    router: './router/router',
+
     // flux
     flux: './flux/flux'
   }
