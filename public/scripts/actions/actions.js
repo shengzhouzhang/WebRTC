@@ -5,9 +5,12 @@ define(['dispatcher'],
 
   var actions = {
 
+    // app
+    APP_READY: 'APP_READY',
+
     // stores actions
-    UPDATE_EVENT: 'UPDATE_EVENT',
-    
+    UPDATE_INSIDENT: 'UPDATE_INSIDENT',
+
   };
 
   return actions;

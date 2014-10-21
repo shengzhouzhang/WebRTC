@@ -8,27 +8,32 @@ define(['EventEmitter'], function (EventEmitter) {
 
     var baseClass = new EventEmitter();
 
-    _.extend(this, options, {
+    _.extend(this, {
 
       STORE_UPDATED: 'STORE_UPDATED',
 
-      _store: null,
+      _data: null,
+
+      init: function () {
+        if(!this._Model) { throw new Error ('missing model'); }
+        this._data = new this._Model();
+      },
 
       get: function () {
-        if(!this._store) { throw new Error ('missing values'); }
-        this._store.toJSON();
+        if(!this._data) { throw new Error ('missing values'); }
+        this._data.toJSON();
       },
 
       set: function (json) {
-        if(!json || !this._store) { throw new Error ('missing values'); }
-        this._store.set(json);
+        if(!json || !this._data) { throw new Error ('missing values'); }
+        this._data.set(json);
         this.emitEvent(this.STORE_UPDATED);
       },
 
       clear: function () {
-        if(!this._store) { throw new Error ('missing values'); }
-        if(!this._store.clear) { this._store.clear(); this.emitEvent(this.STORE_UPDATED); return; }
-        if(!this._store.reset) { this._store.reset(); this.emitEvent(this.STORE_UPDATED); return; }
+        if(!this._data) { throw new Error ('missing values'); }
+        if(!this._data.clear) { this._data.clear(); this.emitEvent(this.STORE_UPDATED); return; }
+        if(!this._data.reset) { this._data.reset(); this.emitEvent(this.STORE_UPDATED); return; }
         throw new Error ('unknow clear method');
       },
 
@@ -40,7 +45,7 @@ define(['EventEmitter'], function (EventEmitter) {
         this.removeListener(this.STORE_UPDATED, callback);
       },
 
-    }, baseClass);
+    }, baseClass, options);
   };
 
   Store.extend = Backbone.Model.extend;

@@ -10,13 +10,16 @@ require.config({
     dispatcher: './dispatcher/dispatcher',
 
     // actions
-    'store.actions': './actions/store.actions/store.actions',
+    actions: './actions/actions',
 
     // stores
-    'event.store': './stores/event.store',
+    'insident.store': './stores/insident.store',
 
     // actions
     actions: './actions/actions',
+
+    // api
+    'insident.api': './api/insident.api',
 
     // flux
     flux: './flux/flux'
