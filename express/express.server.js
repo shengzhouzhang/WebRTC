@@ -6,7 +6,6 @@ var express = require('express'),
     session = require('express-session'),
     RedisStore = require('connect-redis')(session),
     path = require('path'),
-    http = require('http').Server(express),
     redis = require('../util/redis/redis.client').client,
     logger = require('../util/log/application.log').logger;
 
@@ -32,7 +31,7 @@ var server = {
       secret: 'cammy-irc'
     }));
 
-    _server = http.listen(_express.get('port'), function () {
+    _server = _express.listen(_express.get('port'), function () {
       logger.info('Express server listening on port ' + _express.get('port'));
     });
   },
