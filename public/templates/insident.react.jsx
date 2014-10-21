@@ -1,9 +1,9 @@
 /** @jsx React.DOM */
-define(['dispatcher', 'actions'],
-       function (dispatcher, actions) {
+define(['dispatcher', 'actions', 'insident.store'],
+       function (dispatcher, actions, store) {
   'use strict';
 
-  var _container, _store, _component;
+  var _container, _component;
 
   var Image = React.createClass({
 
@@ -29,15 +29,15 @@ define(['dispatcher', 'actions'],
     },
 
     componentDidMount: function () {
-      _store.addEventListener(this._onLoad);
+      store.addEventListener(this._onLoad);
     },
 
     componentWillUnmount: function () {
-      _store.removeEventListener(this._onLoad);
+      store.removeEventListener(this._onLoad);
     },
 
     _onLoad: function () {
-      this.setState(_store.get());
+      this.setState(store.get());
     },
 
     render: function () {
@@ -54,8 +54,7 @@ define(['dispatcher', 'actions'],
 
   return {
 
-    init: function (store, container) {
-      _store = store;
+    init: function (container) {
       _container = container;
       _component = React.renderComponent(
         Images(null),

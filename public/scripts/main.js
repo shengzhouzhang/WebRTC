@@ -2,18 +2,14 @@ require([
   'dispatcher',
   'actions',
 
-  'insident.view',
-  'insident.store',
-  'insident.api',
+  'view.manager',
+  'api.manager',
   'router'
-  ], function (dispatcher, actions, view, store, api) {
+  ], function (dispatcher, actions, views) {
   'use strict';
 
-  var insidentContainer = document.getElementById('insident-container');
+  dispatcher.dispatch(actions.APP_INIT).done(function () {
 
-  view.init(store, insidentContainer);
-
-  Backbone.history.start();
-
-  dispatcher.dispatch(actions.APP_READY);
+    dispatcher.dispatch(actions.APP_START)
+  });
 });

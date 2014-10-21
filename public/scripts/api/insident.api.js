@@ -30,7 +30,5 @@ define(['dispatcher', 'actions'], function (dispatcher, actions) {
     }
   };
 
-  dispatcher.register(actions.REQUEST_INSIDENT, Insident.request.bind(Insident));
-
   return Insident;
 });

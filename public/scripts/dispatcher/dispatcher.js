@@ -2,7 +2,27 @@ define([],
        function () {
   'use strict';
 
-  var _handlers = {};
+  var _handlers = {},
+      _promises = [];
+
+  var _addPromise = function (handler, options) {
+    _promises.push((function () {
+      var def = $.Deferred();
+
+      try {
+        handler(options);
+        def.resolve();
+      } catch (err)  {
+        def.reject(new Error (err));
+      }
+
+      return def.promise();
+    })());
+  };
+
+  var _clearPromises = function () {
+    _promises = [];
+  };
 
   var Dispatcher = {
 
@@ -20,8 +40,10 @@ define([],
 
       _.each(_handlers[action], function (handler) {
         if(!handler) { return; }
-        handler(options);
+        _addPromise(handler, options);
       });
+
+      return $.when(_promises).then(_clearPromises);
     }
   };
 
