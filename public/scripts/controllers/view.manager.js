@@ -13,7 +13,7 @@ define([
     init: function () {
       _views = $('div[container]').hide();
       insidentView.init(_views.filter('#insident-container')[0]);
-      console.log('VIEW_READY');
+      console.log('VIEWS_READY');
     }
   };
 

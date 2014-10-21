@@ -25,8 +25,9 @@ require.config({
     router: './router/router',
 
     // controllers
-    'view.manager': './controller/view.manager',
-    'api.manager': './controller/api.manager',
+    'view.manager': './controllers/view.manager',
+    'api.manager': './controllers/api.manager',
+    'store.manager': './controllers/store.manager',
 
     // flux
     flux: './flux/flux'
