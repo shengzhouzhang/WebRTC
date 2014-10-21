@@ -1,0 +1,31 @@
+{
+  "bitwise": true,
+  "curly": true,
+  "eqeqeq": true,
+  "forin": true,
+  "freeze": true,
+  "immed": true,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "noempty": true,
+  "nonbsp": true,
+  "nonew": true,
+  "undef": true,
+  "strict": true,
+  "trailing": true,
+
+  "quotmark": "single",
+  "indent": 2,
+
+  "eqnull": true,
+  "expr": true,
+
+  "browser": true,
+  "node": true,
+
+  "predef": [
+    "describe",
+    "it"
+  ]
+}
