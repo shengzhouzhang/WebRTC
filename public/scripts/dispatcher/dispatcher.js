@@ -7,7 +7,6 @@ define([],
   var Dispatcher = {
 
     register: function (action, callback) {
-      // console.log(callback);
       if(!action || !callback) { throw new Error ('missing values'); }
       if(!_handlers[action]) { _handlers[action] = []; }
 

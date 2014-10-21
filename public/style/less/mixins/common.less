@@ -1,0 +1,41 @@
+
+.box-sizing (@arg: border-box) {
+  -webkit-box-sizing: @arg;
+  -moz-box-sizing: @arg;
+  box-sizing: @arg;
+}
+
+.appearance (@arg: none) {
+  -webkit-appearance: @arg;
+  -moz-appearance: @arg;
+  appearance: @arg;
+}
+
+.user-select (@arg: none) {
+  -moz-user-select: @arg;
+  -webkit-user-select: @arg;
+  -ms-user-select: @arg;
+  user-select: @arg;
+}
+
+.transition (@arg: .25s) {
+  -webkit-transition: all @arg ease-in-out;
+  -moz-transition: all @arg ease-in-out;
+  -ms-transition: all @arg ease-in-out;
+  transition: all @arg ease-in-out;
+}
+
+.default-font (@arg: .16px) {
+  font-family: "Lato", Arial;
+  color: #3b545c;
+  font-size: @arg;
+  font-weight: normal;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}

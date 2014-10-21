@@ -21,7 +21,7 @@ define(['EventEmitter'], function (EventEmitter) {
 
       get: function () {
         if(!this._data) { throw new Error ('missing values'); }
-        this._data.toJSON();
+        return this._data.toJSON();
       },
 
       set: function (json) {

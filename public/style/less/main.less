@@ -1,0 +1,52 @@
+
+@import 'mixins/common.less';
+
+@import 'components/insident.less';
+
+html,
+body {
+  .full-width;
+
+  padding: 0;
+  margin: 0;
+
+  .default-font(16px);
+}
+
+input,
+textarea,
+button,
+select {
+
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  outline: none;
+  resize: none;
+
+  .default-font(16px);
+  .box-sizing(border-box);
+  .appearance(none);
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+* {
+  .box-sizing(border-box);
+}
+
+.container {
+  display: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}

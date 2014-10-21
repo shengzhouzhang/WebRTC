@@ -12,11 +12,11 @@ require.config({
     // actions
     actions: './actions/actions',
 
+    // views
+    'insident.view': './views/insident.react',
+
     // stores
     'insident.store': './stores/insident.store',
-
-    // actions
-    actions: './actions/actions',
 
     // api
     'insident.api': './api/insident.api',
