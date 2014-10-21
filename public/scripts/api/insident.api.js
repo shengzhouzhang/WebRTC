@@ -24,11 +24,13 @@ define(['dispatcher', 'actions'], function (dispatcher, actions) {
         url: '/json/test-case-06.json',
         contentType: 'application/json',
         success: function (data) {
-          dispatcher.dispatch(actions.UPDATE_INSIDENT, _parse(data));
+          dispatcher.dispatch(actions.UPDATE_INSIDENT_STORE, _parse(data));
         }
       });
     }
   };
+
+  dispatcher.register(actions.REQUEST_INSIDENT, Insident.request.bind(Insident));
 
   return Insident;
 });

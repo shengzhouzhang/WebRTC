@@ -9,6 +9,5 @@ require([
 
 
   dispatcher.dispatch(actions.APP_READY);
-
-  api.request();
+  dispatcher.dispatch(actions.REQUEST_INSIDENT);
 });
