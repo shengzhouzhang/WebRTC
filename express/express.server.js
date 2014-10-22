@@ -20,6 +20,8 @@ var server = {
 
     _express.set('port', process.env.PORT || 3000);
 
+    // middlewares
+
     _express.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }));
     _express.use(bodyParser.json({ limit: '5mb' }));
     _express.use(bodyParser.json({ type: 'application/vnd.api+json', limit: '5mb' }));
@@ -30,6 +32,13 @@ var server = {
       store: new RedisStore({ client: redis }),
       secret: 'cammy-irc'
     }));
+
+    // routers
+
+    _express.use('/user', require('./routers/user.router').router);
+
+
+    // server
 
     _server = _express.listen(_express.get('port'), function () {
       logger.info('Express server listening on port ' + _express.get('port'));

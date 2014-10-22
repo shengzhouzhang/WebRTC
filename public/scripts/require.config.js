@@ -21,6 +21,7 @@ require.config({
     'insident.store': './stores/insident.store',
 
     // api
+    'user.api': './api/user.api',
     'insident.api': './api/insident.api',
 
     // router

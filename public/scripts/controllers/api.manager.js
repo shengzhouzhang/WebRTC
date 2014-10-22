@@ -2,14 +2,15 @@ define([
   'dispatcher',
   'actions',
 
+  'user.api',
   'insident.api',
-  ], function (dispatcher, actions, insidentApi) {
+  ], function (dispatcher, actions, userApi, insidentApi) {
   'use strict';
 
   dispatcher.register(actions.APP_INIT, function (options) {
 
     $.ajaxSetup({
-      statusCode : {
+      statusCode: {
         400: function () {
           console.log('ajaxSetup', 400);
         },
