@@ -27,13 +27,19 @@ define(['dispatcher'],
 
     // user actions
 
-    REQUIRE_AUTH: 'REQUIRE_AUTH',
-
     // authenticate actions
 
+    REQUIRE_AUTH: 'REQUIRE_AUTH',
     USER_LOGIN: 'USER_LOGIN',
     LOGIN_FAILED: 'LOGIN_FAILED',
 
+    // error
+
+    BAD_REQUEST: 'BAD_REQUEST',
+    UNAUTHORIZED: 'UNAUTHORIZED',
+    FORBIDDEN: 'FORBIDDEN',
+    NOT_FOUND: 'NOT_FOUND',
+    REQUEST_TIMEOUT: 'REQUEST_TIMEOUT'
   };
 
   return actions;

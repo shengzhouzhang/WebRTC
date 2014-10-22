@@ -8,7 +8,6 @@ define([
   'use strict';
 
   var _hasAuthenticated = function () {
-
     return false;
   };
 
@@ -17,7 +16,9 @@ define([
       if(!!_hasAuthenticated()) { resolve(); return; }
 
       store.once(function () { if(!!_hasAuthenticated()) { resolve(); } });
-      dispatcher.dispatch(actions.TO_LOGIN_VIEW);
+      dispatcher.dispatch(actions.UNAUTHORIZED);
     });;
   });
+
+  dispatcher.register(actions.UNAUTHORIZED, dispatcher.dispatch.bind(undefined, actions.TO_LOGIN_VIEW));
 });

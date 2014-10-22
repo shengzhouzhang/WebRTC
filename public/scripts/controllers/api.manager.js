@@ -10,22 +10,15 @@ define([
   dispatcher.register(actions.APP_INIT, function (options) {
 
     $.ajaxSetup({
+      contentType: 'application/json',
+      dataType: 'json',
+      cache: false,
       statusCode: {
-        400: function () {
-          console.log('ajaxSetup', 400);
-        },
-        401: function () {
-          console.log('ajaxSetup', 401);
-        },
-        403: function () {
-          console.log('ajaxSetup', 403);
-        },
-        404: function () {
-          console.log('ajaxSetup', 404);
-        },
-        408: function () {
-          console.log('ajaxSetup', 408);
-        }
+        400: dispatcher.dispatch.bind(undefined, actions.BAD_REQUEST),
+        401: dispatcher.dispatch.bind(undefined, actions.UNAUTHORIZED),
+        403: dispatcher.dispatch.bind(undefined, actions.FORBIDDEN),
+        404: dispatcher.dispatch.bind(undefined, actions.NOT_FOUND),
+        408: dispatcher.dispatch.bind(undefined, actions.REQUEST_TIMEOUT),
       }
     });
 
