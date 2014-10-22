@@ -30,5 +30,7 @@ define(['dispatcher', 'actions'], function (dispatcher, actions) {
     }
   };
 
+  dispatcher.register(actions.REQUEST_INSIDENT, Insident.request);
+
   return Insident;
 });

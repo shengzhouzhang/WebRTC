@@ -17,6 +17,7 @@ require.config({
     'insident.view': './views/insident.react',
 
     // stores
+    'user.store': './stores/user.store',
     'insident.store': './stores/insident.store',
 
     // api

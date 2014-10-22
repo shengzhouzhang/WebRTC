@@ -45,6 +45,10 @@ define(['EventEmitter'], function (EventEmitter) {
         this.removeListener(this.STORE_UPDATED, callback);
       },
 
+      once: function (callback) {
+        this.once(this.STORE_UPDATED, callback);
+      },
+
     }, baseClass, options);
   };
 
