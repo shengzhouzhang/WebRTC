@@ -11,7 +11,6 @@ define(['dispatcher', 'actions', 'flux'],
     })
   });
 
-  dispatcher.register(actions.APP_INIT, store.init.bind(store));
   dispatcher.register(actions.UPDATE_INSIDENT_STORE, store.set.bind(store));
 
   return store;

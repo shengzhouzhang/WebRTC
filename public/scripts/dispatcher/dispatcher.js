@@ -6,18 +6,16 @@ define([],
       _promises = [];
 
   var _addPromise = function (handler, options) {
-    _promises.push((function () {
-      var def = $.Deferred();
+
+    _promises.push(new Promise(function (resolve, reject) {
 
       try {
-        handler(options);
-        def.resolve();
-      } catch (err)  {
-        def.reject(new Error (err));
+        Promise.all([handler(options)]).then(resolve);
+      } catch (err) {
+        reject(err);
       }
 
-      return def.promise();
-    })());
+    }));
   };
 
   var _clearPromises = function () {
@@ -36,14 +34,13 @@ define([],
     dispatch: function (action, options) {
       console.log('dispatch action: ' + action);
       if(!action) { throw new Error ('missing values'); }
-      if(!_handlers[action]) { return; }
 
       _.each(_handlers[action], function (handler) {
         if(!handler) { return; }
         _addPromise(handler, options);
       });
 
-      return $.when(_promises).then(_clearPromises);
+      return Promise.all(_promises).then(_clearPromises);
     }
   };
 

@@ -28,6 +28,7 @@ require.config({
     'view.manager': './controllers/view.manager',
     'api.manager': './controllers/api.manager',
     'store.manager': './controllers/store.manager',
+    'user.authenticate': './controllers/user.authenticate',
 
     // flux
     flux: './flux/flux'

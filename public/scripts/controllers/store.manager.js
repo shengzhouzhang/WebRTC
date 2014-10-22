@@ -9,7 +9,6 @@ define([
   dispatcher.register(actions.APP_INIT, function (options) {
 
     insidentStore.init();
-
     console.log('STORES_READY');
   });
 });
