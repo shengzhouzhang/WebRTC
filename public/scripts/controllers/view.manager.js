@@ -18,11 +18,11 @@ define([
   };
 
   dispatcher.register(actions.TO_INSIDENT_VIEW, function (options) {
-    if(!_views) { throw new Error ('empty views'); }
+    dispatcher.dispatch(actions.USER_LOGIN).done(function (){
 
-    _views.filter('#insident-container').fadeIn();
-
-    dispatcher.dispatch(actions.REQUEST_INSIDENT);
+      _views.filter('#insident-container').fadeIn();
+      dispatcher.dispatch(actions.REQUEST_INSIDENT);
+    });
   });
 
   dispatcher.register(actions.APP_INIT, views.init.bind(views));

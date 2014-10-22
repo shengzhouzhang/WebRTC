@@ -17,7 +17,10 @@ define(['dispatcher'],
     REQUEST_INSIDENT: 'REQUEST_INSIDENT',
 
     // view actions
-    TO_INSIDENT_VIEW: 'TO_INSIDENT_VIEW'
+    TO_INSIDENT_VIEW: 'TO_INSIDENT_VIEW',
+
+    // user actions
+    USER_LOGIN: 'USER_LOGIN',
 
   };
 
