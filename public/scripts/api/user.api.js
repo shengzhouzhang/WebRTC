@@ -18,8 +18,10 @@ define(['dispatcher', 'actions'], function (dispatcher, actions) {
             case 400:
             case 401:
             case 408:
-            default:
               dispatcher.dispatch(actions.LOGIN_FAILED);
+              break;
+            default:
+              dispatcher.dispatch(actions.UNEXPECTED_ERROR_CODE);
               break;
           }
         }
