@@ -10,7 +10,7 @@ define([],
     _promises.push(new Promise(function (resolve, reject) {
 
       try {
-        Promise.all([handler(options)]).then(resolve);
+        Promise.all([handler(options)]).then(resolve, reject);
       } catch (err) {
         reject(err);
       }
@@ -40,7 +40,9 @@ define([],
         _addPromise(handler, options);
       });
 
-      return Promise.all(_promises).then(_clearPromises);
+      return Promise.all(_promises).then(_clearPromises, function (error) {
+        console.log(action, error);
+      });
     }
   };
 

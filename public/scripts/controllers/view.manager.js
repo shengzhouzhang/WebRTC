@@ -12,7 +12,7 @@ define([
   var views = {
 
     init: function () {
-      _views = $('div[container]').hide();
+      _views = $('div[container]');
 
       // init all views
 
@@ -23,16 +23,32 @@ define([
     }
   };
 
+  var _fadeOut = function () {
+    var animates = _.map(_views, function (view) {
+      return new Promise(function (resolve, reject) {
+        $(view).fadeOut('slow', resolve);
+      });
+    });
+
+    return Promise.all(animates);
+  }
+
   dispatcher.register(actions.TO_INSIDENT_VIEW, function (options) {
     dispatcher.dispatch(actions.REQUIRE_AUTH).then(function () {
+      _fadeOut().then(function () {
 
-      _views.filter('#insident-container').fadeIn();
-      dispatcher.dispatch(actions.REQUEST_INSIDENT);
+        _views.filter('#insident-container').fadeIn('slow');
+        dispatcher.dispatch(actions.REQUEST_INSIDENT);
+      });
     });
   });
 
   dispatcher.register(actions.TO_LOGIN_VIEW, function (options) {
-    _views.filter('#login-container').fadeIn();
+    _fadeOut().then(function () {
+
+      _views.filter('#login-container').show()
+      .find('div.login-window').fadeIn('slow');
+    });
   });
 
   dispatcher.register(actions.APP_INIT, views.init.bind(views));

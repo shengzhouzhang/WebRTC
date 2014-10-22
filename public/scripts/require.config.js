@@ -13,6 +13,7 @@ require.config({
     actions: './actions/actions',
 
     // views
+    'login.view': './views/login.react',
     'insident.view': './views/insident.react',
 
     // stores

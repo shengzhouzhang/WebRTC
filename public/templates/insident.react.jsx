@@ -60,14 +60,6 @@ define(['dispatcher', 'actions', 'insident.store'],
         Images(null),
         _container
       );
-    },
-
-    fadeIn: function (cb) {
-      $(_container).fadeIn('slow', cb);
-    },
-
-    hide: function () {
-      $(_container).hide();
     }
   };
 });
