@@ -21,7 +21,7 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
 
       $.ajax({
         type: 'GET',
-        url: '/json/test-case-06.json?access_token' + store.get().access_token,
+        url: '/json/test-case-06.json?access_token=' + store.get().access_token,
         success: function (data) {
           dispatcher.dispatch(actions.UPDATE_INSIDENT_STORE, _parse(data));
         }
