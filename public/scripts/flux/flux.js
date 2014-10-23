@@ -27,6 +27,7 @@ define(['EventEmitter'], function (EventEmitter) {
       set: function (json) {
         if(!json || !this._data) { throw new Error ('missing values'); }
         this._data.set(json);
+        console.log(this.STORE_UPDATED);
         this.emitEvent(this.STORE_UPDATED);
       },
 
@@ -43,10 +44,6 @@ define(['EventEmitter'], function (EventEmitter) {
 
       removeEventListener: function (callback) {
         this.removeListener(this.STORE_UPDATED, callback);
-      },
-
-      once: function (callback) {
-        this.once(this.STORE_UPDATED, callback);
       },
 
     }, baseClass, options);

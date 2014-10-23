@@ -8,14 +8,19 @@ define([
   'use strict';
 
   var _hasAuthenticated = function () {
-    return false;
+    return !!store.get().access_token;
+  };
+
+  var _validate = function (isValid) {
+    if(!!_hasAuthenticated()) { isValid(); }
   };
 
   dispatcher.register(actions.REQUIRE_AUTH, function (options) {
     return new Promise(function (resolve, reject) {
       if(!!_hasAuthenticated()) { resolve(); return; }
 
-      store.once(function () { if(!!_hasAuthenticated()) { resolve(); } });
+      // TODO: change addEventListener to once
+      store.addEventListener(_validate.bind(undefined, resolve));
       dispatcher.dispatch(actions.UNAUTHORIZED);
     });
   });

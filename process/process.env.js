@@ -18,6 +18,8 @@ var Env = {
         env.REDIS_PORT = 6379;
         env.REDIS_HOST = 'localhost';
         env.REDIS_PASSWORD = '';
+
+        env.MONGODB_URI = 'mongodb://ii-staging:ii-staging@kahana.mongohq.com:10092/ii';
         break;
     }
   },

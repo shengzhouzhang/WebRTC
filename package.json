@@ -38,7 +38,7 @@
     "lodash": "^2.4.1",
     "memwatch": "^0.2.2",
     "moment": "^2.8.3",
-    "mongojs": "^0.14.1",
+    "mongojs": "^0.15.1",
     "node-uuid": "^1.4.1",
     "promise": "^6.0.0",
     "redis": "^0.12.1",

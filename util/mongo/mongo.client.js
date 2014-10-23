@@ -1,14 +1,9 @@
 
 'use strict';
 
-var util = require('util'),
-    mongojs = require('mongojs'),
-    logger = require('../log/application.log').logger,
-    config = require('../../config/config.env.json'),
-    env = require('../../global/process.env').env.getEnv(),
-    uri = util.format(config[env].mongodb.uri, config[env].mongodb.username, config[env].mongodb.password),
-    db = mongojs(uri, ['users', 'cbs', 'jobs', 'logs']);
+var mongojs = require('mongojs'),
+    logger = require('../log/application.log').logger;
 
-logger.info('mongodb', uri);
+var db = mongojs(process.env.MONGODB_URI, ['users']);
 
 module.exports.db = db;
