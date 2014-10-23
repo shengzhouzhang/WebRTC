@@ -27,7 +27,6 @@ define(['EventEmitter'], function (EventEmitter) {
       set: function (json) {
         if(!json || !this._data) { throw new Error ('missing values'); }
         this._data.set(json);
-        console.log(this.STORE_UPDATED);
         this.emitEvent(this.STORE_UPDATED);
       },
 

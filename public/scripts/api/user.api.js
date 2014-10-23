@@ -10,7 +10,6 @@ define(['dispatcher', 'actions'], function (dispatcher, actions) {
         type: 'POST',
         url: '/user/authenticate',
         data: JSON.stringify(options),
-        contentType: 'application/json',
         statusCode: { 400: null, 401: null, 408: null },
         success: dispatcher.dispatch.bind(undefined, actions.UPDATE_USER_STORE),
         error: function (xhr) {
