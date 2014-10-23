@@ -4,7 +4,9 @@ define([
 
   'login.view',
   'insident.view',
-  ], function (dispatcher, actions, loginView, insidentView) {
+
+  'message.view'
+  ], function (dispatcher, actions, loginView, insidentView, messageView) {
   'use strict';
 
   var _views;
@@ -18,6 +20,7 @@ define([
 
       loginView.init(_views.filter('#login-container')[0]);
       insidentView.init(_views.filter('#insident-container')[0]);
+      messageView.init(_views.filter('#message-container')[0]);
 
       console.log('VIEWS_READY');
     }
@@ -25,11 +28,13 @@ define([
 
   var _fadeOut = function () {
     var animates = _.map(_views, function (view) {
+      if(!$(view).attr('hidden')) { return; }
       return new Promise(function (resolve, reject) {
         $(view).fadeOut('slow', resolve);
       });
     });
 
+    dispatcher.dispatch(actions.CLEAR_MESSAGE);
     return Promise.all(animates);
   }
 

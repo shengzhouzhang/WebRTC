@@ -32,8 +32,8 @@ define(['EventEmitter'], function (EventEmitter) {
 
       clear: function () {
         if(!this._data) { throw new Error ('missing values'); }
-        if(!this._data.clear) { this._data.clear(); this.emitEvent(this.STORE_UPDATED); return; }
-        if(!this._data.reset) { this._data.reset(); this.emitEvent(this.STORE_UPDATED); return; }
+        if(!!this._data.clear) { this._data.clear(); this.emitEvent(this.STORE_UPDATED); return; }
+        if(!!this._data.reset) { this._data.reset(); this.emitEvent(this.STORE_UPDATED); return; }
         throw new Error ('unknow clear method');
       },
 

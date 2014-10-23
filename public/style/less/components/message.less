@@ -1,0 +1,23 @@
+
+
+@message-background: lighten(#2c3e50, 10%);
+@message-color: white;
+
+#message-container {
+  .full-width;
+  .transition;
+
+  position: fixed;
+  top: -60px;
+  line-height: 40px;
+  padding: 10px;
+
+  background: @message-background;
+  color: @message-color;
+
+  text-align: center;
+
+  &.shown {
+    top: 0;
+  }
+}

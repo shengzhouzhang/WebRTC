@@ -17,7 +17,11 @@ define([
 
       store.once(function () { if(!!_hasAuthenticated()) { resolve(); } });
       dispatcher.dispatch(actions.UNAUTHORIZED);
-    });;
+    });
+  });
+
+  dispatcher.register(actions.LOGIN_FAILED, function (options) {
+    dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'invalid username or password' });
   });
 
   dispatcher.register(actions.UNAUTHORIZED, dispatcher.dispatch.bind(undefined, actions.TO_LOGIN_VIEW));

@@ -15,10 +15,12 @@ require.config({
     // views
     'login.view': './views/login.react',
     'insident.view': './views/insident.react',
+    'message.view': './views/message.react',
 
     // stores
     'user.store': './stores/user.store',
     'insident.store': './stores/insident.store',
+    'message.store': './stores/message.store',
 
     // api
     'user.api': './api/user.api',

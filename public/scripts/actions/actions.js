@@ -8,32 +8,27 @@ define(['dispatcher'],
     // app
 
     APP_INIT: 'APP_INIT',
-
     APP_START: 'APP_START',
 
-    // stores actions
-
-    UPDATE_INSIDENT_STORE: 'UPDATE_INSIDENT_STORE',
-
-    // api acitons
+    // insident acitons
 
     REQUEST_INSIDENT: 'REQUEST_INSIDENT',
-
-    // view actions
-
-    TO_LOGIN_VIEW: 'TO_LOGIN_VIEW',
-
+    UPDATE_INSIDENT_STORE: 'UPDATE_INSIDENT_STORE',
     TO_INSIDENT_VIEW: 'TO_INSIDENT_VIEW',
-
-    // user actions
 
     // authenticate actions
 
     REQUIRE_AUTH: 'REQUIRE_AUTH',
     USER_LOGIN: 'USER_LOGIN',
     LOGIN_FAILED: 'LOGIN_FAILED',
+    TO_LOGIN_VIEW: 'TO_LOGIN_VIEW',
 
-    // error
+    // message actions
+
+    UPDATE_MESSAGE: 'UPDATE_MESSAGE',
+    CLEAR_MESSAGE: 'CLEAR_MESSAGE',
+
+    // error handler actions
 
     BAD_REQUEST: 'BAD_REQUEST',
     UNAUTHORIZED: 'UNAUTHORIZED',
