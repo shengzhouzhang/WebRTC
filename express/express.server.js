@@ -21,13 +21,14 @@ var server = {
     // middlewares
 
     _express.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }));
+    _express.use(bodyParser.json({ limit: '5mb' }));
     _express.use(bodyParser.json({ type: 'application/vnd.api+json', limit: '5mb' }));
     _express.use(express.static(path.join(__dirname, '..', 'public')));
 
     // routers
 
     _express.use('/user', require('./routers/user.router').router);
-    _express.use('/insident', require('./routers/insident.router').router);
+    _express.use('/incident', require('./routers/incident.router').router);
 
 
     // server

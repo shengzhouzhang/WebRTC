@@ -3,8 +3,8 @@ define([
   'actions',
 
   'user.api',
-  'insident.api',
-  ], function (dispatcher, actions, userApi, insidentApi) {
+  'incident.api',
+  ], function (dispatcher, actions, userApi, incidentApi) {
   'use strict';
 
   dispatcher.register(actions.APP_INIT, function (options) {

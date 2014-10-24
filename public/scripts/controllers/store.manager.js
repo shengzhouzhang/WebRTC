@@ -3,15 +3,15 @@ define([
   'actions',
 
   'user.store',
-  'insident.store',
+  'incident.store',
   'message.store',
-  ], function (dispatcher, actions, userStore, insidentStore, messageStore) {
+  ], function (dispatcher, actions, userStore, incidentStore, messageStore) {
   'use strict';
 
   dispatcher.register(actions.APP_INIT, function (options) {
 
     userStore.init();
-    insidentStore.init();
+    incidentStore.init();
     messageStore.init();
     console.log('STORES_READY');
   });

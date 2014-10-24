@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-define(['dispatcher', 'actions', 'insident.store'],
+define(['dispatcher', 'actions', 'incident.store'],
        function (dispatcher, actions, store) {
   'use strict';
 

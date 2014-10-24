@@ -14,17 +14,17 @@ require.config({
 
     // views
     'login.view': './views/login.react',
-    'insident.view': './views/insident.react',
+    'incident.view': './views/incident.react',
     'message.view': './views/message.react',
 
     // stores
     'user.store': './stores/user.store',
-    'insident.store': './stores/insident.store',
+    'incident.store': './stores/incident.store',
     'message.store': './stores/message.store',
 
     // api
     'user.api': './api/user.api',
-    'insident.api': './api/insident.api',
+    'incident.api': './api/incident.api',
 
     // router
     router: './router/router',

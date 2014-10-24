@@ -15,7 +15,7 @@ define([
 
     var router = new AppRouter;
 
-    router.on('route:default', dispatcher.dispatch.bind(undefined, actions.TO_INSIDENT_VIEW));
+    router.on('route:default', dispatcher.dispatch.bind(undefined, actions.TO_incident_VIEW));
 
     Backbone.history.start();
   });

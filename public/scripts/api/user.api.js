@@ -10,10 +10,11 @@ define(['dispatcher', 'actions'], function (dispatcher, actions) {
         type: 'POST',
         url: '/user/authenticate',
         data: JSON.stringify(options),
-        statusCode: { 400: null, 401: null, 408: null },
+        statusCode: { 0: null, 400: null, 401: null, 408: null },
         success: dispatcher.dispatch.bind(undefined, actions.UPDATE_USER_STORE),
         error: function (xhr) {
           switch(xhr.status) {
+            case 0:
             case 400:
             case 401:
             case 408:

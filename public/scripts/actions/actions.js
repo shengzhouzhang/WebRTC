@@ -10,11 +10,11 @@ define(['dispatcher'],
     APP_INIT: 'APP_INIT',
     APP_START: 'APP_START',
 
-    // insident acitons
+    // incident acitons
 
-    REQUEST_INSIDENT: 'REQUEST_INSIDENT',
-    UPDATE_INSIDENT_STORE: 'UPDATE_INSIDENT_STORE',
-    TO_INSIDENT_VIEW: 'TO_INSIDENT_VIEW',
+    REQUEST_incident: 'REQUEST_incident',
+    UPDATE_incident_STORE: 'UPDATE_incident_STORE',
+    TO_incident_VIEW: 'TO_incident_VIEW',
 
     // authenticate actions
 

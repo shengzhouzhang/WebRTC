@@ -3,10 +3,10 @@ define([
   'actions',
 
   'login.view',
-  'insident.view',
+  'incident.view',
 
   'message.view'
-  ], function (dispatcher, actions, loginView, insidentView, messageView) {
+  ], function (dispatcher, actions, loginView, incidentView, messageView) {
   'use strict';
 
   var _views;
@@ -19,7 +19,7 @@ define([
       // init all views
 
       loginView.init(_views.filter('#login-container')[0]);
-      insidentView.init(_views.filter('#insident-container')[0]);
+      incidentView.init(_views.filter('#incident-container')[0]);
       messageView.init(_views.filter('#message-container')[0]);
 
       console.log('VIEWS_READY');
@@ -38,12 +38,12 @@ define([
     return Promise.all(animates);
   }
 
-  dispatcher.register(actions.TO_INSIDENT_VIEW, function (options) {
+  dispatcher.register(actions.TO_incident_VIEW, function (options) {
     dispatcher.dispatch(actions.REQUIRE_AUTH).then(function () {
       _fadeOut().then(function () {
 
-        _views.filter('#insident-container').fadeIn('slow');
-        dispatcher.dispatch(actions.REQUEST_INSIDENT);
+        _views.filter('#incident-container').fadeIn('slow');
+        dispatcher.dispatch(actions.REQUEST_incident);
       });
     });
   });
