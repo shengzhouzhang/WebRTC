@@ -22,7 +22,7 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
       var _promises = [];
 
       for (var i = 1; i < 10; i++) {
-        if (i === 4) { return; }
+        if (i === 4) { break; }
 
         _promises.push(new Promise(function (resolve, reject) {
 
@@ -35,11 +35,13 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
         }));
       }
 
-      Promise.all(_promises).then(dispatcher.dispatch.bind(undefined, actions.UPDATE_TIMELINE_STORE);
+      Promise.all(_promises).then(function () {
+        dispatcher.dispatch(actions.UPDATE_TIMELINE_STORE);
+      });
     }
   };
 
   dispatcher.register(actions.REQUEST_TIMELINE, timeline.request);
 
-  return incident;
+  return timeline;
 });

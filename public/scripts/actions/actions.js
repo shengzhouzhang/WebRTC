@@ -12,12 +12,14 @@ define(['dispatcher'],
 
     // timeline actions
     UPDATE_TIMELINE_STORE: 'UPDATE_TIMELINE_STORE',
+    TO_TIMELINE_VIEW: 'TO_TIMELINE_VIEW',
+    REQUEST_TIMELINE: 'REQUEST_TIMELINE',
 
     // incident acitons
 
-    REQUEST_incident: 'REQUEST_incident',
-    UPDATE_incident_STORE: 'UPDATE_incident_STORE',
-    TO_incident_VIEW: 'TO_incident_VIEW',
+    REQUEST_INCIDENT: 'REQUEST_INCIDENT',
+    UPDATE_INCIDENT_STORE: 'UPDATE_INCIDENT_STORE',
+    TO_INCIDENT_VIEW: 'TO_INCIDENT_VIEW',
 
     // authenticate actions
 

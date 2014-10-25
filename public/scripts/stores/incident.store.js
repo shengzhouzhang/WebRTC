@@ -13,7 +13,7 @@ define(['dispatcher', 'actions', 'flux'],
     })
   });
 
-  dispatcher.register(actions.UPDATE_incident_STORE, store.set.bind(store));
+  dispatcher.register(actions.UPDATE_INCIDENT_STORE, store.set.bind(store));
 
   return store;
 });

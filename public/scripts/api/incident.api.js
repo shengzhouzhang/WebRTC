@@ -23,13 +23,13 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
         type: 'GET',
         url: '/json/test-case-06.json?access_token=' + store.get().access_token,
         success: function (data) {
-          dispatcher.dispatch(actions.UPDATE_incident_STORE, _parse(data));
+          dispatcher.dispatch(actions.UPDATE_INCIDENT_STORE, _parse(data));
         }
       });
     }
   };
 
-  dispatcher.register(actions.REQUEST_incident, incident.request);
+  dispatcher.register(actions.REQUEST_INCIDENT, incident.request);
 
   return incident;
 });

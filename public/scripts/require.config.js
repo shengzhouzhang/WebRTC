@@ -26,6 +26,7 @@ require.config({
 
     // api
     'user.api': './api/user.api',
+    'timeline.api': './api/timeline.api',
     'incident.api': './api/incident.api',
 
     // router

@@ -3,6 +3,7 @@ define([
   'actions',
 
   'user.api',
+  'timeline.api',
   'incident.api',
   ], function (dispatcher, actions, userApi, incidentApi) {
   'use strict';
