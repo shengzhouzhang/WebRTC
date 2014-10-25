@@ -14,11 +14,13 @@ require.config({
 
     // views
     'login.view': './views/login.react',
+    'timeline.view': './views/timeline.react',
     'incident.view': './views/incident.react',
     'message.view': './views/message.react',
 
     // stores
     'user.store': './stores/user.store',
+    'timeline.store': './stores/timeline.store',
     'incident.store': './stores/incident.store',
     'message.store': './stores/message.store',
 

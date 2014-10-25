@@ -6,8 +6,10 @@ define(['dispatcher', 'actions', 'flux'],
   var store = new Flux.Store({
 
     _Model: Backbone.Model.extend({
-      username: undefined,
-      access_token: undefined
+      default: {
+        username: undefined,
+        access_token: undefined
+      }
     })
   });
 

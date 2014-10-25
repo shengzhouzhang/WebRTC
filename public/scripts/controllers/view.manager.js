@@ -3,10 +3,11 @@ define([
   'actions',
 
   'login.view',
+  'timeline.view',
   'incident.view',
 
   'message.view'
-  ], function (dispatcher, actions, loginView, incidentView, messageView) {
+  ], function (dispatcher, actions, loginView, timelineView, incidentView, messageView) {
   'use strict';
 
   var _views;
@@ -19,6 +20,7 @@ define([
       // init all views
 
       loginView.init(_views.filter('#login-container')[0]);
+      timelineView.init(_views.filter('#timeline-container')[0])
       incidentView.init(_views.filter('#incident-container')[0]);
       messageView.init(_views.filter('#message-container')[0]);
 

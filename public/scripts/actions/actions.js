@@ -10,6 +10,9 @@ define(['dispatcher'],
     APP_INIT: 'APP_INIT',
     APP_START: 'APP_START',
 
+    // timeline actions
+    UPDATE_TIMELINE_STORE: 'UPDATE_TIMELINE_STORE',
+
     // incident acitons
 
     REQUEST_incident: 'REQUEST_incident',
