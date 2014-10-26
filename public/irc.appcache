@@ -1,0 +1,13 @@
+CACHE MANIFEST
+//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js
+//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js
+//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment.min.js
+//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js
+//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js
+//cdnjs.cloudflare.com/ajax/libs/react/0.11.1/react.js
+
+http://fonts.googleapis.com/css?family=Lato
+//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css
+
+NETWORK:
+*
