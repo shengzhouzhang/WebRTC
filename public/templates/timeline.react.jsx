@@ -45,7 +45,7 @@ define(['dispatcher', 'actions', 'timeline.store'],
         );
       });
 
-      return (<div className="row">{incidents}</div>);
+      return (<div className="timeline">{incidents}</div>);
     }
   });
 

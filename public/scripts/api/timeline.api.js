@@ -23,7 +23,7 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
       var _promises = [];
 
       for (var i = 1; i < 10; i++) {
-        if (i === 4) { break; }
+        if (i === 4) { continue; }
 
         _promises.push(new Promise(function (resolve, reject) {
 
