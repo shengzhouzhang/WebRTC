@@ -19,10 +19,7 @@ define(['dispatcher', 'actions', 'timeline.store'],
   var Images = React.createClass({
 
     getInitialState: function () {
-      return {
-        id: undefined,
-        incidents: []
-      };
+      return { timeline: [] };
     },
 
     componentDidMount: function () {
@@ -34,13 +31,15 @@ define(['dispatcher', 'actions', 'timeline.store'],
     },
 
     _onLoad: function () {
-      console.log('_onLoad');
-      this.setState(store.get());
+      this.setState({
+        timeline: store.get()
+      });
     },
 
     render: function () {
 
-      var incidents = this.state.incidents.map(function (incident) {
+      var incidents = _.map(this.state.timeline, function (incident) {
+        console.log(incident);
         return (
           <Incident key={incident.id} />
         );

@@ -5,13 +5,14 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
 
     return {
       id: data.response._id,
-      images: _.map(data.response.snapshot_keys, function (key) {
+      snapshots: _.map(data.response.snapshot_keys, function (key) {
         var snapshot = data.response.snapshots[key];
         return {
           id: key,
           url: snapshot.prefix_url + snapshot.images.standard_res.key,
         }
-      })
+      }),
+      created_at: Date.now()
     };
   };
 
@@ -35,8 +36,8 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
         }));
       }
 
-      Promise.all(_promises).then(function () {
-        dispatcher.dispatch(actions.UPDATE_TIMELINE_STORE);
+      Promise.all(_promises).then(function (data, a) {
+        dispatcher.dispatch(actions.UPDATE_TIMELINE_STORE, data);
       });
     }
   };

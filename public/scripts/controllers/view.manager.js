@@ -51,13 +51,13 @@ define([
   });
 
   dispatcher.register(actions.TO_TIMELINE_VIEW, function (options) {
-    dispatcher.dispatch(actions.REQUIRE_AUTH).then(function () {
+    // dispatcher.dispatch(actions.REQUIRE_AUTH).then(function () {
       _fadeOut().then(function () {
 
         _views.filter('#timeline-container').fadeIn('slow');
         dispatcher.dispatch(actions.REQUEST_TIMELINE);
       });
-    });
+    // });
   });
 
   dispatcher.register(actions.TO_LOGIN_VIEW, function (options) {
