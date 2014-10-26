@@ -2,12 +2,13 @@ define([
   'dispatcher',
   'actions',
 
+  'header.view',
   'login.view',
   'timeline.view',
   'incident.view',
 
   'message.view'
-  ], function (dispatcher, actions, loginView, timelineView, incidentView, messageView) {
+  ], function (dispatcher, actions, headerView, loginView, timelineView, incidentView, messageView) {
   'use strict';
 
   var _views;
@@ -19,6 +20,7 @@ define([
 
       // init all views
 
+      headerView.init(_views.filter('#header-container')[0]);
       loginView.init(_views.filter('#login-container')[0]);
       timelineView.init(_views.filter('#timeline-container')[0]);
       incidentView.init(_views.filter('#incident-container')[0]);
@@ -41,13 +43,13 @@ define([
   }
 
   dispatcher.register(actions.TO_INCIDENT_VIEW, function (options) {
-    dispatcher.dispatch(actions.REQUIRE_AUTH).then(function () {
+    // dispatcher.dispatch(actions.REQUIRE_AUTH).then(function () {
       _fadeOut().then(function () {
 
         _views.filter('#incident-container').fadeIn('slow');
         dispatcher.dispatch(actions.REQUEST_INCIDENT);
       });
-    });
+    // });
   });
 
   dispatcher.register(actions.TO_TIMELINE_VIEW, function (options) {

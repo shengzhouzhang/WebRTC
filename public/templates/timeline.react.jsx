@@ -16,6 +16,8 @@ define(['dispatcher', 'actions', 'timeline.store'],
     }
   });
 
+  var toIncidentView = dispatcher.dispatch.bind(undefined, actions.TO_INCIDENT_VIEW);
+
   var Images = React.createClass({
 
     getInitialState: function () {
@@ -24,10 +26,12 @@ define(['dispatcher', 'actions', 'timeline.store'],
 
     componentDidMount: function () {
       store.addEventListener(this._onLoad);
+      $(_container).delegate('div.incident', 'click', toIncidentView);
     },
 
     componentWillUnmount: function () {
       store.removeEventListener(this._onLoad);
+      $(_container).undelegate('div.incident', 'click', toIncidentView);
     },
 
     _onLoad: function () {
