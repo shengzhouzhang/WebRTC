@@ -35,16 +35,15 @@ var server = {
   }
 };
 
-var broadcast = function (message) {
-  if(!data) { throw new Error ('missing broadcast message'); }
+var broadcast = function (data) {
+  if(!data || !data.action) { throw new Error ('invalid message data'); }
   if(!_server) { logger.error('broadcast', 'server is not available'); return; }
   if(!_server.clients || !_server.clients.length) { logger.info('broadcast', 'no clients'); return; }
 
   _.each(_server.clients, function (client) {
 
-    client.send(message, function (err) {
-      if(!err) { return; }
-      logger.error(err.message || err);
+    client.send(data, function (err) {
+      if(!!err) { logger.error(err.message || err); return; }
     });
   });
 };
