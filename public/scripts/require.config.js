@@ -34,6 +34,7 @@ require.config({
     router: './router/router',
 
     // controllers
+    'global.error.handler': './controllers/global.error.handler',
     'view.manager': './controllers/view.manager',
     'api.manager': './controllers/api.manager',
     'store.manager': './controllers/store.manager',

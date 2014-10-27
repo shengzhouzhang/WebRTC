@@ -4,6 +4,7 @@ require([
 
   // controllers
 
+  'global.error.handler',
   'view.manager',
   'api.manager',
   'store.manager',
