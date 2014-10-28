@@ -11,35 +11,13 @@ var events = _.extend(baseClass, {
 
   types: {
 
-    // job queues
-    JOB_RECEIVED: 'JOB_RECEIVED',
-    JOB_ASSIGNED: 'JOB_ASSIGNED',
-    JOB_PROCESSED: 'JOB_PROCESSED',
-    JOB_FINISHED: 'JOB_FINISHED',
+    // incidents
 
-    JOB_SCAN: 'JOB_SCAN',
-    JOB_NOTIFY: 'JOB_NOTIFY',
-    JOB_EXPIRE: 'JOB_EXPIRE',
-    JOB_DIRTY: 'JOB_DIRTY',
-
-    // service
-    REGISTER: 'REGISTER',
-
-    // scheduler
-    START_SCHEDULE: 'START_SCHEDULE',
-    STOP_SCHEDULE: 'STOP_SCHEDULE',
-
-    // users
-    USER_LOGIN: 'USER_LOGIN',
-    USER_HEARTBEAT: 'USER_HEARTBEAT',
-
+    INCIDENTS_UPDATED: 'INCIDENTS_UPDATED',
+    
     // web socket server
 
     BROADCAST: 'BROADCAST',
-
-    // admin
-    REMOVE_CACHE: 'REMOVE_CACHE',
-    GC: 'GC'
   },
 
   addEventListener: function (name, callback) {

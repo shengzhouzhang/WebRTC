@@ -13,11 +13,9 @@ var _ = require('lodash'),
 
 var router = express.Router();
 
-
 var _hasAuthorized = function (req, res, next) {
   if(req.header['Authorization'] ===  process.env.CAMMY_ACCESS_TOKEN) { next(); }
 };
-
 
 var _hasAuthenticated = function (req, res, next) {
 
@@ -32,9 +30,16 @@ var _hasAuthenticated = function (req, res, next) {
   next();
 };
 
-
 var _isValid = function (req, res, next) {
 
+  var incident = req.body.incident;
+
+  if(!incident || !incident.home_alarm_id || !incident.event) {
+    res.status(400).json({ error: 'invalid incident data' });
+    return;
+  }
+
+  req.incident = incident;
   next();
 };
 
