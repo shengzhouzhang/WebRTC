@@ -13,12 +13,13 @@ var _ = require('lodash'),
 
 var router = express.Router();
 
-var _isCammy = function (req, res, next) {
 
-  next();
+var _hasAuthorized = function (req, res, next) {
+  if(req.header['Authorization'] ===  process.env.CAMMY_ACCESS_TOKEN) { next(); }
 };
 
-var _isValidUser = function (req, res, next) {
+
+var _hasAuthenticated = function (req, res, next) {
 
   var access_token = req.body.access_token,
       token = this.decode(access_token);
@@ -31,12 +32,14 @@ var _isValidUser = function (req, res, next) {
   next();
 };
 
-var _isValidPost = function () {
 
+var _isValid = function (req, res, next) {
+
+  next();
 };
 
-router.post('/', [_isCammy], routes.create);
-router.get('/timeline', [_isValidUser], routes.timeline);
-router.get('/{id}', [_isValidUser], routes.details);
+router.post('/', [_hasAuthorized, _isValid], routes.create);
+router.get('/timeline', [_hasAuthenticated], routes.timeline);
+router.get('/{id}', [_hasAuthenticated], routes.details);
 
 module.exports.router = router;
