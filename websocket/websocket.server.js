@@ -3,7 +3,7 @@
 
 var _ = require('lodash'),
     Server = require('ws').Server,
-    events = require('../dispatcher/events').events,
+    dispatcher = require('../dispatcher/dispatcher').dispatcher,
     logger = require('../util/log/application.log').logger;
 
 var _server;
@@ -48,6 +48,6 @@ var broadcast = function (data) {
   });
 };
 
-events.addEventListener(events.types.BROADCAST, broadcast.bind(undefined));
+dispatcher.register(dispatcher.actions.BROADCAST, broadcast.bind(undefined));
 
 module.exports.server = server;

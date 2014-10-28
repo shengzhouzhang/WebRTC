@@ -26,7 +26,7 @@ var incidents = {
       redis.lrang(id, 0, -1, function (err, result) {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
         resolve(result);
-      };
+      });
     });
   }
 };

@@ -3,7 +3,6 @@
 
 var _ = require('lodash'),
     db = require('../util/mongo/mongo.client').db.users,
-    events = require('../dispatcher/events').events,
     logger = require('../util/log/application.log').logger;
 
 var users = {
