@@ -2,9 +2,10 @@
 'use strict';
 
 var redis = require('../util/redis/redis.client').client,
+    dispatcher = require('../dispatcher/dispatcher').dispatcher,
     logger = require('../util/log/application.log').logger;
 
-var incidents = {
+var store = {
 
   create: function (incident) {
     if(!incident || !incident.home_alarm_id || !incident.event) { throw new Error ('invalid incident data'); }
@@ -31,4 +32,6 @@ var incidents = {
   }
 };
 
-module.exports.store = incidents;
+dispatcher.register(dispatcher.actions.UPDATE_INCIDENTS, store.create.bind(store));
+
+module.exports.store = store;

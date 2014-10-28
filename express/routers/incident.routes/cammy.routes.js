@@ -14,7 +14,7 @@ var create = function (req, res) {
   incident.id = uuid.v1();
   incident.created_at = moment().valueOf();
 
-  dispatcher.dispatch(dispatcher.actions.CREATE_INCIDENT, incident).then(function (result) {
+  dispatcher.dispatch(dispatcher.actions.UPDATE_INCIDENTS, incident).then(function (result) {
 
     res.status(201).json({ id: incident.id, created_at: incident.created_at });
 

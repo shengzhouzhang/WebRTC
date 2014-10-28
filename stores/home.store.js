@@ -2,13 +2,14 @@
 'use strict';
 
 var redis = require('../util/redis/redis.client').client,
+    dispatcher = require('../dispatcher/dispatcher').dispatcher,
     logger = require('../util/log/application.log').logger;
 
-var incidents = {
+var store = {
 
   _DB: 'HOME_DETAILS',
 
-  update: function (incident) {
+  create: function (incident) {
     if(!incident || !incident.home_alarm_id || !incident.address || !incident.contact) { throw new Error ('invalid incident data'); }
 
     var data = {
@@ -36,8 +37,9 @@ var incidents = {
         resolve(result);
       });
     });
-
   }
 };
 
-module.exports.store = incidents;
+dispatcher.register(dispatcher.actions.UPDATE_INCIDENTS, store.create.bind(store));
+
+module.exports.store = store;

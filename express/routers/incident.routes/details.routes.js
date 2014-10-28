@@ -4,7 +4,6 @@
 var _ = require('lodash'),
     moment = require('moment'),
     express = require('express'),
-    store = require('../../../stores/incident.store').store,
     logger = require('../../../util/log/application.log').logger;
 
 var details = function (req, res) {

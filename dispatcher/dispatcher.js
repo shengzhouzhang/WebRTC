@@ -27,7 +27,7 @@ var dispatcher = {
 
     // incidents
 
-    CREATE_INCIDENT: 'CREATE_INCIDENT',
+    UPDATE_INCIDENTS: 'UPDATE_INCIDENTS',
 
     // web socket server
 
