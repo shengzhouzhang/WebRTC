@@ -1,7 +1,9 @@
 
 'use strict';
 
-var redis = require('../util/redis/redis.client').client,
+var _ = require('lodash'),
+    Promise = require('promise'),
+    redis = require('../util/redis/redis.client').client,
     dispatcher = require('../dispatcher/dispatcher').dispatcher,
     logger = require('../util/log/application.log').logger;
 
@@ -24,7 +26,7 @@ var store = {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
         resolve(result);
       });
-    });
+    }.bind(this));
   },
 
   retrieve: function (id) {
@@ -36,7 +38,7 @@ var store = {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
         resolve(result);
       });
-    });
+    }.bind(this));
   }
 };
 

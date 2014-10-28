@@ -1,6 +1,9 @@
 
 'use strict';
 
+var _ = require('lodash'),
+    Promise = require('promise');
+
 var _handlers = {},
     _promises = [];
 

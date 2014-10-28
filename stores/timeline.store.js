@@ -1,7 +1,9 @@
 
 'use strict';
 
-var redis = require('../util/redis/redis.client').client,
+var _ = require('lodash'),
+    Promise = require('promise'),
+    redis = require('../util/redis/redis.client').client,
     dispatcher = require('../dispatcher/dispatcher').dispatcher,
     logger = require('../util/log/application.log').logger;
 
@@ -22,9 +24,10 @@ var store = {
 
       redis.zadd(this._DB, data.created_at, JSON.stringify(data), function (err, result) {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
+        if(!result) { reject(new Error (result)); return; }
         resolve(result);
       });
-    });
+    }.bind(this));
   },
 
   query: function (options) {
@@ -39,7 +42,7 @@ var store = {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
         resolve(result);
       });
-    });
+    }.bind(this));
   }
 };
 

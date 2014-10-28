@@ -14,7 +14,8 @@ var _ = require('lodash'),
 var router = express.Router();
 
 var _hasAuthorized = function (req, res, next) {
-  if(req.header['Authorization'] ===  process.env.CAMMY_ACCESS_TOKEN) { next(); }
+  if(req.headers['authorization'].toLowerCase() ===  'Basic bXlVc2VybmFtZTpteVBhc3N3b3Jk'.toLowerCase()) { next(); return; }
+  res.status(401).json({ error: 'invalid access token' });
 };
 
 var _hasAuthenticated = function (req, res, next) {
@@ -32,7 +33,7 @@ var _hasAuthenticated = function (req, res, next) {
 
 var _isValid = function (req, res, next) {
 
-  var incident = req.body.incident;
+  var incident = req.body;
 
   if(!incident || !incident.home_alarm_id || !incident.event) {
     res.status(400).json({ error: 'invalid incident data' });
