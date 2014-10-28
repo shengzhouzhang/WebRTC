@@ -28,8 +28,7 @@ var server = {
     // routers
 
     _express.use('/user', require('./routers/user.router').router);
-    _express.use('/incident', require('./routers/incident.router').router);
-
+    _express.use('/incidents', require('./routers/incident.router').router);
 
     // server
 

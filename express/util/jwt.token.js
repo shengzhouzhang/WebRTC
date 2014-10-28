@@ -15,16 +15,9 @@ var token = {
     return jwt.encode({ username: username, timestamp: moment().valueOf() }, this._secret);
   },
 
-  verify: function (access_token) {
-
-    var token = this.decode(access_token),
-        username = !!token ? token.username : null,
-        timestamp = !!token ? token.timestamp : null;
-
-    if (!token || !username || !timestamp) { return; }
-    if (moment(timestamp).add(10080, 'minutes').valueOf() < moment().valueOf()) { return; }
-
-    return username;
+  isExpired: function (timestamp) {
+    if (!timestamp || moment(timestamp).add(10080, 'minutes').valueOf() > moment().valueOf()) { return false; }
+    return true;
   },
 
   decode: function (access_token) {

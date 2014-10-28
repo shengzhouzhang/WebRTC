@@ -6,10 +6,10 @@ var redis = require('../util/redis/redis.client').client,
 
 var incidents = {
 
-  _DB: 'incidentS_LIST',
+  _DB: 'INCIDENTS_TIMELINE',
 
-  add: function (incident, cb) {
-    if(!incident || !incident.id || !incident.received_at) { throw new Error ('invalid incident data'); }
+  create: function (incident, cb) {
+    if(!incident || !incident.id || !incident.created_at) { throw new Error ('invalid incident data'); }
 
     redis.zadd(this._DB, incident.received_at, JSON.stringify(incident), function (err, result) {
       logger.info('new incident', incident.id, result, err);

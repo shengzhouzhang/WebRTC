@@ -2,45 +2,41 @@
 'use strict';
 
 var _ = require('lodash'),
-    moment = require('moment'),
     express = require('express'),
-    store = require('../../stores/incident.store').store,
+    routes = _.extend(
+      require('./incident.routes/cammy.routes').routes,
+      require('./incident.routes/timeline.routes').routes,
+      require('./incident.routes/details.routes').routes
+    ),
+    token = require('../util/jwt.token').token,
     logger = require('../../util/log/application.log').logger;
-
-var request = function (req, res) {
-
-  store.query({}, function (err, incidents) {
-    if(!!err) { res.status(500).json({}); return; }
-    if(!incidents || !incidents.length) { res.status(204).json(); return; }
-
-    res.status(200).json(incidents);
-  });
-};
-
-var add = function (req, res) {
-
-  var incident = req.incident;
-
-  incident.recevied_at = moment().valueOf();
-
-  store.add(req.incident, function (err, result) {
-    if(!!err) { res.status(500).json(); return; }
-    res.status(201).json();
-  });
-};
-
-var validate = function (req, res, next) {
-
-  var incident = req.incident;
-
-  if(!!incident && !!incident.id) { next(); return; }
-  res.status(400).json({ error: 'invalid incident data' });
-};
-
 
 var router = express.Router();
 
-router.get('/request', request);
-router.post('/add', validate, add);
+var _isCammy = function (req, res, next) {
+
+  next();
+};
+
+var _isValidUser = function (req, res, next) {
+
+  var access_token = req.body.access_token,
+      token = this.decode(access_token);
+
+  if (!token || token.isExpired(token.timestamp)) {
+    res.status(401).json({ error: 'token is invalid or expired' });
+  }
+
+  req.username = token.username;
+  next();
+};
+
+var _isValidPost = function () {
+
+};
+
+router.post('/', [_isCammy], routes.create);
+router.get('/timeline', [_isValidUser], routes.timeline);
+router.get('/{id}', [_isValidUser], routes.details);
 
 module.exports.router = router;
