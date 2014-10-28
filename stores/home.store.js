@@ -6,12 +6,20 @@ var redis = require('../util/redis/redis.client').client,
 
 var incidents = {
 
-  create: function (incident) {
-    if(!incident || !incident.home_alarm_id || !incident.event) { throw new Error ('invalid incident data'); }
+  _DB: 'HOME_DETAILS',
+
+  update: function (incident) {
+    if(!incident || !incident.home_alarm_id || !incident.address || !incident.contact) { throw new Error ('invalid incident data'); }
+
+    var data = {
+      home_alarm_id: incident.home_alarm_id,
+      address: incident.address,
+      contact: incident.contact
+    };
 
     return new Promise(function (resolve, reject) {
 
-      redis.rpush(incident.home_alarm_id, JSON.stringify(incident.event), function (err, result) {
+      redis.hset(this._DB, data.home_alarm_id, JSON.stringify(data), function (err, result) {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
         resolve(result);
       });
@@ -23,11 +31,12 @@ var incidents = {
 
     return new Promise(function (resolve, reject) {
 
-      redis.lrang(id, 0, -1, function (err, result) {
+      redis.hget(this._DB, id, function (err, result) {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
         resolve(result);
-      };
+      });
     });
+
   }
 };
 
