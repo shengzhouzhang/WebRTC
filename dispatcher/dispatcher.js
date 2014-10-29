@@ -28,6 +28,7 @@ var dispatcher = {
     // web socket server
 
     BROADCAST: 'BROADCAST',
+    REQUEST_UNPDATES: 'REQUEST_UNPDATES',
   },
 
   register: function (action, callback) {

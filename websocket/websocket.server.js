@@ -3,6 +3,7 @@
 
 var _ = require('lodash'),
     Server = require('ws').Server,
+    jwt = require('../express/util/jwt.token').token,
     dispatcher = require('../dispatcher/dispatcher').dispatcher,
     logger = require('../util/log/application.log').logger;
 
@@ -22,14 +23,17 @@ var server = {
       logger.info('socket', 'connections', this.clients.length);
 
       client.on('message', function (data) {
-        if(!data || !data.username || !data.action) { logger.error('socket', 'invalid message data', data); return; }
 
-        switch(data.action) {
-          case '':
-            break;
-          default:
-            logger.error('socket', 'unknown action type', data.action);
+        try {
+          data = JSON.parse(data);
+        } catch (err) {
+          data = null;
         }
+
+        if(!data || !data.access_token || !data.action) { logger.error('socket', 'invalid message data', data); return; }
+        if(!handlers[data.action]) { logger.error('socket', 'unknown action', data.action); return; }
+
+        handlers[data.action](client, data);
       });
     });
   }
@@ -46,6 +50,54 @@ var broadcast = function (data) {
       if(!!err) { logger.error(err.message || err); return; }
     });
   });
+};
+
+var _error = function (client, msg) {
+  client.send(JSON.stringify({ error: msg }));
+  logger.error('socket', msg);
+};
+
+var handlers = {
+
+  AUTHENTICATE: function (client, options) {
+
+    if(!options || !options.access_token) { _error(client, 'invalid token'); return; }
+
+    var token = jwt.decode(options.access_token);
+
+    if (!token || jwt.isExpired(token.timestamp)) { _error(client, 'invalid token'); return; }
+
+    var data = JSON.stringify({ username: token.username });
+
+    client.send(data, function (err) {
+      if(!!err) { logger.error(err.message || err); return; }
+    });
+
+    client.username = token.username;
+  },
+
+  REQUEST_UNPDATES: function (client, options) {
+    if(!client.username) { _error(client, 'unauthorized'); return; }
+    if(!options.timestamp) { _error(client, 'missing timestamp'); return; }
+
+    var options = { min: options.timestamp };
+
+    dispatcher.dispatch(dispatcher.actions.REQUEST_UNPDATES, options)
+      .then(function (result) {
+
+      if(!result || !result[0]) { _error(client, 'invalid result'); return; }
+
+      var data = JSON.stringify({
+        action: 'RESPONSE_UNPDATES',
+        updates: result[0].length,
+        timestamp: options.timestamp
+      });
+
+      client.send(data, function (err) {
+        if(!!err) { logger.error(err.message || err); return; }
+      });
+    });
+  },
 };
 
 dispatcher.register(dispatcher.actions.BROADCAST, broadcast.bind(undefined));

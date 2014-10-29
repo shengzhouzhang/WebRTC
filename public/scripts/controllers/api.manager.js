@@ -5,6 +5,9 @@ define([
   'user.api',
   'timeline.api',
   'incident.api',
+
+  'websocket.client',
+  
   ], function (dispatcher, actions, userApi, incidentApi) {
   'use strict';
 

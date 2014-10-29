@@ -30,6 +30,9 @@ require.config({
     'timeline.api': './api/timeline.api',
     'incident.api': './api/incident.api',
 
+    'websocket.client': './websocket/websocket.client',
+
+
     // router
     router: './router/router',
 

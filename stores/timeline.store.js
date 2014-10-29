@@ -63,5 +63,6 @@ var store = {
 
 dispatcher.register(dispatcher.actions.UPDATE_INCIDENTS, store.create.bind(store));
 dispatcher.register(dispatcher.actions.REQUEST_TIMELINE, store.request.bind(store));
+dispatcher.register(dispatcher.actions.REQUEST_UNPDATES, store.request.bind(store));
 
 module.exports.store = store;
