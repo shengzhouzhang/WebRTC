@@ -5,7 +5,7 @@ define(['dispatcher', 'actions', 'incident.store'],
 
   var _container, _component;
 
-  var Image = React.createClass({
+  var Snapshot = React.createClass({
 
     render: function () {
 
@@ -19,12 +19,37 @@ define(['dispatcher', 'actions', 'incident.store'],
     }
   });
 
-  var Images = React.createClass({
+  var Event = React.createClass({
+
+    componentDidMount: function () {
+      store.addEventListener(this._onLoad);
+    },
+
+    componentWillUnmount: function () {
+      store.removeEventListener(this._onLoad);
+    },
+
+    _onLoad: function () {
+      this.setState(store.get());
+    },
+
+    render: function () {
+
+      var snapshots = this.props.snapshots.map(function (snapshot) {
+        return (
+          <Snapshot key={snapshot.id} url={snapshot.url} />
+        );
+      });
+
+      return (<div className="row">{snapshots}</div>);
+    }
+  });
+
+  var Events = React.createClass({
 
     getInitialState: function () {
       return {
-        id: undefined,
-        images: []
+        events: []
       };
     },
 
@@ -42,13 +67,14 @@ define(['dispatcher', 'actions', 'incident.store'],
 
     render: function () {
 
-      var images = this.state.images.map(function (image) {
+      var events = this.state.events.map(function (event, index) {
+        // TODO: need to have unique id
         return (
-          <Image key={image.id} url={image.url} />
+          <Event key={event.id + index} start={event.start} end={event.end} snapshots={event.snapshots} />
         );
-      });
+      }.bind(this));
 
-      return (<div className="row">{images}</div>);
+      return (<div className="row">{events}</div>);
     }
   });
 
@@ -57,7 +83,7 @@ define(['dispatcher', 'actions', 'incident.store'],
     init: function (container) {
       _container = container;
       _component = React.renderComponent(
-        Images(null),
+        Events(null),
         _container
       );
     }

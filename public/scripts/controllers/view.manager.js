@@ -47,7 +47,7 @@ define([
       _fadeOut().then(function () {
 
         _views.filter('#incident-container').fadeIn('slow');
-        dispatcher.dispatch(actions.REQUEST_INCIDENT);
+        dispatcher.dispatch(actions.REQUEST_INCIDENT, options);
       });
     });
   });
