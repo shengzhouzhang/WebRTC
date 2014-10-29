@@ -47,6 +47,6 @@ var _isValid = function (req, res, next) {
 
 router.post('/', [_hasAuthorized, _isValid], routes.create);
 router.get('/timeline', [_hasAuthenticated], routes.timeline);
-router.get('/{id}', [_hasAuthenticated], routes.details);
+router.get('/:id', [_hasAuthenticated], routes.details);
 
 module.exports.router = router;

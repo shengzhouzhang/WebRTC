@@ -12,7 +12,9 @@ var _addPromise = function (handler, options) {
   _promises.push(new Promise(function (resolve, reject) {
 
     try {
-      Promise.all([handler(options)]).then(resolve, reject);
+      Promise.all([handler(options)]).then(function (results) {
+        resolve(results[0]);
+      }, reject);
     } catch (err) {
       reject(err);
     }
@@ -32,6 +34,7 @@ var dispatcher = {
 
     UPDATE_INCIDENTS: 'UPDATE_INCIDENTS',
     REQUEST_TIMELINE: 'REQUEST_TIMELINE',
+    REQUEST_INCIDENT: 'REQUEST_INCIDENT',
 
     // web socket server
 
@@ -55,7 +58,7 @@ var dispatcher = {
 
     return Promise.all(_promises).then(function (result) {
       _clearPromises();
-      return result[0];
+      return result;
     }, function (error) {
       console.log('dispatcher', action, error);
       return error;

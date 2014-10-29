@@ -21,19 +21,27 @@ var store = {
     }.bind(this));
   },
 
-  retrieve: function (id) {
+  request: function (id) {
     if(!id) { throw new Error ('invalid home alarm id'); }
 
     return new Promise(function (resolve, reject) {
 
-      redis.lrang(id, 0, -1, function (err, result) {
+      redis.lrange(id, 0, -1, function (err, result) {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
-        resolve(result);
+        try {
+          var incidents = _.map(result, function (item) {
+            return JSON.parse(item);
+          });
+          resolve(incidents);
+        } catch (err) {
+          reject(err);
+        }
       });
     }.bind(this));
   }
 };
 
 dispatcher.register(dispatcher.actions.UPDATE_INCIDENTS, store.create.bind(store));
+dispatcher.register(dispatcher.actions.REQUEST_INCIDENT, store.request.bind(store));
 
 module.exports.store = store;
