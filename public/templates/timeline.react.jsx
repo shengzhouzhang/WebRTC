@@ -10,6 +10,9 @@ define(['dispatcher', 'actions', 'timeline.store'],
     render: function () {
       return (
         <div className="incident" data-home-alarm-id={this.props.homeId}>
+          <div className="cover" style={{backgroundImage: 'url(' + this.props.event.cover + ')'}}></div>
+          <div className="timestamp">{moment(this.props.createdAt).format('YYYY-MM-DD HH:mm:ss')}</div>
+          <div className="address">{this.props.address}</div>
         </div>
       );
     }
@@ -47,7 +50,7 @@ define(['dispatcher', 'actions', 'timeline.store'],
       var incidents = _.map(this.state.timeline, function (incident) {
         console.log(incident);
         return (
-          <Incident key={incident.id} homeId={incident.home_alarm_id} />
+          <Incident key={incident.id} homeId={incident.home_alarm_id} address={incident.address} event={incident.event} createdAt={incident.created_at} />
         );
       });
 

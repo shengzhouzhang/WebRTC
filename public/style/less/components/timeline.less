@@ -11,8 +11,34 @@
 
     .incident {
       height: 150px;
+      padding: 10px;
       background-color: #eee;
       margin-bottom: 10px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #eaeaea;
+      }
+
+      .timestamp,
+      .address {
+        display: inline-block;
+        min-width: 50%;
+        line-height: 20px;
+        margin-bottom: 5px;
+      }
+
+      .cover {
+        display: inline-block;
+        margin-right: 10px;
+        float: left;
+        width: 130px;
+        height: 130px;
+
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: cover;
+      }
     }
   }
 }

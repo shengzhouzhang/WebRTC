@@ -10,7 +10,27 @@
 
   margin-top: 50px;
 
-  .image {
+  .event {
+    margin-bottom: 40px;
+  }
+
+  .event-attr {
+    line-height: 20px;
+    margin-bottom: 5px;
+
+    label {
+      display: inline-block;
+      margin-right: 10px;
+      width: 50px;
+      text-align: right;
+    }
+  }
+
+  .event-snapshots {
+    margin-top: 10px;
+  }
+
+  .snapshot {
     display: inline-block;
     margin: @thumbnail-margin;
 
@@ -24,7 +44,7 @@
     }
   }
 
-  .image.motion {
+  .snapshot.motion {
     a {
       img {
         opacity: 0.4;
@@ -33,7 +53,7 @@
   }
 
   @media (min-width: 320px) {
-    .image {
+    .snapshot {
       width: (100 - 2 * 2 * @thumbnail-margin) / 2;
       height: (100 - 2 * 2 * @thumbnail-margin) / 2 / 4 * 3;
     }
@@ -41,42 +61,42 @@
 
 
   @media (min-width: 480px) {
-    .image {
+    .snapshot {
       width: (100 - 3 * 2 * @thumbnail-margin) / 3;
       height: (100 - 3 * 2 * @thumbnail-margin) / 3 / 4 * 3;
     }
   }
 
   @media (min-width: 800px) {
-    .image {
+    .snapshot {
       width: (100 - 4 * 2 * @thumbnail-margin) / 4;
       height: (100 - 4 * 2 * @thumbnail-margin) / 4 / 4 * 3;
     }
   }
 
   @media (min-width: 1280px) {
-    .image {
+    .snapshot {
       width: (100 - 5 * 2 * @thumbnail-margin) / 5;
       height: (100 - 5 * 2 * @thumbnail-margin) / 5 / 4 * 3;
     }
   }
 
   @media (min-width: 1680px) {
-    .image {
+    .snapshot {
       width: (100 - 6 * 2 * @thumbnail-margin) / 6;
       height: (100 - 6 * 2 * @thumbnail-margin) / 6 / 4 * 3;
     }
   }
 
   @media (min-width: 1920px) {
-    .image {
+    .snapshot {
       width: (100 - 7 * 2 * @thumbnail-margin) / 7;
       height: (100 - 7 * 2 * @thumbnail-margin) / 7 / 4 * 3;
     }
   }
 
   @media (min-width: 2560px) {
-    .image {
+    .snapshot {
       width: (100 - 8 * 2 * @thumbnail-margin) / 8;
       height: (100 - 8 * 2 * @thumbnail-margin) / 8 / 4 * 3;
     }

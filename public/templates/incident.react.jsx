@@ -10,7 +10,7 @@ define(['dispatcher', 'actions', 'incident.store'],
     render: function () {
 
       return (
-        <div className="image">
+        <div className="snapshot">
           <a href="#" data-snapshot-id={this.props.key}>
             <img src={this.props.url} />
           </a>
@@ -41,7 +41,13 @@ define(['dispatcher', 'actions', 'incident.store'],
         );
       });
 
-      return (<div className="row">{snapshots}</div>);
+      return (
+        <div className="event">
+          <div className="event-attr"><label>In:</label><span>{moment(this.props.start).format('YYYY-MM-DD HH:mm:ss')}</span></div>
+          <div className="event-attr"><label>Out:</label><span>{moment(this.props.end).format('YYYY-MM-DD HH:mm:ss')}</span></div>
+          <div className="event-snapshots">{snapshots}</div>
+        </div>
+      );
     }
   });
 
@@ -74,7 +80,7 @@ define(['dispatcher', 'actions', 'incident.store'],
         );
       }.bind(this));
 
-      return (<div className="row">{events}</div>);
+      return (<div className="events">{events}</div>);
     }
   });
 
