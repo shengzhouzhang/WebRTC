@@ -14,6 +14,11 @@ var create = function (req, res) {
 
   incident.id = uuid.v1();
   incident.created_at = moment().valueOf();
+  incident.event.start = _.min(incident.event.snapshots, 'timestamp').timestamp;
+  incident.event.end = _.max(incident.event.snapshots, 'timestamp').timestamp;
+  incident.event.cover = _.find(incident.event.snapshots, function (snapshot) {
+    return !!snapshot.motion;
+  }).url;
 
   dispatcher.dispatch(dispatcher.actions.UPDATE_INCIDENTS, incident).then(function () {
 

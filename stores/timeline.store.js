@@ -17,7 +17,13 @@ var store = {
     var data = {
       id: incident.id,
       home_alarm_id: incident.home_alarm_id,
-      created_at: incident.created_at
+      event: {
+        id: incident.event.id,
+        start: incident.event.start,
+        end: incident.event.end,
+        cover: incident.event.cover
+      },
+      created_at: incident.created_at,
     };
 
     return new Promise(function (resolve, reject) {
