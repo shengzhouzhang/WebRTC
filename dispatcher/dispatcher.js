@@ -8,18 +8,7 @@ var _handlers = {},
     _promises = [];
 
 var _addPromise = function (handler, options) {
-
-  _promises.push(new Promise(function (resolve, reject) {
-
-    try {
-      Promise.all([handler(options)]).then(function (results) {
-        resolve(results[0]);
-      }, reject);
-    } catch (err) {
-      reject(err);
-    }
-
-  }));
+  _promises.push(handler(options));
 };
 
 var _clearPromises = function () {
