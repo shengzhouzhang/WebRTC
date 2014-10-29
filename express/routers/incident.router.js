@@ -8,7 +8,7 @@ var _ = require('lodash'),
       require('./incident.routes/timeline.routes').routes,
       require('./incident.routes/details.routes').routes
     ),
-    token = require('../util/jwt.token').token,
+    jwt = require('../util/jwt.token').token,
     logger = require('../../util/log/application.log').logger;
 
 var router = express.Router();
@@ -20,11 +20,12 @@ var _hasAuthorized = function (req, res, next) {
 
 var _hasAuthenticated = function (req, res, next) {
 
-  var access_token = req.body.access_token,
-      token = this.decode(access_token);
+  var access_token = req.headers['authorization'],
+      token = jwt.decode(access_token);
 
-  if (!token || token.isExpired(token.timestamp)) {
+  if (!token || jwt.isExpired(token.timestamp)) {
     res.status(401).json({ error: 'token is invalid or expired' });
+    return;
   }
 
   req.username = token.username;

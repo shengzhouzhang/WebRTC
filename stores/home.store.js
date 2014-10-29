@@ -29,12 +29,12 @@ var store = {
     }.bind(this));
   },
 
-  retrieve: function (id) {
-    if(!id) { throw new Error ('invalid home alarm id'); }
+  request: function (options) {
+    if(!options || !options.home_alarm_id) { throw new Error ('invalid home alarm id'); }
 
     return new Promise(function (resolve, reject) {
 
-      redis.hget(this._DB, id, function (err, result) {
+      redis.hget(this._DB, options.home_alarm_id, function (err, result) {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
         resolve(result);
       });
@@ -43,5 +43,6 @@ var store = {
 };
 
 dispatcher.register(dispatcher.actions.UPDATE_INCIDENTS, store.create.bind(store));
+// dispatcher.register(dispatcher.actions.REQUEST_TIMELINE, store.request.bind(store));
 
 module.exports.store = store;

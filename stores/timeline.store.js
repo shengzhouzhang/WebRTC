@@ -17,6 +17,8 @@ var store = {
     var data = {
       id: incident.id,
       home_alarm_id: incident.home_alarm_id,
+      address: incident.address,
+      contact: incident.contact,
       event: {
         id: incident.event.id,
         start: incident.event.start,
@@ -36,8 +38,7 @@ var store = {
     }.bind(this));
   },
 
-  query: function (options) {
-    if(!cb) { throw new Error ('missing cb'); }
+  request: function (options) {
 
     var min = options.min || '-inf',
         max = options.max || '+inf';
@@ -46,12 +47,21 @@ var store = {
 
       redis.zrangebyscore(this._DB, min, max, function (err, result) {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
-        resolve(result);
+
+        try {
+          var incidents = _.map(result, function (item) {
+            return JSON.parse(item);
+          });
+          resolve(incidents);
+        } catch (err) {
+          reject(err);
+        }
       });
     }.bind(this));
   }
 };
 
 dispatcher.register(dispatcher.actions.UPDATE_INCIDENTS, store.create.bind(store));
+dispatcher.register(dispatcher.actions.REQUEST_TIMELINE, store.request.bind(store));
 
 module.exports.store = store;

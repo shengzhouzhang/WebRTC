@@ -31,6 +31,7 @@ var dispatcher = {
     // incidents
 
     UPDATE_INCIDENTS: 'UPDATE_INCIDENTS',
+    REQUEST_TIMELINE: 'REQUEST_TIMELINE',
 
     // web socket server
 
@@ -52,8 +53,12 @@ var dispatcher = {
       _addPromise(handler, options);
     });
 
-    return Promise.all(_promises).then(_clearPromises, function (error) {
-      console.log(action, error);
+    return Promise.all(_promises).then(function (result) {
+      _clearPromises();
+      return result[0];
+    }, function (error) {
+      console.log('dispatcher', action, error);
+      return error;
     });
   }
 };
