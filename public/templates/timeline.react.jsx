@@ -18,7 +18,7 @@ define(['dispatcher', 'actions', 'timeline.store'],
     }
   });
 
-  var toIncidentView = dispatcher.dispatch.bind(undefined, actions.TO_INCIDENT_VIEW);
+  var toIncidentView = dispatcher.dispatch.bind(undefined, actions.NAVIGATE_TO_VIEW);
 
   var Images = React.createClass({
 
@@ -43,7 +43,7 @@ define(['dispatcher', 'actions', 'timeline.store'],
     },
 
     _onClick: function (event) {
-      toIncidentView($(event.target).attr('data-home-alarm-id'));
+      dispatcher.dispatch(actions.NAVIGATE_TO_VIEW, { uri: 'incident/' + $(event.target).attr('data-home-alarm-id') });
     },
 
     render: function () {

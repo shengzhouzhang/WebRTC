@@ -10,6 +10,10 @@ define(['dispatcher'],
     APP_INIT: 'APP_INIT',
     APP_START: 'APP_START',
 
+    // router
+    
+    NAVIGATE_TO_VIEW: 'NAVIGATE_TO_VIEW',
+
     // timeline actions
     UPDATE_TIMELINE_STORE: 'UPDATE_TIMELINE_STORE',
     TO_TIMELINE_VIEW: 'TO_TIMELINE_VIEW',
