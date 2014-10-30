@@ -8,6 +8,7 @@ require([
   'view.manager',
   'api.manager',
   'store.manager',
+  'socket.manager',
   'user.authenticate',
 
   // router

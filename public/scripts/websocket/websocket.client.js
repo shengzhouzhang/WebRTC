@@ -7,53 +7,71 @@ define([
   ], function (dispatcher, actions, store) {
   'use strict';
 
-  var socket = new WebSocket("ws://localhost:4000/socket",'json');
+  var _socket, _username;
 
-  socket.onopen = function () {
+  var socket = {
 
-    socket.send(JSON.stringify({
-      action: 'AUTHENTICATE',
-      access_token: store.get().access_token
-    }));
-  };
+    init: function () {
+      if(!!_socket) { console.log('socket exists'); return; }
 
-  socket.onerror = function (error) {
+      _socket = new WebSocket("ws://localhost:4000/socket",'json');
 
-    socket.log('Error Logged: ' + error);
-  };
+      _socket.onopen = this.authenticate;
+      _socket.onerror = this._onerror;
+      _socket.onmessage = this._onmessage;
+    },
 
-  socket.onmessage = function (event) {
-    var data;
+    updates: function (options) {
+      if(!_socket) { console.log('socket not available'); return; }
+      if(!_username) { console.log('unauthorized socket'); return; }
 
-    try {
-      data = JSON.parse(event.data);
-    } catch (err) {
+      _socket.send(JSON.stringify({
+        action: 'REQUEST_UNPDATES',
+        timestamp: options.timestamp
+      }));
+    },
 
-    }
+    authenticate: function () {
+      if(!_socket) { console.log('socket not available'); return; }
 
-    console.log(data);
+      _socket.send(JSON.stringify({
+        action: 'AUTHENTICATE',
+        access_token: store.get().access_token
+      }));
+    },
 
-    if(!data || !data.action) { return; }
+    _onerror: function (err) {
+      console.log(err);
+    },
 
-    switch(data.action) {
-      case 'AUTHENTICATE':
-        dispatcher.dispatch(actions.REQUEST_UNPDATES, { timestamp: moment().valueOf() });
-        break;
-      case 'REQUEST_UNPDATES':
-        // dispatcher.dispatch(actions.REQUEST_UNPDATES, { timestamp: moment().valueOf() }
-        break;
-      default:
-        break;
-    }
-  };
+    _onmessage: function (event) {
+      var data;
 
+      try {
+        data = JSON.parse(event.data);
+      } catch (err) {
 
-  dispatcher.register(actions.REQUEST_UNPDATES, function (options) {
+      }
 
-    socket.send(JSON.stringify({
-      action: 'REQUEST_UNPDATES',
-      timestamp: options.timestamp
-    }));
-  });
+      console.log(data);
 
+      if(!data || !data.action) { return; }
+
+      switch(data.action) {
+        case 'AUTHENTICATE':
+          _username = data.username;
+          dispatcher.dispatch(actions.REQUEST_UNPDATES, { timestamp: moment().valueOf() });
+          break;
+        case 'REQUEST_UNPDATES':
+          if(!data.updates) { return; }
+          break;
+        default:
+          break;
+      }
+    },
+  }
+
+  dispatcher.register(actions.REQUEST_UNPDATES, socket.updates.bind(socket));
+
+  return socket;
 });

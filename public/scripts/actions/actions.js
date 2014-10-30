@@ -40,6 +40,7 @@ define(['dispatcher'],
     CLEAR_MESSAGE: 'CLEAR_MESSAGE',
 
     // web socket
+
     REQUEST_UNPDATES: 'REQUEST_UNPDATES',
 
     // error handler actions
