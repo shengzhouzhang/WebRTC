@@ -46,7 +46,7 @@ var broadcast = function (data) {
 
   _.each(_server.clients, function (client) {
 
-    client.send(data, function (err) {
+    client.send(JSON.stringify(data), function (err) {
       if(!!err) { logger.error(err.message || err); return; }
     });
   });

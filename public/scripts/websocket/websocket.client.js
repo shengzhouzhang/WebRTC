@@ -18,10 +18,10 @@ define([
 
       _socket = new WebSocket('ws://localhost:4000/socket', 'json');
 
-      _socket.onopen = this._onopen;
-      _socket.onmessage = this._onmessage;
-      _socket.onerror = this._onerror;
-      _socket.onclose = this._onclose;
+      _socket.onopen = this._onopen.bind(this);
+      _socket.onmessage = this._onmessage.bind(this);
+      _socket.onerror = this._onerror.bind(this);
+      _socket.onclose = this._onclose.bind(this);
     },
 
     updates: function (options) {
@@ -65,8 +65,12 @@ define([
         case 'AUTHENTICATE':
           _socket.username = data.username;
           break;
+        case 'NEW_CASE':
+          dispatcher.dispatch(actions.NEW_CASE);
+          break;
         case 'REQUEST_UNPDATES':
           if(!data.updates) { return; }
+          dispatcher.dispatch(actions.NEW_CASE);
           break;
         default:
           break;
@@ -80,7 +84,7 @@ define([
     _onclose: function () {
       _socket = null;
       _status = status.CLOSED;
-      setTimeout(socket.connect.bind(socket), 5000);
+      setTimeout(this.connect.bind(this), 5000);
     },
   };
 

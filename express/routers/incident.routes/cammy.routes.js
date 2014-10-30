@@ -25,7 +25,7 @@ var create = function (req, res) {
     res.status(201).json({ id: incident.id, created_at: incident.created_at });
 
     dispatcher.dispatch(dispatcher.actions.BROADCAST, {
-      action: 'NEW_INCIDENT',
+      action: 'NEW_CASE',
       incident: {
         id: incident.id,
         home_alarm_id: incident.home_alarm_id,

@@ -43,6 +43,7 @@ define(['dispatcher'],
 
     SOCKET_CONNECT: 'SOCKET_CONNECT',
     REQUEST_UNPDATES: 'REQUEST_UNPDATES',
+    NEW_CASE: 'NEW_CASE',
 
     // error handler actions
 

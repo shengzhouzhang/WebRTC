@@ -59,7 +59,7 @@ define([
       _fadeOut().then(function () {
 
         dispatcher.dispatch(actions.SOCKET_CONNECT);
-        
+
         _views.filter('#timeline-container').fadeIn('slow');
         dispatcher.dispatch(actions.REQUEST_TIMELINE);
       });
@@ -73,6 +73,13 @@ define([
       .find('div.login-window').fadeIn('slow');
     });
   });
+
+  // message bar
+
+  dispatcher.register(actions.NEW_CASE, dispatcher.dispatch.bind(undefined,
+    actions.UPDATE_MESSAGE, { message: 'new incident, please refresh the page' }));
+
+  // app
 
   dispatcher.register(actions.APP_INIT, views.init.bind(views));
 
