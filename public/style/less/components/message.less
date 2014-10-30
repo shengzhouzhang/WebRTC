@@ -1,23 +1,32 @@
 
 
-@message-background: lighten(#2c3e50, 10%);
-@message-color: white;
-
 #message-container {
   .full-width;
   .transition;
 
   position: fixed;
-  top: -60px;
-  line-height: 40px;
-  padding: 10px;
+  top: 0;
+  height: 50px;
+  line-height: 50px;
 
-  background: @message-background;
-  color: @message-color;
+  background: #C9E7F1;
+  color: #FFF;
 
   text-align: center;
 
+  a {
+    display: inline-block;
+    position: absolute;
+    width: 25px;
+    color: white;
+    right: 20px;
+
+    &:hover {
+      color: #FF5A4B;
+    }
+  }
+
   &.shown {
-    top: 0;
+    top: 50px;
   }
 }

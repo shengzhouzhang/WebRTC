@@ -13,10 +13,12 @@ define(['dispatcher', 'actions', 'message.store'],
 
     componentDidMount: function () {
       store.addEventListener(this._onLoad);
+      $(_container).delegate('a', 'click', this._onClose);
     },
 
     componentWillUnmount: function () {
       store.removeEventListener(this._onLoad);
+      $(_container).undelegate('a', 'click', this._onClose);
     },
 
     _onLoad: function () {
@@ -28,10 +30,16 @@ define(['dispatcher', 'actions', 'message.store'],
       $(_container).addClass('shown');
     },
 
+    _onClose: function (event) {
+      event.preventDefault();
+      $(_container).removeClass('shown');
+    },
+
     render: function () {
       return (
-        <div className='message-window'>
+        <div className='message'>
           {this.state.message}
+          <a href="#"><i className="fa fa-times"></i></a>
         </div>
       );
     }

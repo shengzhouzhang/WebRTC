@@ -80,7 +80,12 @@ define(['dispatcher', 'actions', 'incident.store'],
         );
       }.bind(this));
 
-      return (<div className="events">{events}</div>);
+      return (
+        <div>
+          <div className="address">Home Address</div>
+          <div className="events">{events}</div>
+        </div>
+      );
     }
   });
 

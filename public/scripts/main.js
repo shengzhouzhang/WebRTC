@@ -20,6 +20,6 @@ require([
 
   dispatcher.dispatch(actions.APP_INIT).then(function () {
 
-    dispatcher.dispatch(actions.APP_START)
+    dispatcher.dispatch(actions.APP_START);
   });
 });

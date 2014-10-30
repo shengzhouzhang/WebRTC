@@ -59,6 +59,7 @@ define([
       _fadeOut().then(function () {
 
         dispatcher.dispatch(actions.SOCKET_CONNECT);
+        dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'Connection Lost' });
 
         _views.filter('#timeline-container').fadeIn('slow');
         dispatcher.dispatch(actions.REQUEST_TIMELINE);

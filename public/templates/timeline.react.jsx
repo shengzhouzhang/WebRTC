@@ -18,8 +18,6 @@ define(['dispatcher', 'actions', 'timeline.store'],
     }
   });
 
-  var toIncidentView = dispatcher.dispatch.bind(undefined, actions.NAVIGATE_TO_VIEW);
-
   var Images = React.createClass({
 
     getInitialState: function () {

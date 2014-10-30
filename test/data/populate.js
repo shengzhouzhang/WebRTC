@@ -5,7 +5,7 @@ var _ = require('lodash'),
     fs = require('fs'),
     path = require('path');
 
-var input = path.join(__dirname, '..', '..', 'public', 'json', 'test-case-07.json'),
+var input = path.join(__dirname, '..', '..', 'public', 'json', 'test-case-09.json'),
     output = path.join(__dirname, 'test.json');
 
 fs.readFile(input, function (err, data) {
