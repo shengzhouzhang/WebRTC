@@ -11,10 +11,11 @@ define(['dispatcher'],
     APP_START: 'APP_START',
 
     // router
-    
+
     NAVIGATE_TO_VIEW: 'NAVIGATE_TO_VIEW',
 
     // timeline actions
+
     UPDATE_TIMELINE_STORE: 'UPDATE_TIMELINE_STORE',
     TO_TIMELINE_VIEW: 'TO_TIMELINE_VIEW',
     REQUEST_TIMELINE: 'REQUEST_TIMELINE',
@@ -37,6 +38,9 @@ define(['dispatcher'],
 
     UPDATE_MESSAGE: 'UPDATE_MESSAGE',
     CLEAR_MESSAGE: 'CLEAR_MESSAGE',
+
+    // web socket
+    REQUEST_UNPDATES: 'REQUEST_UNPDATES',
 
     // error handler actions
 

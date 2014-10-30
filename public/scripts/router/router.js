@@ -19,7 +19,7 @@ define([
     router = new AppRouter;
 
     router.on('route:incident', dispatcher.dispatch.bind(undefined, actions.TO_INCIDENT_VIEW));
-    // router.on('route:incidents', dispatcher.dispatch.bind(undefined, actions.TO_TIMELINE_VIEW));
+    router.on('route:incidents', dispatcher.dispatch.bind(undefined, actions.TO_TIMELINE_VIEW));
 
     Backbone.history.start();
   });

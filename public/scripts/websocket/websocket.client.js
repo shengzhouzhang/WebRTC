@@ -15,13 +15,6 @@ define([
       action: 'AUTHENTICATE',
       access_token: store.get().access_token
     }));
-
-    // socket.send(JSON.stringify({
-    //   access_token: store.get().access_token,
-    //   action: 'REQUEST_UNPDATES',
-    //   timestamp: moment().valueOf()
-    //   // timestamp: 1414621586651
-    // }));
   };
 
   socket.onerror = function (error) {
@@ -37,15 +30,30 @@ define([
     } catch (err) {
 
     }
+
     console.log(data);
+
     if(!data || !data.action) { return; }
 
     switch(data.action) {
-      case '':
+      case 'AUTHENTICATE':
+        dispatcher.dispatch(actions.REQUEST_UNPDATES, { timestamp: moment().valueOf() });
+        break;
+      case 'REQUEST_UNPDATES':
+        // dispatcher.dispatch(actions.REQUEST_UNPDATES, { timestamp: moment().valueOf() }
         break;
       default:
         break;
     }
   };
+
+
+  dispatcher.register(actions.REQUEST_UNPDATES, function (options) {
+
+    socket.send(JSON.stringify({
+      action: 'REQUEST_UNPDATES',
+      timestamp: options.timestamp
+    }));
+  });
 
 });

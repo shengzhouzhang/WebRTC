@@ -30,7 +30,7 @@ var server = {
           data = null;
         }
 
-        if(!data || !data.access_token || !data.action) { logger.error('socket', 'invalid message data', data); return; }
+        if(!data || !data.action) { logger.error('socket', 'invalid message data', data); return; }
         if(!handlers[data.action]) { logger.error('socket', 'unknown action', data.action); return; }
 
         handlers[data.action](client, data);
@@ -67,7 +67,7 @@ var handlers = {
 
     if (!token || jwt.isExpired(token.timestamp)) { _error(client, 'invalid token'); return; }
 
-    var data = JSON.stringify({ username: token.username });
+    var data = JSON.stringify({ action: 'AUTHENTICATE', username: token.username });
 
     client.send(data, function (err) {
       if(!!err) { logger.error(err.message || err); return; }
@@ -88,7 +88,7 @@ var handlers = {
       if(!result || !result[0]) { _error(client, 'invalid result'); return; }
 
       var data = JSON.stringify({
-        action: 'RESPONSE_UNPDATES',
+        action: 'REQUEST_UNPDATES',
         updates: result[0].length,
         timestamp: options.timestamp
       });
