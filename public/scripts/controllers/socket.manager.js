@@ -9,7 +9,7 @@ define([
 
   dispatcher.register(actions.APP_INIT, function (options) {
 
-    socket.init();
+    socket.connect();
 
     console.log('SOCKET_READY');
   });

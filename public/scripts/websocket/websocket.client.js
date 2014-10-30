@@ -7,23 +7,24 @@ define([
   ], function (dispatcher, actions, store) {
   'use strict';
 
-  var _socket, _username;
+  var _socket;
 
   var socket = {
 
-    init: function () {
+    connect: function () {
       if(!!_socket) { console.log('socket exists'); return; }
 
-      _socket = new WebSocket("ws://localhost:4000/socket",'json');
+      _socket = new WebSocket('ws://localhost:4000/socket', 'json');
 
-      _socket.onopen = this.authenticate;
-      _socket.onerror = this._onerror;
+      _socket.onopen = this._onopen;
       _socket.onmessage = this._onmessage;
+      _socket.onerror = this._onerror;
+      _socket.onclose = this._onclose;
     },
 
     updates: function (options) {
       if(!_socket) { console.log('socket not available'); return; }
-      if(!_username) { console.log('unauthorized socket'); return; }
+      if(!_socket.username) { console.log('unauthorized socket'); return; }
 
       _socket.send(JSON.stringify({
         action: 'REQUEST_UNPDATES',
@@ -40,8 +41,8 @@ define([
       }));
     },
 
-    _onerror: function (err) {
-      console.log(err);
+    _onopen: function () {
+      socket.authenticate();
     },
 
     _onmessage: function (event) {
@@ -59,8 +60,7 @@ define([
 
       switch(data.action) {
         case 'AUTHENTICATE':
-          _username = data.username;
-          dispatcher.dispatch(actions.REQUEST_UNPDATES, { timestamp: moment().valueOf() });
+          _socket.username = data.username;
           break;
         case 'REQUEST_UNPDATES':
           if(!data.updates) { return; }
@@ -68,6 +68,15 @@ define([
         default:
           break;
       }
+    },
+
+    _onerror: function (err) {
+      console.log(err.message || err);
+    },
+
+    _onclose: function () {
+      _socket = null;
+      setTimeout(socket.connect.bind(socket), 5000);
     },
   }
 
