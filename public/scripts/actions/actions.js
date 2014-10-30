@@ -41,6 +41,7 @@ define(['dispatcher'],
 
     // web socket
 
+    SOCKET_CONNECT: 'SOCKET_CONNECT',
     REQUEST_UNPDATES: 'REQUEST_UNPDATES',
 
     // error handler actions

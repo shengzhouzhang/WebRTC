@@ -7,11 +7,6 @@ define([
   ], function (dispatcher, actions, socket) {
   'use strict';
 
-  dispatcher.register(actions.APP_INIT, function (options) {
-
-    socket.connect();
-
-    console.log('SOCKET_READY');
-  });
-
+  dispatcher.register(actions.SOCKET_CONNECT, socket.connect.bind(socket));
+  dispatcher.register(actions.REQUEST_UNPDATES, socket.updates.bind(socket));
 });

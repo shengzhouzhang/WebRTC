@@ -46,6 +46,8 @@ define([
     dispatcher.dispatch(actions.REQUIRE_AUTH).then(function () {
       _fadeOut().then(function () {
 
+        dispatcher.dispatch(actions.SOCKET_CONNECT);
+
         _views.filter('#incident-container').fadeIn('slow');
         dispatcher.dispatch(actions.REQUEST_INCIDENT, options);
       });
@@ -56,6 +58,8 @@ define([
     dispatcher.dispatch(actions.REQUIRE_AUTH).then(function () {
       _fadeOut().then(function () {
 
+        dispatcher.dispatch(actions.SOCKET_CONNECT);
+        
         _views.filter('#timeline-container').fadeIn('slow');
         dispatcher.dispatch(actions.REQUEST_TIMELINE);
       });

@@ -7,7 +7,9 @@ define([
   ], function (dispatcher, actions, store) {
   'use strict';
 
-  var _socket;
+  var _socket, _status;
+
+  var status = { OPENED: 'OPENED', CLOSED: 'CLOSED' };
 
   var socket = {
 
@@ -43,6 +45,7 @@ define([
 
     _onopen: function () {
       socket.authenticate();
+      _status = status.OPENED;
     },
 
     _onmessage: function (event) {
@@ -76,11 +79,10 @@ define([
 
     _onclose: function () {
       _socket = null;
+      _status = status.CLOSED;
       setTimeout(socket.connect.bind(socket), 5000);
     },
-  }
-
-  dispatcher.register(actions.REQUEST_UNPDATES, socket.updates.bind(socket));
+  };
 
   return socket;
 });
