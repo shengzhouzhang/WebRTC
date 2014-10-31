@@ -7,15 +7,6 @@ define(['dispatcher', 'actions'],
 
   var Message = React.createClass({
 
-
-    componentDidMount: function () {
-      $(_container).delegate('a.refresh', 'click', this._refresh);
-    },
-
-    componentWillUnmount: function (event) {
-      $(_container).undelegate('a.refresh', 'click', this._refresh);
-    },
-
     _refresh: function (event) {
       event.preventDefault();
       dispatcher.dispatch(actions.TO_TIMELINE_VIEW);
@@ -37,7 +28,7 @@ define(['dispatcher', 'actions'],
           <div className="menu"><a href="#" ><i className="fa fa-bars"></i></a></div>
           <div className="actions">
             <a href="#" className="alarm" ><i className="fa fa-bell-o"></i></a>
-            <a href="#" className="refresh" ><i className="fa fa-refresh"></i></a>
+            <a href="#" className="refresh" onClick={this._refresh}><i className="fa fa-refresh"></i></a>
             <a href="#" ><i className="fa fa-ellipsis-v"></i></a>
           </div>
         </div>
@@ -54,7 +45,8 @@ define(['dispatcher', 'actions'],
         _container
       );
 
-      dispatcher.register(actions.NEW_CASE, _component.alarmOn.bind(_component));
+      dispatcher.register(actions.ALARM_ON, _component.alarmOn);
+      dispatcher.register(actions.ALARM_OFF, _component.alarmOn);
     }
   };
 

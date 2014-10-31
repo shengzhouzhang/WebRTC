@@ -59,7 +59,6 @@ define([
       _fadeOut().then(function () {
 
         dispatcher.dispatch(actions.SOCKET_CONNECT);
-        dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'Connection Lost' });
 
         _views.filter('#timeline-container').fadeIn('slow');
         dispatcher.dispatch(actions.REQUEST_TIMELINE);
@@ -77,8 +76,11 @@ define([
 
   // message bar
 
-  dispatcher.register(actions.NEW_CASE, dispatcher.dispatch.bind(undefined,
-    actions.UPDATE_MESSAGE, { message: 'new incident, please refresh the page' }));
+  dispatcher.register(actions.NEW_CASE, function () {
+
+    dispatcher.dispatch(actions.ALARM_ON);
+    dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'New Incidents' });
+  });
 
   // app
 

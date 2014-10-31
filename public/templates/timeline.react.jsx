@@ -35,9 +35,15 @@ define(['dispatcher', 'actions', 'timeline.store'],
     },
 
     _onLoad: function () {
+      var incidents = _.sortBy(store.get(), function (incident) { return -incident.created_at; });
+
       this.setState({
-        timeline: store.get()
+        timeline: incidents
       });
+
+      var timestamp = !!incidents && !!incidents[0] ? incidents[0].created_at: null;
+
+      dispatcher.dispatch(actions.REQUEST_UNPDATES, { timestamp: timestamp });
     },
 
     _onClick: function (event) {

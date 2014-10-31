@@ -45,6 +45,11 @@ define(['dispatcher'],
     REQUEST_UNPDATES: 'REQUEST_UNPDATES',
     NEW_CASE: 'NEW_CASE',
 
+    // header
+
+    ALARM_ON: 'ALARM_ON',
+    ALARM_OFF: 'ALARM_OFF',
+
     // error handler actions
 
     BAD_REQUEST: 'BAD_REQUEST',

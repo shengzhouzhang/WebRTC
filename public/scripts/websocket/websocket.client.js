@@ -30,7 +30,7 @@ define([
 
       _socket.send(JSON.stringify({
         action: 'REQUEST_UNPDATES',
-        timestamp: options.timestamp
+        timestamp: options && options.timestamp || -1
       }));
     },
 
