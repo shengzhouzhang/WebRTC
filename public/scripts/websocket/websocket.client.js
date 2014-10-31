@@ -7,7 +7,7 @@ define([
   ], function (dispatcher, actions, store) {
   'use strict';
 
-  var _socket, _status, _conneciton, _authentication;
+  var _socket, _conneciton, _authentication;
 
   var handlers = {
 
@@ -30,16 +30,21 @@ define([
 
   var socket = {
 
-    connect: function () {
-      if(!!_socket) { console.log('socket exists'); return; }
-
-      _socket = new WebSocket('ws://localhost:4000/socket', 'json');
-
-      _socket.onerror = this._onerror;
+    connect: function (delay) {
 
       _conneciton = new Promise(function (resolve, reject) {
-        _socket.onopen = resolve;
-        _socket.onclose = reject;
+        if(!!_socket) { console.log('socket exists'); reject(); return; }
+
+        setTimeout(function () {
+
+          _socket = new WebSocket('ws://localhost:4000/socket', 'json');
+
+          _socket.onopen = resolve;
+          _socket.onclose = this._onclose;
+          _socket.onerror = this._onerror;
+
+        }, delay || 0);
+
       }.bind(this));
 
       _authentication = new Promise(function (resolve, reject) {
@@ -48,7 +53,7 @@ define([
           resolve: resolve,
           reject: reject
         });
-        
+
       }.bind(this));
     },
 
@@ -77,6 +82,7 @@ define([
     },
 
     _execute: function (action, options) {
+      console.log(action);
       _socket.onmessage = this._onmessage.bind(this, options);
       _socket.send(JSON.stringify(action));
     },
@@ -100,7 +106,9 @@ define([
 
     _onclose: function () {
       _socket = null;
-      setTimeout(this.connect.bind(this), 5000);
+      _conneciton = null;
+      _authentication = null;
+      this.connect.bind(this, 5000);
     },
   };
 

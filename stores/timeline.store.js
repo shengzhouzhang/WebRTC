@@ -40,7 +40,7 @@ var store = {
 
   request: function (options) {
 
-    var min = options.min || '-inf',
+    var min = !!options && !!options.min ? '(' + options.min : '-inf',
         max = options.max || '+inf';
 
     return new Promise(function (resolve, reject) {
