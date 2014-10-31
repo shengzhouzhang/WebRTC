@@ -7,9 +7,26 @@ define([
   ], function (dispatcher, actions, store) {
   'use strict';
 
-  var _socket, _status;
+  var _socket, _status, _conneciton, _authentication;
 
-  var status = { OPENED: 'OPENED', CLOSED: 'CLOSED' };
+  var handlers = {
+
+    AUTHENTICATE: function (data, options) {
+      _socket.username = data.username;
+      if(!!options && !!options.resolve) { options.resolve(); }
+    },
+
+    NEW_CASE: function (data, options) {
+      dispatcher.dispatch(actions.NEW_CASE);
+      if(!!options && !!options.resolve) { options.resolve(); }
+    },
+
+    REQUEST_UNPDATES: function (data, options) {
+      if(!data.updates) { return; }
+      dispatcher.dispatch(actions.NEW_CASE);
+      if(!!options && !!options.resolve) { options.resolve(); }
+    },
+  }
 
   var socket = {
 
@@ -18,63 +35,63 @@ define([
 
       _socket = new WebSocket('ws://localhost:4000/socket', 'json');
 
-      _socket.onopen = this._onopen.bind(this);
-      _socket.onmessage = this._onmessage.bind(this);
-      _socket.onerror = this._onerror.bind(this);
-      _socket.onclose = this._onclose.bind(this);
+      _socket.onerror = this._onerror;
+
+      _conneciton = new Promise(function (resolve, reject) {
+        _socket.onopen = resolve;
+        _socket.onclose = reject;
+      }.bind(this));
+
+      _authentication = new Promise(function (resolve, reject) {
+
+        this.authenticate({
+          resolve: resolve,
+          reject: reject
+        });
+        
+      }.bind(this));
+    },
+
+    authenticate: function (options) {
+      _conneciton.then(function () {
+
+        this._execute({
+          action: 'AUTHENTICATE',
+          access_token: store.get().access_token
+        }, options)
+
+      }.bind(this));
     },
 
     updates: function (options) {
-      if(!_socket) { console.log('socket not available'); return; }
-      if(!_socket.username) { console.log('unauthorized socket'); return; }
+      _conneciton.then(function () {
+        _authentication.then(function () {
 
-      _socket.send(JSON.stringify({
-        action: 'REQUEST_UNPDATES',
-        timestamp: options && options.timestamp || -1
-      }));
+          this._execute({
+            action: 'REQUEST_UNPDATES',
+            timestamp: options && options.timestamp || -1
+          });
+
+        }.bind(this));
+      }.bind(this));
     },
 
-    authenticate: function () {
-      if(!_socket) { console.log('socket not available'); return; }
-
-      _socket.send(JSON.stringify({
-        action: 'AUTHENTICATE',
-        access_token: store.get().access_token
-      }));
+    _execute: function (action, options) {
+      _socket.onmessage = this._onmessage.bind(this, options);
+      _socket.send(JSON.stringify(action));
     },
 
-    _onopen: function () {
-      socket.authenticate();
-      _status = status.OPENED;
-    },
+    _onmessage: function (options, event) {
 
-    _onmessage: function (event) {
       var data;
 
-      try {
-        data = JSON.parse(event.data);
-      } catch (err) {
-
-      }
+      try { data = JSON.parse(event.data); } catch (err) { }
 
       console.log(data);
 
-      if(!data || !data.action) { return; }
+      if(!data || !data.action || !handlers[data.action]) { return; }
 
-      switch(data.action) {
-        case 'AUTHENTICATE':
-          _socket.username = data.username;
-          break;
-        case 'NEW_CASE':
-          dispatcher.dispatch(actions.NEW_CASE);
-          break;
-        case 'REQUEST_UNPDATES':
-          if(!data.updates) { return; }
-          dispatcher.dispatch(actions.NEW_CASE);
-          break;
-        default:
-          break;
-      }
+      handlers[data.action](data, options);
     },
 
     _onerror: function (err) {
@@ -83,7 +100,6 @@ define([
 
     _onclose: function () {
       _socket = null;
-      _status = status.CLOSED;
       setTimeout(this.connect.bind(this), 5000);
     },
   };
