@@ -76,7 +76,11 @@ define([
 
   // message bar
 
-  dispatcher.register(actions.NEW_CASE, dispatcher.dispatch.bind(undefined, actions.UPDATE_MESSAGE, { message: 'New Incidents' }));
+  dispatcher.register(actions.NEW_CASE, function (incident) {
+
+    var msg = 'New Incidents' + (!!incident ? ' at ' + moment(incident.created_at).format('HH:mm:ss') : '');
+    dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: msg })
+  });
 
   // header
 

@@ -17,7 +17,7 @@ define([
     },
 
     NEW_CASE: function (data, options) {
-      dispatcher.dispatch(actions.NEW_CASE);
+      dispatcher.dispatch(actions.NEW_CASE, data.incident);
       if(!!options && !!options.resolve) { options.resolve(); }
     },
 
