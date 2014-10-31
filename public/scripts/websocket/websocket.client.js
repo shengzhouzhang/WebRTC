@@ -82,7 +82,6 @@ define([
     },
 
     _execute: function (action, options) {
-      console.log(action);
       _socket.onmessage = this._onmessage.bind(this, options);
       _socket.send(JSON.stringify(action));
     },
