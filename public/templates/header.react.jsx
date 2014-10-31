@@ -46,7 +46,7 @@ define(['dispatcher', 'actions'],
       );
 
       dispatcher.register(actions.ALARM_ON, _component.alarmOn);
-      dispatcher.register(actions.ALARM_OFF, _component.alarmOn);
+      dispatcher.register(actions.ALARM_OFF, _component.alarmOff);
     }
   };
 

@@ -76,11 +76,12 @@ define([
 
   // message bar
 
-  dispatcher.register(actions.NEW_CASE, function () {
+  dispatcher.register(actions.NEW_CASE, dispatcher.dispatch.bind(undefined, actions.UPDATE_MESSAGE, { message: 'New Incidents' }));
 
-    dispatcher.dispatch(actions.ALARM_ON);
-    dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'New Incidents' });
-  });
+  // header
+
+  dispatcher.register(actions.NEW_CASE, dispatcher.dispatch.bind(undefined, actions.ALARM_ON));
+  dispatcher.register(actions.NO_NEW_CASE, dispatcher.dispatch.bind(undefined, actions.ALARM_OFF));
 
   // app
 

@@ -22,7 +22,7 @@ define([
     },
 
     REQUEST_UNPDATES: function (data, options) {
-      if(!data.updates) { return; }
+      if(!data.updates) { dispatcher.dispatch(actions.NO_NEW_CASE); return; }
       dispatcher.dispatch(actions.NEW_CASE);
       if(!!options && !!options.resolve) { options.resolve(); }
     },
@@ -31,20 +31,21 @@ define([
   var socket = {
 
     connect: function (delay) {
+      if(!!_socket) { return; }
+
+      console.log('connect.......');
 
       _conneciton = new Promise(function (resolve, reject) {
-        if(!!_socket) { console.log('socket exists'); reject(); return; }
 
         setTimeout(function () {
 
           _socket = new WebSocket('ws://localhost:4000/socket', 'json');
 
           _socket.onopen = resolve;
-          _socket.onclose = this._onclose;
-          _socket.onerror = this._onerror;
+          _socket.onclose = this._onclose.bind(this);
+          _socket.onerror = this._onerror.bind(this);
 
-        }, delay || 0);
-
+        }.bind(this), delay || 0);
       }.bind(this));
 
       _authentication = new Promise(function (resolve, reject) {
@@ -69,6 +70,7 @@ define([
     },
 
     updates: function (options) {
+
       _conneciton.then(function () {
         _authentication.then(function () {
 
@@ -82,6 +84,7 @@ define([
     },
 
     _execute: function (action, options) {
+
       _socket.onmessage = this._onmessage.bind(this, options);
       _socket.send(JSON.stringify(action));
     },
@@ -104,10 +107,11 @@ define([
     },
 
     _onclose: function () {
+      console.log('close.......');
       _socket = null;
       _conneciton = null;
       _authentication = null;
-      this.connect.bind(this, 5000);
+      this.connect(3000);
     },
   };
 

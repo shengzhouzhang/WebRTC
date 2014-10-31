@@ -44,6 +44,7 @@ define(['dispatcher'],
     SOCKET_CONNECT: 'SOCKET_CONNECT',
     REQUEST_UNPDATES: 'REQUEST_UNPDATES',
     NEW_CASE: 'NEW_CASE',
+    NO_NEW_CASE: 'NO_NEW_CASE',
 
     // header
 
