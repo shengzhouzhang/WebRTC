@@ -43,11 +43,18 @@ define([
 
     dispatcher.dispatch(actions.CLEAR_MESSAGE);
     return Promise.all(animates);
-  }
+  };
+
+  var _showComponents = function () {
+
+    _views.filter('#header-container').show();
+  };
 
   dispatcher.register(actions.TO_INCIDENT_VIEW, function (options) {
     dispatcher.dispatch(actions.REQUIRE_AUTH).then(function () {
       _fadeOut().then(function () {
+
+        _showComponents();
 
         dispatcher.dispatch(actions.SOCKET_CONNECT);
 
@@ -61,6 +68,8 @@ define([
     dispatcher.dispatch(actions.REQUIRE_AUTH).then(function () {
       _fadeOut().then(function () {
 
+        _showComponents();
+
         dispatcher.dispatch(actions.SOCKET_CONNECT);
 
         _views.filter('#timeline-container').fadeIn('slow');
@@ -72,6 +81,7 @@ define([
   dispatcher.register(actions.TO_LOGIN_VIEW, function (options) {
     _fadeOut().then(function () {
 
+      _views.filter('#header-container').hide();
       _views.filter('#login-container').show()
       .find('div.login-window').fadeIn('slow');
     });
