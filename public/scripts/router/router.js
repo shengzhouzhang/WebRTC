@@ -21,7 +21,7 @@ define([
 
     router.on('route:incident', dispatcher.dispatch.bind(undefined, actions.TO_INCIDENT_VIEW));
     router.on('route:incidents', dispatcher.dispatch.bind(undefined, actions.TO_TIMELINE_VIEW));
-    
+
     router.on('route:redirect', dispatcher.dispatch.bind(undefined, actions.NAVIGATE_TO_VIEW, { uri: 'incidents '}));
 
     Backbone.history.start();
@@ -29,6 +29,8 @@ define([
 
   dispatcher.register(actions.NAVIGATE_TO_VIEW, function (options) {
     if(!router) { throw new Error ('router is not available')};
+
+    if(Backbone.history.fragment === options.uri) { Backbone.history.fragment = null; }
     router.navigate(options.uri, {trigger: true});
   });
 });

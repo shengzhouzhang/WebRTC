@@ -74,7 +74,6 @@ define(['dispatcher', 'actions', 'incident.store'],
     render: function () {
 
       var events = _.map(this.state.events, function (event, index) {
-        console.log(event);
 
         // TODO: need to have unique id
         return (
