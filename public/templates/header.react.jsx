@@ -38,7 +38,7 @@ define(['dispatcher', 'actions'],
           <div className="actions">
             <a href="#" className="alarm" onClick={this._alarm}><i className="fa fa-bell-o"></i></a>
             <a href="#" className="refresh" onClick={this._refresh}><i className="fa fa-refresh"></i></a>
-            <a href="#" ><i className="fa fa-ellipsis-v"></i></a>
+            <a href="#" onClick={function (event) { event.preventDefault(); } }><i className="fa fa-ellipsis-v"></i></a>
           </div>
         </div>
       );
