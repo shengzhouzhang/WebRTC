@@ -11,6 +11,7 @@ define([
 
     var AppRouter = Backbone.Router.extend({
       routes: {
+        'incidents/request': 'incidents',
         'incidents/:id': 'incident',
         'incidents': 'incidents',
         '*actions': 'redirect'
@@ -30,7 +31,7 @@ define([
   dispatcher.register(actions.NAVIGATE_TO_VIEW, function (options) {
     if(!router) { throw new Error ('router is not available')};
 
-    if(Backbone.history.fragment === options.uri) { Backbone.history.fragment = null; }
+    if(!!options.refresh) { Backbone.history.fragment = null; }
     router.navigate(options.uri, {trigger: true});
   });
 });

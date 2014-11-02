@@ -9,7 +9,7 @@ define(['dispatcher', 'actions'],
 
     _refresh: function (event) {
       event.preventDefault();
-      dispatcher.dispatch(actions.NAVIGATE_TO_VIEW, { uri: 'incidents' });
+      dispatcher.dispatch(actions.NAVIGATE_TO_VIEW, { uri: 'incidents', refresh: true });
     },
 
     _sidebar: function (event) {
