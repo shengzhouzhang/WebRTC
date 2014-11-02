@@ -85,9 +85,9 @@ module.exports = function(grunt) {
     requirejs: {
       compile: {
         options: {
-          baseUrl: 'public/scripts/config',
-          mainConfigFile: 'public/scripts/config/require.config.js',
-          include: ['../main.js'],
+          baseUrl: 'public/scripts/',
+          mainConfigFile: 'public/scripts/require.config.js',
+          include: ['main.js'],
           out: 'public/scripts/application.js'
         }
       }

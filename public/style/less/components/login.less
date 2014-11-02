@@ -2,10 +2,10 @@
 
 @login-width: 300px;
 
-@login-background: #2c3e50;
+@login-background: #3B545C;
 @login-color: white;
 
-@button-color: #F1C40F;
+@button-color: #FF5A4B;
 
 #login-container {
   .full-width;
@@ -35,6 +35,19 @@
     margin: auto;
 
     display: none;
+
+    .title {
+      display: block;
+      margin-bottom: 10px;
+      .default-font (@arg: 26px);
+      color: white;
+    }
+
+    .brand {
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 16px;
+    }
   }
 
   img {

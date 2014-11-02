@@ -7,26 +7,26 @@ define(['dispatcher', 'actions'],
 
   var Login = React.createClass({
 
-    _onClick: function () {
-      var username = $('#login-username').val(),
-          password = $('#login-password').val();
-
-      if(!username || !password) { return; }
-
-      dispatcher.dispatch(actions.USER_LOGIN, {
-        username: username,
-        password: password
-      });
+    getInitialState: function () {
+      return {
+        disabled: true
+      };
     },
 
     _onKeyPress: function () {
       var code = (event.keyCode ? event.keyCode : event.which);
       if (code !== 13) { return; }
+      this._login();
+    },
+
+    _login: function () {
 
       var username = $('#login-username').val(),
           password = $('#login-password').val();
 
       if(!username || !password) { return; }
+
+      this._disable();
 
       dispatcher.dispatch(actions.USER_LOGIN, {
         username: username,
@@ -34,13 +34,25 @@ define(['dispatcher', 'actions'],
       });
     },
 
+    _enable: function () {
+      this.setState({ disabled: false });
+    },
+
+    _disable: function () {
+      this.setState({ disabled: true });
+    },
+
     render: function () {
       return (
         <div className="login-window">
-          <img src="/img/logo-dark.png" />
+          <p>
+            <span className="title">Incident Response Center</span>
+            <span className="icon--logo-text brand"></span>
+            <span className="icon--logo brand"></span>
+          </p>
           <p><input id="login-username" type="email" placeholder="Email" /></p>
-          <p><input id="login-password" type="password" placeholder="Password" onKeyPress={this._onKeyPress}/></p>
-          <button id="login-submit" onClick={this._onClick}>
+          <p><input id="login-password" type="password" placeholder="Password" onInput={this._enable} onKeyPress={this._onKeyPress}/></p>
+          <button id="login-submit" disabled={this.state.disabled} onClick={this._login}>
             Go
           </button>
         </div>
