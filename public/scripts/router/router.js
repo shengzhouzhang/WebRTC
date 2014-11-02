@@ -11,7 +11,8 @@ define([
 
     var AppRouter = Backbone.Router.extend({
       routes: {
-        'incident/:id': 'incident',
+        'incidents/:id': 'incident',
+        'incidents': 'incidents',
         '*actions': 'incidents'
       }
     });

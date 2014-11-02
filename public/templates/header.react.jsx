@@ -9,7 +9,7 @@ define(['dispatcher', 'actions'],
 
     _refresh: function (event) {
       event.preventDefault();
-      dispatcher.dispatch(actions.TO_TIMELINE_VIEW);
+      dispatcher.dispatch(actions.NAVIGATE_TO_VIEW, { uri: 'incidents' });
     },
 
     _sidebar: function (event) {
@@ -27,12 +27,16 @@ define(['dispatcher', 'actions'],
         .addClass('fa-bell-o');
     },
 
+    _alarm: function (event) {
+      event.preventDefault();
+    },
+
     render: function () {
       return (
         <div className="header">
           <div className="menu"><a href="#" onClick={this._sidebar}><i className="fa fa-bars"></i></a></div>
           <div className="actions">
-            <a href="#" className="alarm" ><i className="fa fa-bell-o"></i></a>
+            <a href="#" className="alarm" onClick={this._alarm}><i className="fa fa-bell-o"></i></a>
             <a href="#" className="refresh" onClick={this._refresh}><i className="fa fa-refresh"></i></a>
             <a href="#" ><i className="fa fa-ellipsis-v"></i></a>
           </div>

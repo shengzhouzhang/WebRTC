@@ -22,12 +22,18 @@ define(['dispatcher', 'actions'],
       $(_container).removeClass('shown');
     },
 
+    _toTimelineView: function (event) {
+      event.preventDefault();
+      this._close();
+      dispatcher.dispatch(actions.NAVIGATE_TO_VIEW, { uri: 'incidents' });
+    },
+
     render: function () {
       return (
         <div className="sidebar">
           <div className="header">Menu</div>
           <div className="menu">
-            <a href="#" >Incidents</a>
+            <a href="#" onClick={this._toTimelineView}>Incidents</a>
             <a href="#" >Guide</a>
             <a href="#" >About</a>
             <a href="#" >Sign Out</a>

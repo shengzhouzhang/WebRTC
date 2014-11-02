@@ -47,7 +47,7 @@ define(['dispatcher', 'actions', 'timeline.store'],
     },
 
     _onClick: function (event) {
-      dispatcher.dispatch(actions.NAVIGATE_TO_VIEW, { uri: 'incident/' + $(event.target).attr('data-home-alarm-id') });
+      dispatcher.dispatch(actions.NAVIGATE_TO_VIEW, { uri: 'incidents/' + $(event.target).attr('data-home-alarm-id') });
     },
 
     render: function () {
