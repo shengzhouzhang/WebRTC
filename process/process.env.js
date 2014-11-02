@@ -14,6 +14,14 @@ var Env = {
       case 'production':
         break;
 
+      case 'staging':
+        env.REDIS_PORT = 10023;
+        env.REDIS_HOST = 'pub-redis-10023.us-east-1-4.3.ec2.garantiadata.com';
+        env.REDIS_PASSWORD = 'PtxrZAx9qJUJqV4d';
+
+        env.MONGODB_URI = 'mongodb://ii-staging:ii-staging@kahana.mongohq.com:10092/ii';
+        break;
+
       default:
         env.REDIS_PORT = 6379;
         env.REDIS_HOST = 'localhost';
