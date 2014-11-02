@@ -15,6 +15,7 @@ require.config({
     // views
     'login.view': './views/login.react',
     'header.view': './views/header.react',
+    'sidebar.view': './views/sidebar.react',
     'timeline.view': './views/timeline.react',
     'incident.view': './views/incident.react',
     'message.view': './views/message.react',

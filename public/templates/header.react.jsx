@@ -12,6 +12,11 @@ define(['dispatcher', 'actions'],
       dispatcher.dispatch(actions.TO_TIMELINE_VIEW);
     },
 
+    _sidebar: function (event) {
+      event.preventDefault();
+      $('#sidebar-container').addClass('shown');
+    },
+
     alarmOn: function () {
       $(_container).find('a.alarm i').removeClass('fa-bell-o')
         .addClass('fa-bell');
@@ -25,7 +30,7 @@ define(['dispatcher', 'actions'],
     render: function () {
       return (
         <div className="header">
-          <div className="menu"><a href="#" ><i className="fa fa-bars"></i></a></div>
+          <div className="menu"><a href="#" onClick={this._sidebar}><i className="fa fa-bars"></i></a></div>
           <div className="actions">
             <a href="#" className="alarm" ><i className="fa fa-bell-o"></i></a>
             <a href="#" className="refresh" onClick={this._refresh}><i className="fa fa-refresh"></i></a>
