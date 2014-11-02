@@ -13,7 +13,7 @@ define([
       routes: {
         'incidents/:id': 'incident',
         'incidents': 'incidents',
-        '*actions': 'incidents'
+        '*actions': 'redirect'
       }
     });
 
@@ -21,6 +21,8 @@ define([
 
     router.on('route:incident', dispatcher.dispatch.bind(undefined, actions.TO_INCIDENT_VIEW));
     router.on('route:incidents', dispatcher.dispatch.bind(undefined, actions.TO_TIMELINE_VIEW));
+    
+    router.on('route:redirect', dispatcher.dispatch.bind(undefined, actions.NAVIGATE_TO_VIEW, { uri: 'incidents '}));
 
     Backbone.history.start();
   });
