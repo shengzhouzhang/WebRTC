@@ -9,12 +9,15 @@ var _ = require('lodash'),
 
 var store = {
 
+  _DB: 'INCIDENT_DETAILS',
+
   create: function (incident) {
+    console.log(incident);
     if(!incident || !incident.id || !incident.event) { throw new Error ('invalid incident data'); }
 
     return new Promise(function (resolve, reject) {
 
-      redis.rpush(incident.id, JSON.stringify(incident.event), function (err, result) {
+      redis.hset(this._DB, incident.id, JSON.stringify(incident), function (err, result) {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
         resolve(result);
       });
@@ -26,13 +29,10 @@ var store = {
 
     return new Promise(function (resolve, reject) {
 
-      redis.lrange(id, 0, -1, function (err, result) {
+      redis.hget(this._DB, id, function (err, result) {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
         try {
-          var incidents = _.map(result, function (item) {
-            return JSON.parse(item);
-          });
-          resolve(incidents);
+          resolve(JSON.parse(result));
         } catch (err) {
           reject(err);
         }

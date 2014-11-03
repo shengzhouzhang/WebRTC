@@ -53,12 +53,6 @@ define(['dispatcher', 'actions', 'incident.store'],
 
   var Events = React.createClass({
 
-    getInitialState: function () {
-      return {
-        events: []
-      };
-    },
-
     componentDidMount: function () {
       store.addEventListener(this._onLoad);
     },
@@ -72,14 +66,11 @@ define(['dispatcher', 'actions', 'incident.store'],
     },
 
     render: function () {
+      if(!this.state || !this.state.event) { return (<div></div>); }
 
-      var events = _.map(this.state.events, function (event, index) {
+      console.log(this.state);
 
-        // TODO: need to have unique id
-        return (
-          <Event key={event.id + index} start={event.start} end={event.end} snapshots={event.snapshots} />
-        );
-      }.bind(this));
+      var events = <Event key={this.state.event.id} start={this.state.event.start} end={this.state.event.end} snapshots={this.state.event.snapshots} />;
 
       var contacts = _.map(this.state.contact, function (contact, index) {
         return (
@@ -89,12 +80,10 @@ define(['dispatcher', 'actions', 'incident.store'],
         );
       }.bind(this));
 
-      var cover = !!this.state.events && !!this.state.events.length ? this.state.events[0].cover : '';
-
       return (
         <div>
           <div className="header">
-            <div className="cover" style={{backgroundImage: 'url(' + cover + ')'}}></div>
+            <div className="cover" style={{backgroundImage: 'url(' + this.state.event.cover + ')'}}></div>
             <div className="address">
               <div><span>200 Broadway Av</span><span>NSW</span><span>2112</span><span>Australia</span></div>
             </div>
