@@ -2,6 +2,7 @@
 'use strict';
 
 var express = require('express'),
+    http = require('http'),
     bodyParser = require('body-parser'),
     path = require('path'),
     redis = require('../util/redis/redis.client').client,
@@ -32,9 +33,17 @@ var server = {
 
     // server
 
-    _server = _express.listen(_express.get('port'), function () {
-      logger.info('Express server listening on port ' + _express.get('port'));
-    });
+    _server = http.Server(_express);
+
+    // _server.listen(_express.get('port'), function () {
+    //   logger.info('Express server listening on port ' + _express.get('port'));
+    // });
+
+    // _server = _express.listen(_express.get('port'), function () {
+    //   logger.info('Express server listening on port ' + _express.get('port'));
+    // });
+
+    return _server;
   },
 
   shutdown: function () {

@@ -11,12 +11,19 @@ var _server;
 
 var server = {
 
-  startup: function () {
+  startup: function (server) {
 
-    var port = process.env.PORT || 4000;
+    // var port = process.env.PORT || 4000;
 
-    _server = new Server({ port: port, path: '/socket' }, function () {
-      logger.info('WebSocket server listening on port ' + port);
+    // _server = new Server({ port: port, path: '/socket' }, function () {
+    //   logger.info('WebSocket server listening on port ' + port);
+    // });
+
+    // console.log(server);
+
+    _server = new Server({ server: server, path: '/socket' }, function () {
+      console.log('WebSocket server listening');
+      // logger.info('WebSocket server listening on port ' + port);
     });
 
     _server.on('connection', function (client) {

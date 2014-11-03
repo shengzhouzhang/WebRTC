@@ -20,6 +20,7 @@
     "eventemitter2": "^0.4.14",
     "express": "^4.9.3",
     "express-session": "^1.8.2",
+    "express-ws": "^0.2.1",
     "grunt": "^0.4.5",
     "grunt-bg-shell": "*",
     "grunt-cli": "^0.1.13",

@@ -39,7 +39,7 @@ define([
 
         setTimeout(function () {
 
-          _socket = new WebSocket('ws://localhost:4000/socket', 'json');
+          _socket = new WebSocket('ws://localhost:3000/socket', 'json');
 
           _socket.onopen = resolve;
           _socket.onclose = this._onclose.bind(this);
