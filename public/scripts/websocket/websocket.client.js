@@ -118,7 +118,7 @@ define([
       this.connect(3000);
 
       dispatcher.dispatch(actions.UPDATE_MESSAGE, {
-        message: 'connection lost, trying to reconnect in 3 seconds...'
+        message: 'connection lost, trying to reconnect...'
       });
     },
   };
