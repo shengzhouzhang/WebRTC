@@ -12,9 +12,9 @@ require('./stores/incident.store');
 var express = require('./express/express.server').server,
     websocket = require('./websocket/websocket.server').server;
 
-var server = express.startup();
-websocket.startup(server);
+var server = express.create();
+websocket.bind(server);
 
 server.listen(process.env.PORT || 3000, function () {
-  console.log('Server listening on ' + (process.env.PORT || 3000));
+  console.log('Servers listening on ' + (process.env.PORT || 3000));
 });

@@ -12,7 +12,7 @@ var _express, _server;
 
 var server = {
 
-  startup: function () {
+  create: function () {
     if(!!_express || !!_server) { logger.info('Express Server is running..'); return; }
 
     _express = express();
@@ -34,14 +34,6 @@ var server = {
     // server
 
     _server = http.Server(_express);
-
-    // _server.listen(_express.get('port'), function () {
-    //   logger.info('Express server listening on port ' + _express.get('port'));
-    // });
-
-    // _server = _express.listen(_express.get('port'), function () {
-    //   logger.info('Express server listening on port ' + _express.get('port'));
-    // });
 
     return _server;
   },

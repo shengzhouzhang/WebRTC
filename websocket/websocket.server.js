@@ -2,6 +2,7 @@
 'use strict';
 
 var _ = require('lodash'),
+    moment = require('moment'),
     Server = require('ws').Server,
     jwt = require('../express/util/jwt.token').token,
     dispatcher = require('../dispatcher/dispatcher').dispatcher,
@@ -11,20 +12,9 @@ var _server;
 
 var server = {
 
-  startup: function (server) {
+  bind: function (server) {
 
-    // var port = process.env.PORT || 4000;
-
-    // _server = new Server({ port: port, path: '/socket' }, function () {
-    //   logger.info('WebSocket server listening on port ' + port);
-    // });
-
-    // console.log(server);
-
-    _server = new Server({ server: server, path: '/socket' }, function () {
-      console.log('WebSocket server listening');
-      // logger.info('WebSocket server listening on port ' + port);
-    });
+    _server = new Server({ server: server, path: '/socket' });
 
     _server.on('connection', function (client) {
       logger.info('socket', 'connections', this.clients.length);
@@ -106,6 +96,10 @@ var handlers = {
     });
   },
 };
+
+// ping clients
+
+setInterval(dispatcher.dispatch.bind(undefined, dispatcher.actions.BROADCAST, { action: 'PING', timestamp: moment().valueOf() }), 10000);
 
 dispatcher.register(dispatcher.actions.BROADCAST, broadcast.bind(undefined));
 
