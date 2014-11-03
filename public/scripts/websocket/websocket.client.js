@@ -43,9 +43,20 @@ define([
 
           _socket = new WebSocket(host + '/socket', 'json');
 
-          _socket.onopen = resolve;
-          _socket.onclose = this._onclose.bind(this);
-          _socket.onerror = this._onerror.bind(this);
+          _socket.onopen = function () {
+            resolve();
+            dispatcher.dispatch(actions.CLEAR_MESSAGE);
+          };
+
+          _socket.onclose = function () {
+            reject();
+            this._onclose();
+          }.bind(this);
+
+          _socket.onerror = function () {
+            reject();
+            this._onerror();
+          }.bind(this);
 
         }.bind(this), delay || 0);
       }.bind(this));
@@ -105,7 +116,7 @@ define([
     },
 
     _onerror: function (err) {
-      console.log(err.message || err);
+      console.log(err && err.message || err);
     },
 
     _onclose: function () {
@@ -114,6 +125,10 @@ define([
       _conneciton = null;
       _authentication = null;
       this.connect(3000);
+
+      dispatcher.dispatch(actions.UPDATE_MESSAGE, {
+        message: 'connection lost, trying to reconnect in 3 seconds...'
+      });
     },
   };
 
