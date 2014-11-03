@@ -1,57 +1,22 @@
 /** @jsx React.DOM */
-define(['dispatcher', 'actions', 'incident.store'],
-       function (dispatcher, actions, store) {
+define([
+  'dispatcher',
+  'actions',
+  'incident.store',
+
+  'contact.component',
+  'event.component',
+  'notes.component'
+], function (dispatcher, actions, store, Contact, Event, Notes) {
   'use strict';
 
   var _container, _component;
 
-  var Snapshot = React.createClass({
+  var Incident = React.createClass({
 
-    render: function () {
-
-      return (
-        <div className="snapshot">
-          <a href="#" data-snapshot-id={this.props.key}>
-            <img src={this.props.url} />
-          </a>
-        </div>
-      );
-    }
-  });
-
-  var Event = React.createClass({
-
-    componentDidMount: function () {
-      store.addEventListener(this._onLoad);
+    getInitialState: function () {
+      return {};
     },
-
-    componentWillUnmount: function () {
-      store.removeEventListener(this._onLoad);
-    },
-
-    _onLoad: function () {
-      this.setState(store.get());
-    },
-
-    render: function () {
-
-      var snapshots = this.props.snapshots.map(function (snapshot, index) {
-        return (
-          <Snapshot key={snapshot.id + index} url={snapshot.url} />
-        );
-      });
-
-      return (
-        <div className="event">
-          <div className="event-attr"><label>In:</label><span>{moment(this.props.start).format('YYYY-MM-DD HH:mm:ss')}</span></div>
-          <div className="event-attr"><label>Out:</label><span>{moment(this.props.end).format('YYYY-MM-DD HH:mm:ss')}</span></div>
-          <div className="event-snapshots">{snapshots}</div>
-        </div>
-      );
-    }
-  });
-
-  var Events = React.createClass({
 
     componentDidMount: function () {
       store.addEventListener(this._onLoad);
@@ -68,14 +33,9 @@ define(['dispatcher', 'actions', 'incident.store'],
     render: function () {
       if(!this.state || !this.state.event) { return (<div></div>); }
 
-      var events = <Event key={this.state.event.id} start={this.state.event.start} end={this.state.event.end} snapshots={this.state.event.snapshots} />;
-
       var contacts = _.map(this.state.contact, function (contact, index) {
         return (
-          <div key={this.state.home_alarm_id + '_contact_' + index}>
-            <span className="name">{contact.name}</span>
-            <span className="phone"><a href={'tel:'+contact.phone}>{contact.phone}</a></span>
-          </div>
+          <Contact key={this.state.id + '_contact_' + index} name={contact.name} phone={contact.phone} />
         );
       }.bind(this));
 
@@ -84,7 +44,7 @@ define(['dispatcher', 'actions', 'incident.store'],
           <div className="header">
             <div className="cover" style={{backgroundImage: 'url(' + this.state.event.cover + ')'}}></div>
             <div className="address">
-              <div><span>200 Broadway Av</span><span>NSW</span><span>2112</span><span>Australia</span></div>
+              <div><span>200 Broadway Av NSW 2112 Australia</span></div>
             </div>
             <div className="contact">
               <div><label>Contact Info</label></div>
@@ -94,7 +54,8 @@ define(['dispatcher', 'actions', 'incident.store'],
               <a href="#">Close</a>
             </div>
           </div>
-          <div className="events">{events}</div>
+          <div className="events"><Event event={this.state.event} /></div>
+          <div className="notes"><Notes notes={this.state.notes} /></div>
         </div>
       );
     }
@@ -105,7 +66,7 @@ define(['dispatcher', 'actions', 'incident.store'],
     init: function (container) {
       _container = container;
       _component = React.renderComponent(
-        Events(null),
+        Incident(null),
         _container
       );
     }
