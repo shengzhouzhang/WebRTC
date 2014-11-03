@@ -15,6 +15,6 @@ var express = require('./express/express.server').server,
 var server = express.startup();
 websocket.startup(server);
 
-server.listen(3000, function () {
+server.listen(process.env.PORT || 3000, function () {
   console.log('Server listening on ' + (process.env.PORT || 3000));
 });
