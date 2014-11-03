@@ -68,8 +68,6 @@ define(['dispatcher', 'actions', 'incident.store'],
     render: function () {
       if(!this.state || !this.state.event) { return (<div></div>); }
 
-      console.log(this.state);
-
       var events = <Event key={this.state.event.id} start={this.state.event.start} end={this.state.event.end} snapshots={this.state.event.snapshots} />;
 
       var contacts = _.map(this.state.contact, function (contact, index) {

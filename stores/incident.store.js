@@ -12,7 +12,6 @@ var store = {
   _DB: 'INCIDENT_DETAILS',
 
   create: function (incident) {
-    console.log(incident);
     if(!incident || !incident.id || !incident.event) { throw new Error ('invalid incident data'); }
 
     return new Promise(function (resolve, reject) {
