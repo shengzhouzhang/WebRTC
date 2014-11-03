@@ -53,11 +53,6 @@ define([
             this._onclose();
           }.bind(this);
 
-          _socket.onerror = function () {
-            reject();
-            this._onerror();
-          }.bind(this);
-
         }.bind(this), delay || 0);
       }.bind(this));
 
@@ -113,10 +108,6 @@ define([
       if(!data || !data.action || !handlers[data.action]) { return; }
 
       handlers[data.action](data, options);
-    },
-
-    _onerror: function (err) {
-      console.log(err && err.message || err);
     },
 
     _onclose: function () {
