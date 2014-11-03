@@ -7,9 +7,15 @@ define(['dispatcher', 'actions', 'timeline.store'],
 
   var Incident = React.createClass({
 
+    _onClick: function (event) {
+      event.preventDefault();
+      if(!this.props.key) { return; }
+      dispatcher.dispatch(actions.NAVIGATE_TO_VIEW, { uri: 'incidents/' + this.props.key });
+    },
+
     render: function () {
       return (
-        <div className="incident" data-home-alarm-id={this.props.homeId}>
+        <div className="incident" onClick={this._onClick} >
           <div className="cover" style={{backgroundImage: 'url(' + this.props.event.cover + ')'}}></div>
           <div className="timestamp">{moment(this.props.createdAt).format('YYYY-MM-DD HH:mm:ss')}</div>
           <div className="address">{this.props.address}</div>
@@ -26,12 +32,10 @@ define(['dispatcher', 'actions', 'timeline.store'],
 
     componentDidMount: function () {
       store.addEventListener(this._onLoad);
-      $(_container).delegate('div.incident', 'click', this._onClick);
     },
 
     componentWillUnmount: function () {
       store.removeEventListener(this._onLoad);
-      $(_container).undelegate('div.incident', 'click', this._onClick);
     },
 
     _onLoad: function () {
@@ -46,14 +50,10 @@ define(['dispatcher', 'actions', 'timeline.store'],
       dispatcher.dispatch(actions.REQUEST_UNPDATES, { timestamp: timestamp });
     },
 
-    _onClick: function (event) {
-      dispatcher.dispatch(actions.NAVIGATE_TO_VIEW, { uri: 'incidents/' + $(event.target).attr('data-home-alarm-id') });
-    },
-
     render: function () {
       var incidents = _.map(this.state.timeline, function (incident) {
         return (
-          <Incident key={incident.id} homeId={incident.home_alarm_id} address={incident.address} event={incident.event} createdAt={incident.created_at} />
+          <Incident key={incident.id} address={incident.address} event={incident.event} createdAt={incident.created_at} />
         );
       });
 

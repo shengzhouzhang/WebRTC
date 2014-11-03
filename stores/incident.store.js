@@ -10,11 +10,11 @@ var _ = require('lodash'),
 var store = {
 
   create: function (incident) {
-    if(!incident || !incident.home_alarm_id || !incident.event) { throw new Error ('invalid incident data'); }
+    if(!incident || !incident.id || !incident.event) { throw new Error ('invalid incident data'); }
 
     return new Promise(function (resolve, reject) {
 
-      redis.rpush(incident.home_alarm_id, JSON.stringify(incident.event), function (err, result) {
+      redis.rpush(incident.id, JSON.stringify(incident.event), function (err, result) {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
         resolve(result);
       });
@@ -22,7 +22,7 @@ var store = {
   },
 
   request: function (id) {
-    if(!id) { throw new Error ('invalid home alarm id'); }
+    if(!id) { throw new Error ('invalid incident id'); }
 
     return new Promise(function (resolve, reject) {
 

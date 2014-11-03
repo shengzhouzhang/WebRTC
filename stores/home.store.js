@@ -12,17 +12,17 @@ var store = {
   _DB: 'HOME_DETAILS',
 
   create: function (incident) {
-    if(!incident || !incident.home_alarm_id || !incident.address || !incident.contact) { throw new Error ('invalid incident data'); }
+    if(!incident || !incident.id || !incident.address || !incident.contact) { throw new Error ('invalid incident data'); }
 
     var data = {
-      home_alarm_id: incident.home_alarm_id,
+      id: incident.id,
       address: incident.address,
       contact: incident.contact
     };
 
     return new Promise(function (resolve, reject) {
 
-      redis.hset(this._DB, data.home_alarm_id, JSON.stringify(data), function (err, result) {
+      redis.hset(this._DB, data.id, JSON.stringify(data), function (err, result) {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
         resolve(result);
       });
@@ -30,7 +30,7 @@ var store = {
   },
 
   request: function (id) {
-    if(!id) { throw new Error ('invalid home alarm id'); }
+    if(!id) { throw new Error ('invalid incident id'); }
 
     return new Promise(function (resolve, reject) {
 
