@@ -100,6 +100,8 @@ define([
   dispatcher.register(actions.NEW_CASE, dispatcher.dispatch.bind(undefined, actions.ALARM_ON));
   dispatcher.register(actions.NO_NEW_CASE, dispatcher.dispatch.bind(undefined, actions.ALARM_OFF));
 
+  // sidebar
+
   // app
 
   dispatcher.register(actions.APP_INIT, views.init.bind(views));

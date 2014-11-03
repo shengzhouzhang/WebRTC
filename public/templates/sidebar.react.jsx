@@ -28,15 +28,24 @@ define(['dispatcher', 'actions'],
       dispatcher.dispatch(actions.NAVIGATE_TO_VIEW, { uri: 'incidents' });
     },
 
+    _onClick: function (event) {
+      event.preventDefault();
+    },
+
+    _logout: function (event) {
+      event.preventDefault();
+      dispatcher.dispatch(actions.LOGOUT).then(window.location.reload);
+    },
+
     render: function () {
       return (
         <div className="sidebar">
           <div className="header">Menu</div>
           <div className="menu">
             <a href="#" onClick={this._toTimelineView}>Incidents</a>
-            <a href="#" >Guide</a>
-            <a href="#" >About</a>
-            <a href="#" >Sign Out</a>
+            <a href="#" onClick={this._onClick}>Guide</a>
+            <a href="#" onClick={this._onClick}>About</a>
+            <a href="#" onClick={this._logout}>Sign Out</a>
           </div>
         </div>
       );

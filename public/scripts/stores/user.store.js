@@ -23,9 +23,15 @@ define(['dispatcher', 'actions', 'flux'],
       if(!sessionStorage) { return; }
       sessionStorage.username = data.username;
       sessionStorage.access_token = data.access_token;
+    },
+
+    clearSession: function () {
+      if(!sessionStorage) { return; }
+      sessionStorage.clear();
     }
   });
 
+  dispatcher.register(actions.LOGOUT, store.clearSession.bind(store));
   dispatcher.register(actions.UPDATE_USER_STORE, store.set.bind(store));
   dispatcher.register(actions.UPDATE_USER_STORE, store.setSession.bind(store));
 

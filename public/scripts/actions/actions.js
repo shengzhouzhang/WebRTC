@@ -33,6 +33,7 @@ define(['dispatcher'],
     UPDATE_USER_STORE: 'UPDATE_USER_STORE',
     LOGIN_FAILED: 'LOGIN_FAILED',
     TO_LOGIN_VIEW: 'TO_LOGIN_VIEW',
+    LOGOUT: 'LOGOUT',
 
     // message actions
 

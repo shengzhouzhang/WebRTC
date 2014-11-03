@@ -35,9 +35,9 @@ define(['dispatcher', 'actions', 'incident.store'],
 
     render: function () {
 
-      var snapshots = this.props.snapshots.map(function (snapshot) {
+      var snapshots = this.props.snapshots.map(function (snapshot, index) {
         return (
-          <Snapshot key={snapshot.id} url={snapshot.url} />
+          <Snapshot key={snapshot.id + index} url={snapshot.url} />
         );
       });
 
