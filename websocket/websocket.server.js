@@ -39,7 +39,7 @@ var server = {
 var broadcast = function (data) {
   if(!data || !data.action) { throw new Error ('invalid message data'); }
   if(!_server) { logger.error('broadcast', 'server is not available'); return; }
-  if(!_server.clients || !_server.clients.length) { logger.info('broadcast', 'no clients'); return; }
+  if(!_server.clients || !_server.clients.length) { return; }
 
   _.each(_server.clients, function (client) {
 
