@@ -12,5 +12,5 @@ require('./stores/incident.store');
 var express = require('./express/express.server').server,
     websocket = require('./websocket/websocket.server').server;
 
-express.startup();
+// express.startup();
 websocket.startup();
