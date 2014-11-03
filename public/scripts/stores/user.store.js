@@ -27,6 +27,7 @@ define(['dispatcher', 'actions', 'flux'],
 
     clearSession: function () {
       if(!sessionStorage) { return; }
+      console.log('clear session storage');
       sessionStorage.clear();
     }
   });

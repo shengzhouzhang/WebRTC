@@ -34,7 +34,9 @@ define(['dispatcher', 'actions'],
 
     _logout: function (event) {
       event.preventDefault();
-      dispatcher.dispatch(actions.LOGOUT).then(window.location.reload);
+      dispatcher.dispatch(actions.LOGOUT).then(function () {
+        window.location.reload();
+      });
     },
 
     render: function () {
