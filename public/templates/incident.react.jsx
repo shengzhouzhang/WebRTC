@@ -73,7 +73,8 @@ define(['dispatcher', 'actions', 'incident.store'],
       var contacts = _.map(this.state.contact, function (contact, index) {
         return (
           <div key={this.state.home_alarm_id + '_contact_' + index}>
-            <span>{contact.name}</span><span>{contact.relationship}</span><span>{contact.phone}</span>
+            <span className="name">{contact.name}</span>
+            <span className="phone"><a href={'tel:'+contact.phone}>{contact.phone}</a></span>
           </div>
         );
       }.bind(this));
