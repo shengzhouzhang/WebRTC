@@ -22,7 +22,14 @@ define([
       });
 
       return (
-        React.DOM.div(null, notes)
+        React.DOM.div(null, 
+          React.DOM.div({className: "create"}, 
+            React.DOM.label(null, "Create a Note"), 
+            React.DOM.textarea({rows: "4", cols: "50"}), 
+            React.DOM.div(null, React.DOM.a({href: ""}, "Create"))
+          ), 
+          React.DOM.div(null, notes)
+        )
       );
     }
   });

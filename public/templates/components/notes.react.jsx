@@ -22,7 +22,14 @@ define([
       });
 
       return (
-        <div>{notes}</div>
+        <div>
+          <div className="create">
+            <label>Create a Note</label>
+            <textarea rows="4" cols="50"></textarea>
+            <div><a href="" >Create</a></div>
+          </div>
+          <div>{notes}</div>
+        </div>
       );
     }
   });

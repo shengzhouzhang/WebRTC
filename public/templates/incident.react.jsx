@@ -30,6 +30,25 @@ define([
       this.setState(store.get());
     },
 
+    _showEvent: function (event) {
+      event.preventDefault();
+      $('div.taps a').removeClass('active');
+      $(event.target).addClass('active');
+      $('div[data-target-tap=notes]').fadeOut('fast', function () {
+        $('div[data-target-tap=event]').fadeIn('fast');
+      });
+
+    },
+
+    _showNote: function (event) {
+      event.preventDefault();
+      $('div.taps a').removeClass('active');
+      $(event.target).addClass('active');
+      $('div[data-target-tap=event]').fadeOut('fast', function () {
+        $('div[data-target-tap=notes]').fadeIn('fast');
+      });
+    },
+
     render: function () {
       if(!this.state || !this.state.event) { return (<div></div>); }
 
@@ -54,8 +73,12 @@ define([
               <a href="#">Close</a>
             </div>
           </div>
-          <div className="events"><Event event={this.state.event} /></div>
-          <div className="notes"><Notes notes={this.state.notes} /></div>
+          <div className="taps">
+            <a href="#" className="active" onClick={this._showEvent}>Event</a>
+            <a href="#" onClick={this._showNote} >Notes</a>
+          </div>
+          <div className="events" data-target-tap="event"><Event event={this.state.event} /></div>
+          <div className="notes" data-target-tap="notes"><Notes notes={this.state.notes} /></div>
         </div>
       );
     }
