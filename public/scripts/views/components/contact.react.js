@@ -8,7 +8,7 @@ define(['dispatcher', 'actions'],
     render: function () {
 
       return (
-        React.DOM.div({className: "contact"}, 
+        React.DOM.div(null, 
           React.DOM.span({className: "name"}, this.props.name), 
           React.DOM.span({className: "phone"}, 
             React.DOM.a({href: 'tel:' + this.props.phone}, this.props.phone)
