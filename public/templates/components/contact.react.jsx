@@ -8,7 +8,7 @@ define(['dispatcher', 'actions'],
     render: function () {
 
       return (
-        <div className="contact">
+        <div>
           <span className="name">{this.props.name}</span>
           <span className="phone">
             <a href={'tel:' + this.props.phone}>{this.props.phone}</a>

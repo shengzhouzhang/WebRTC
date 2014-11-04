@@ -5,13 +5,15 @@ define(['dispatcher', 'actions'],
 
   var Snapshot = React.createClass({
 
+    _onClick: function (event) {
+      event.preventDefault();
+    },
+
     render: function () {
 
       return (
         <div className="snapshot">
-          <a href="#" data-snapshot-id={this.props.key}>
-            <img src={this.props.url} />
-          </a>
+          <img src={this.props.url} />
         </div>
       );
     }

@@ -135,6 +135,81 @@
 
   .event {
     padding: 30px 20px;
+
+    .event-attr {
+      line-height: 20px;
+      margin-bottom: 5px;
+
+      label {
+        display: inline-block;
+        margin-right: 10px;
+        width: 50px;
+        text-align: right;
+      }
+    }
+
+    .event-snapshots {
+      margin-top: 30px;
+    }
+
+    .snapshot {
+      display: inline-block;
+      margin: @thumbnail-margin;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    @media (min-width: 320px) {
+      .snapshot {
+        width: (100 - 2 * 2 * @thumbnail-margin) / 2;
+        height: (100 - 2 * 2 * @thumbnail-margin) / 2 / 4 * 3;
+      }
+    }
+
+
+    @media (min-width: 480px) {
+      .snapshot {
+        width: (100 - 3 * 2 * @thumbnail-margin) / 3;
+        height: (100 - 3 * 2 * @thumbnail-margin) / 3 / 4 * 3;
+      }
+    }
+
+    @media (min-width: 800px) {
+      .snapshot {
+        width: (100 - 5 * 2 * @thumbnail-margin) / 5;
+        height: (100 - 5 * 2 * @thumbnail-margin) / 5 / 5 * 3;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .snapshot {
+        width: (100 - 6 * 2 * @thumbnail-margin) / 6;
+        height: (100 - 6 * 2 * @thumbnail-margin) / 6 / 4 * 3;
+      }
+    }
+
+    @media (min-width: 1680px) {
+      .snapshot {
+        width: (100 - 7 * 2 * @thumbnail-margin) / 7;
+        height: (100 - 7 * 2 * @thumbnail-margin) / 7 / 4 * 3;
+      }
+    }
+
+    @media (min-width: 1920px) {
+      .snapshot {
+        width: (100 - 8 * 2 * @thumbnail-margin) / 8;
+        height: (100 - 8 * 2 * @thumbnail-margin) / 8 / 4 * 3;
+      }
+    }
+
+    @media (min-width: 2560px) {
+      .snapshot {
+        width: (100 - 9 * 2 * @thumbnail-margin) / 9;
+        height: (100 - 9 * 2 * @thumbnail-margin) / 9 / 4 * 3;
+      }
+    }
   }
 
   .notes {
@@ -142,7 +217,6 @@
     padding: 30px 0;
     width: 600px;
     height: 100%;
-    // background-color: #C9E7F1;
 
     .create {
       padding: 10px;
@@ -182,94 +256,6 @@
           background-color: #FF5A4B;
         }
       }
-    }
-  }
-
-  .event-attr {
-    line-height: 20px;
-    margin-bottom: 5px;
-
-    label {
-      display: inline-block;
-      margin-right: 10px;
-      width: 50px;
-      text-align: right;
-    }
-  }
-
-  .event-snapshots {
-    margin-top: 30px;
-  }
-
-  .snapshot {
-    display: inline-block;
-    margin: @thumbnail-margin;
-
-    a {
-      display: block;
-      width: 100%;
-
-      img {
-        width: 100%;
-      }
-    }
-  }
-
-  .snapshot.motion {
-    a {
-      img {
-        opacity: 0.4;
-      }
-    }
-  }
-
-  @media (min-width: 320px) {
-    .snapshot {
-      width: (100 - 2 * 2 * @thumbnail-margin) / 2;
-      height: (100 - 2 * 2 * @thumbnail-margin) / 2 / 4 * 3;
-    }
-  }
-
-
-  @media (min-width: 480px) {
-    .snapshot {
-      width: (100 - 3 * 2 * @thumbnail-margin) / 3;
-      height: (100 - 3 * 2 * @thumbnail-margin) / 3 / 4 * 3;
-    }
-  }
-
-  @media (min-width: 800px) {
-    .snapshot {
-      width: (100 - 5 * 2 * @thumbnail-margin) / 5;
-      height: (100 - 5 * 2 * @thumbnail-margin) / 5 / 5 * 3;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .snapshot {
-      width: (100 - 6 * 2 * @thumbnail-margin) / 6;
-      height: (100 - 6 * 2 * @thumbnail-margin) / 6 / 4 * 3;
-    }
-  }
-
-  @media (min-width: 1680px) {
-    .snapshot {
-      width: (100 - 7 * 2 * @thumbnail-margin) / 7;
-      height: (100 - 7 * 2 * @thumbnail-margin) / 7 / 4 * 3;
-    }
-  }
-
-  @media (min-width: 1920px) {
-    .snapshot {
-      width: (100 - 8 * 2 * @thumbnail-margin) / 8;
-      height: (100 - 8 * 2 * @thumbnail-margin) / 8 / 4 * 3;
-    }
-  }
-
-  @media (min-width: 2560px) {
-    .snapshot {
-      width: (100 - 9 * 2 * @thumbnail-margin) / 9;
-      height: (100 - 9 * 2 * @thumbnail-margin) / 9 / 4 * 3;
     }
   }
 }
