@@ -3,7 +3,7 @@
 application.log
 public/scripts/application.js
 public/scripts/application.min.js
-public/scripts/views/*.react.js
+public/scripts/views/**/*.react.js
 public/style/*.css
 newrelic_agent.log
 dump.rdb
