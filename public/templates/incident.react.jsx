@@ -78,7 +78,7 @@ define([
             <a href="#" onClick={this._showNote} >Notes</a>
           </div>
           <div className="events" data-target-tap="event"><Event event={this.state.event} /></div>
-          <div className="notes" data-target-tap="notes"><Notes notes={this.state.notes} /></div>
+          <div className="notes" data-target-tap="notes" style={{display: 'none'}}><Notes notes={this.state.notes} /></div>
         </div>
       );
     }
