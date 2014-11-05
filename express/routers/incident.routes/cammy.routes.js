@@ -17,8 +17,10 @@ var create = function (req, res) {
   incident.event.start = _.min(incident.event.snapshots, 'timestamp').timestamp;
   incident.event.end = _.max(incident.event.snapshots, 'timestamp').timestamp;
   incident.event.cover = _.find(incident.event.snapshots, function (snapshot) {
-    return !!snapshot.motion;
-  }).url;
+    return !!snapshot.ii;
+  }) || _.first(incident.event.snapshots);
+
+  incident.event.cover = incident.event.cover.url || '';
 
   dispatcher.dispatch(dispatcher.actions.UPDATE_INCIDENTS, incident).then(function () {
 
