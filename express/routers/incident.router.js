@@ -14,7 +14,10 @@ var _ = require('lodash'),
 var router = express.Router();
 
 var _hasAuthorized = function (req, res, next) {
-  if(req.headers['authorization'].toLowerCase() ===  'Basic bXlVc2VybmFtZTpteVBhc3N3b3Jk'.toLowerCase()) { next(); return; }
+
+  var access_token = !!req.headers['authorization'] ? req.headers['authorization'].split(' ')[1] : req.query.access_token;
+
+  if(!!access_token && access_token.toLowerCase() ===  'bXlVc2VybmFtZTpteVBhc3N3b3Jk'.toLowerCase()) { next(); return; }
   res.status(401).json({ error: 'invalid access token' });
 };
 
