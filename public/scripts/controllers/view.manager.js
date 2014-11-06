@@ -45,6 +45,10 @@ define([
     return Promise.all(animates);
   };
 
+  var _fadeIn = function (container) {
+    _views.filter(container).fadeIn('slow');
+  };
+
   var _showComponents = function () {
 
     _views.filter('#header-container').show();
@@ -57,9 +61,9 @@ define([
         _showComponents();
 
         dispatcher.dispatch(actions.SOCKET_CONNECT);
-
-        _views.filter('#incident-container').fadeIn('slow');
-        dispatcher.dispatch(actions.REQUEST_INCIDENT, options);
+        dispatcher.dispatch(actions.REQUEST_INCIDENT, options).then(function () {
+          _fadeIn('#incident-container');
+        });
       });
     });
   });
@@ -71,9 +75,9 @@ define([
         _showComponents();
 
         dispatcher.dispatch(actions.SOCKET_CONNECT);
-
-        _views.filter('#timeline-container').fadeIn('slow');
-        dispatcher.dispatch(actions.REQUEST_TIMELINE);
+        dispatcher.dispatch(actions.REQUEST_TIMELINE).then(function () {
+          _fadeIn('#timeline-container');
+        });
       });
     });
   });

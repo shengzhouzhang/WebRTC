@@ -45,7 +45,6 @@ define([
 
           _socket.onopen = function () {
             resolve();
-            dispatcher.dispatch(actions.CLEAR_MESSAGE);
           };
 
           _socket.onclose = function () {
