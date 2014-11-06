@@ -63,7 +63,7 @@ define([
           <div className="header">
             <div className="cover" style={{backgroundImage: 'url(' + this.state.event.cover + ')'}}></div>
             <div className="address">
-              <div><span>200 Broadway Av NSW 2112 Australia</span></div>
+              <div><span>{this.state.address}</span></div>
             </div>
             <div className="contact">
               <div><label>Contact Info</label></div>
