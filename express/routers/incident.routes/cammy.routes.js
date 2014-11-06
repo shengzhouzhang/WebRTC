@@ -5,6 +5,7 @@ var _ = require('lodash'),
     moment = require('moment'),
     uuid = require('node-uuid'),
     express = require('express'),
+    status = require('../../../static/incident.status').status,
     dispatcher = require('../../../dispatcher/dispatcher').dispatcher,
     logger = require('../../../util/log/application.log').logger;
 
@@ -14,13 +15,15 @@ var create = function (req, res) {
 
   incident.id = uuid.v1();
   incident.created_at = moment().valueOf();
+  incident.status = status.OPEN,
   incident.event.start = _.min(incident.event.snapshots, 'timestamp').timestamp;
   incident.event.end = _.max(incident.event.snapshots, 'timestamp').timestamp;
-  incident.event.cover = _.find(incident.event.snapshots, function (snapshot) {
-    return !!snapshot.ii;
-  }) || _.first(incident.event.snapshots);
 
-  incident.event.cover = incident.event.cover.url || '';
+  var motion = _.find(incident.event.snapshots, function (snapshot) {
+    return !!snapshot.ii;
+  });
+
+  incident.event.cover = !!motion ? motion.url : _.first(incident.event.snapshots).url;
 
   dispatcher.dispatch(dispatcher.actions.UPDATE_INCIDENTS, incident).then(function () {
 
