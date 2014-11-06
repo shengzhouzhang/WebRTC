@@ -40,7 +40,36 @@ var _isValid = function (req, res, next) {
   var incident = req.body;
 
   if(!incident || !incident.home_alarm_id || !incident.event) {
-    res.status(400).json({ error: 'invalid incident data' });
+    res.status(400).json({ error: 'missing home alarm id or event' });
+    return;
+  }
+
+  if(!incident.event.id || !incident.event.snapshots || !incident.event.snapshots.length) {
+    res.status(400).json({ error: 'invalid event data' });
+    return;
+  }
+
+  if(!!_.find(incident.event.snapshots, function (snapshot) {
+
+    return !snapshot.id ||
+           !snapshot.url ||
+           !snapshot.timestamp ||
+           isNaN(new Date(snapshot.timestamp).getTime());
+
+  })) {
+    res.status(400).json({ error: 'invalid snapshot data' });
+    return;
+  }
+
+  if(!incident.address || !incident.contact || !incident.contact.length) {
+    res.status(400).json({ error: 'missing address or contact' });
+    return;
+  }
+
+  if(!!_.find(incident.contact, function (contact) {
+    return !contact.name || !contact.phone;
+  })) {
+    res.status(400).json({ error: 'invalid contact data' });
     return;
   }
 
