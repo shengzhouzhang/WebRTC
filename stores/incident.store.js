@@ -12,7 +12,7 @@ var store = {
   _DB: 'INCIDENT_DETAILS',
 
   create: function (incident) {
-    if(!incident || !incident.id || !incident.event) { throw new Error ('invalid incident data'); }
+    if(!incident || !incident.id) { throw new Error ('invalid incident data'); }
 
     return new Promise(function (resolve, reject) {
 

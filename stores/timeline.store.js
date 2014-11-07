@@ -12,13 +12,14 @@ var store = {
   _DB: 'INCIDENT_TIMELINE',
 
   create: function (incident) {
-    if(!incident || !incident.id || !incident.home_alarm_id || !incident.created_at) { throw new Error ('invalid incident data'); }
+    if(!incident || !incident.id) { throw new Error ('invalid incident data'); }
 
     var data = {
       id: incident.id,
-      home_alarm_id: incident.home_alarm_id,
-      address: incident.address,
-      contact: incident.contact,
+      home: incident.home,
+      contact: _.find(incident.contact, function (contact) {
+        return !!contact.owner;
+      }),
       event: {
         id: incident.event.id,
         start: incident.event.start,
