@@ -40,22 +40,22 @@ var parse = function (incident, cb) {
     return;
   }
 
-  if(!incident.contact ||
-     !incident.contact.length ||
-     !!_.find(incident.contact, function (contact) {
+  if(!incident.contacts ||
+     !incident.contacts.length ||
+     !!_.find(incident.contacts, function (contact) {
 
       return !contact.first_name ||
              !contact.last_name ||
              !contact.phone ||
              !contact.email;
-             
+
      }) ||
-     _.filter(incident.contact, function (contact) {
+     _.filter(incident.contacts, function (contact) {
       return !!contact.owner;
      }).length !== 1
    ) {
 
-    cb(new Error ('invalid contact data'));
+    cb(new Error ('invalid contacts data'));
     return;
   }
 
@@ -95,7 +95,7 @@ var create = function (incident) {
       })
     },
 
-    contact: _.map(incident.contact, function (contact) {
+    contacts: _.map(incident.contacts, function (contact) {
 
       return {
         first_name: contact.first_name,

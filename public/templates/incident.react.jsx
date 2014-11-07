@@ -52,7 +52,7 @@ define([
     render: function () {
       if(!this.state || !this.state.event) { return (<div></div>); }
 
-      var contacts = _.map(this.state.contact, function (contact, index) {
+      var contacts = _.map(this.state.contacts, function (contact, index) {
         return (
           <Contact key={this.state.id + '_contact_' + index}
             name={[contact.first_name, contact.last_name].join(' ')}
@@ -63,7 +63,7 @@ define([
       }.bind(this));
 
       console.log(this.state.home);
-      
+
       return (
         <div>
           <div className="header">
