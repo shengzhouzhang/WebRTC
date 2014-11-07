@@ -14,15 +14,15 @@ var _ = require('lodash'),
 
 var router = express.Router();
 
-var _hasAuthorized = function (req, res, next) {
+var _authorize = function (req, res, next) {
 
-  var access_token = !!req.headers['authorization'] ? req.headers['authorization'].split(' ')[1] : req.query.access_token;
+  var access_token = req.headers['authorization'] || req.query.access_token;
 
   if(!!access_token && access_token.toLowerCase() ===  'bXlVc2VybmFtZTpteVBhc3N3b3Jk'.toLowerCase()) { next(); return; }
   res.status(401).json({ error: 'invalid access token' });
 };
 
-var _hasAuthenticated = function (req, res, next) {
+var _authenticate = function (req, res, next) {
 
   var access_token = req.headers['authorization'],
       token = jwt.decode(access_token);
@@ -36,7 +36,7 @@ var _hasAuthenticated = function (req, res, next) {
   next();
 };
 
-var _parse = function (req, res, next) {
+var _validate = function (req, res, next) {
 
   var incident = req.body;
 
@@ -47,8 +47,8 @@ var _parse = function (req, res, next) {
   });
 };
 
-router.post('/', [_hasAuthorized, _parse], routes.create);
-router.get('/timeline', [_hasAuthenticated], routes.timeline);
-router.get('/:id', [_hasAuthenticated], routes.details);
+router.post('/', [_authorize, _validate], routes.create);
+router.get('/timeline', [_authenticate], routes.timeline);
+router.get('/:id', [_authenticate], routes.details);
 
 module.exports.router = router;
