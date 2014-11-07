@@ -47,12 +47,8 @@ var parse = function (incident, cb) {
       return !contact.first_name ||
              !contact.last_name ||
              !contact.phone ||
-             !contact.email ||
-             !contact.address ||
-             !contact.address.city ||
-             !contact.address.country ||
-             !contact.address.postcode ||
-             !contact.address.street;
+             !contact.email;
+             
      }) ||
      _.filter(incident.contact, function (contact) {
       return !!contact.owner;
