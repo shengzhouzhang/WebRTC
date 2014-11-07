@@ -44,16 +44,20 @@ var parse = function (incident, cb) {
      !incident.contact.length ||
      !!_.find(incident.contact, function (contact) {
 
-    return !contact.first_name ||
-           !contact.last_name ||
-           !contact.phone ||
-           !contact.email ||
-           !contact.address ||
-           !contact.address.city ||
-           !contact.address.country ||
-           !contact.address.postcode ||
-           !contact.address.street
-  })) {
+      return !contact.first_name ||
+             !contact.last_name ||
+             !contact.phone ||
+             !contact.email ||
+             !contact.address ||
+             !contact.address.city ||
+             !contact.address.country ||
+             !contact.address.postcode ||
+             !contact.address.street;
+     }) ||
+     _.filter(incident.contact, function (contact) {
+      return !!contact.owner;
+     }).length !== 1
+   ) {
 
     cb(new Error ('invalid contact data'));
     return;
