@@ -102,13 +102,7 @@ var create = function (incident) {
         last_name: contact.last_name,
         owner: contact.owner,
         phone: contact.phone,
-        email: contact.email,
-        address: {
-          street: contact.address.street,
-          city: contact.address.city,
-          postcode: contact.address.postcode,
-          country: contact.address.country
-        }
+        email: contact.email
       };
     })
   };
