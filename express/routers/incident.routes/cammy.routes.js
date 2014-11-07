@@ -2,16 +2,15 @@
 'use strict';
 
 var _ = require('lodash'),
-    moment = require('moment'),
-    uuid = require('node-uuid'),
     express = require('express'),
-    status = require('../../../static/incident.status').status,
+    util = require('../../util/incident.util').util,
     dispatcher = require('../../../dispatcher/dispatcher').dispatcher,
     logger = require('../../../util/log/application.log').logger;
 
 var create = function (req, res) {
 
-  var incident = req.incident;
+  var data = req.incident;
+  var incident = util.create(data);
 
   dispatcher.dispatch(dispatcher.actions.UPDATE_INCIDENTS, incident).then(function () {
 
