@@ -7,8 +7,7 @@ define(['dispatcher', 'actions', 'flux'],
 
     _Model: Backbone.Model.extend({
       defaults: {
-        id: undefined,
-        images: undefined
+        id: undefined
       }
     })
   });

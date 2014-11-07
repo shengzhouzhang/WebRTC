@@ -54,16 +54,27 @@ define([
 
       var contacts = _.map(this.state.contact, function (contact, index) {
         return (
-          <Contact key={this.state.id + '_contact_' + index} name={contact.name} phone={contact.phone} />
+          <Contact key={this.state.id + '_contact_' + index}
+            name={[contact.first_name, contact.last_name].join(' ')}
+            phone={contact.phone}
+            email={contact.email}
+          />
         );
       }.bind(this));
 
+      console.log(this.state.home);
+      
       return (
         <div>
           <div className="header">
             <div className="cover" style={{backgroundImage: 'url(' + this.state.event.cover + ')'}}></div>
             <div className="address">
-              <div><span>{this.state.address}</span></div>
+              <div><span>{[
+                this.state.home.address.street,
+                this.state.home.address.city,
+                this.state.home.address.postcode,
+                this.state.home.address.country
+                ].join(' ')}</span></div>
             </div>
             <div className="contact">
               <div><label>Contact Info</label></div>

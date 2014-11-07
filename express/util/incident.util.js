@@ -73,10 +73,10 @@ var create = function (incident) {
     home: {
       id: incident.home.id,
       address: {
-        street: incident.home.street,
-        city: incident.home.city,
-        country: incident.home.country,
-        postcode: incident.home.postcode
+        street: incident.home.address.street,
+        city: incident.home.address.city,
+        postcode: incident.home.address.postcode,
+        country: incident.home.address.country
       }
     },
 
@@ -106,8 +106,8 @@ var create = function (incident) {
         address: {
           street: contact.address.street,
           city: contact.address.city,
-          country: contact.address.country,
-          postcode: contact.address.postcode
+          postcode: contact.address.postcode,
+          country: contact.address.country
         }
       };
     })
@@ -115,5 +115,6 @@ var create = function (incident) {
 };
 
 module.exports.util = {
-  parse: parse
+  parse: parse,
+  create: create
 };

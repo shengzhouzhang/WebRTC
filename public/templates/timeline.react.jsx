@@ -18,13 +18,22 @@ define(['dispatcher', 'actions', 'timeline.store'],
         <div className="incident" onClick={this._onClick} >
           <div className="cover" style={{backgroundImage: 'url(' + this.props.event.cover + ')'}}></div>
           <div className="timestamp">{moment(this.props.createdAt).format('YYYY-MM-DD HH:mm:ss')}</div>
-          <div className="address">{this.props.address}</div>
+          <div className="address">
+            {
+              [
+                this.props.home.address.street,
+                this.props.home.address.city,
+                this.props.home.address.postcode,
+                this.props.home.address.country
+              ].join(' ')
+            }
+          </div>
         </div>
       );
     }
   });
 
-  var Images = React.createClass({
+  var Incidents = React.createClass({
 
     getInitialState: function () {
       return { timeline: [] };
@@ -53,7 +62,7 @@ define(['dispatcher', 'actions', 'timeline.store'],
     render: function () {
       var incidents = _.map(this.state.timeline, function (incident) {
         return (
-          <Incident key={incident.id} address={incident.address} event={incident.event} createdAt={incident.created_at} />
+          <Incident key={incident.id} home={incident.home} event={incident.event} createdAt={incident.created_at} />
         );
       });
 
@@ -66,7 +75,7 @@ define(['dispatcher', 'actions', 'timeline.store'],
     init: function (container) {
       _container = container;
       _component = React.renderComponent(
-        Images(null),
+        Incidents(null),
         _container
       );
     }

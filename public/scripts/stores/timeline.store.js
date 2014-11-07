@@ -8,8 +8,7 @@ define(['dispatcher', 'actions', 'flux'],
     _Model: Backbone.Collection.extend({
       model: Backbone.Model.extend({
         defaults: {
-          id: undefined,
-          created_at: undefined
+          id: undefined
         }
       })
     })

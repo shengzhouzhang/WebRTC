@@ -13,18 +13,40 @@ fs.readFile(input, function (err, data) {
 
   var data = JSON.parse(data),
       json = {
-        home_alarm_id: 'home alarm id',
-        address: 'The Home Alarm Location',
+        home: {
+          id: 'home_alarm_id',
+          address: {
+            street: "483 George Street",
+            city: "Sydney",
+            postcode: "2000",
+            country: "Australia"
+          }
+        },
         contact: [
           {
-            name: "Steven Zhang",
-            phone: "12345678",
-            relationship: "owner"
+            first_name: "Steven",
+            last_name: "Zhang",
+            phone: "1234567890",
+            email: 'steven@cammy.com',
+            owner: true,
+            address: {
+              street: "483 George Street",
+              city: "Sydney",
+              postcode: "2000",
+              country: "Australia"
+            }
           },
           {
-            name: "Steven Zhang 2",
-            phone: "87654321",
-            relationship: "owner"
+            first_name: "Steven",
+            last_name: "Zhang",
+            phone: "1234567890",
+            email: 'steven@cammy.com',
+            address: {
+              street: "483 George Street",
+              city: "Sydney",
+              postcode: "2000",
+              country: "Australia"
+            }
           }
         ],
         event: {
