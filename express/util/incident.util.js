@@ -108,7 +108,25 @@ var create = function (incident) {
   };
 };
 
+var open = function (incident, cb) {
+  if(!cb) { throw new Error ('missing cb'); }
+  if(!incident || !incident.id) { cb(new Error('invalid incident data')); return; }
+  if(incident.status !== status.CLOSE) { cb(new Error('invalid incident status')); return; }
+  incident.status = status.OPEN;
+  cb(null, incident);
+};
+
+var close = function (incident, cb) {
+  if(!cb) { throw new Error ('missing cb'); }
+  if(!incident || !incident.id) { cb(new Error('invalid incident data')); return; }
+  if(incident.status !== status.OPEN) { cb(new Error('invalid incident status')); return; }
+  incident.status = status.CLOSE;
+  cb(null, incident);
+};
+
 module.exports.util = {
   parse: parse,
-  create: create
+  create: create,
+  open: open,
+  close: close
 };

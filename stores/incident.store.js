@@ -37,10 +37,23 @@ var store = {
         }
       });
     }.bind(this));
+  },
+
+  update: function (incident) {
+    if(!incident || !incident.id) { throw new Error ('invalid incident data'); }
+
+    return new Promise(function (resolve, reject) {
+
+      redis.hset(this._DB, incident.id, JSON.stringify(incident), function (err, result) {
+        if(!!err) { logger.error(err.message || err); reject(err); return; }
+        resolve(result);
+      });
+    }.bind(this));
   }
 };
 
 dispatcher.register(dispatcher.actions.UPDATE_INCIDENTS, store.create.bind(store));
 dispatcher.register(dispatcher.actions.REQUEST_INCIDENT, store.request.bind(store));
+dispatcher.register(dispatcher.actions.UPDATE_INCIDENT, store.update.bind(store));
 
 module.exports.store = store;
