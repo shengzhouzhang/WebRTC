@@ -3,10 +3,12 @@
 
 var _ = require('lodash'),
     fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    util = require('util');
 
 var input = path.join(__dirname, '..', '..', 'public', 'json', 'test-case-09.json'),
-    output = path.join(__dirname, 'test.json');
+    output = path.join(__dirname, 'test.sh'),
+    command = 'curl -H "Content-Type: application/json" -H "Authorization: bXlVc2VybmFtZTpteVBhc3N3b3Jk" -d \'%s\' http://localhost:3000/incidents';
 
 fs.readFile(input, function (err, data) {
   if(!!err) { console.log(err); return; }
@@ -22,31 +24,19 @@ fs.readFile(input, function (err, data) {
             country: "Australia"
           }
         },
-        contact: [
+        contacts: [
           {
             first_name: "Steven",
             last_name: "Zhang",
             phone: "1234567890",
             email: 'steven@cammy.com',
-            owner: true,
-            address: {
-              street: "483 George Street",
-              city: "Sydney",
-              postcode: "2000",
-              country: "Australia"
-            }
+            owner: true
           },
           {
             first_name: "Steven",
             last_name: "Zhang",
             phone: "1234567890",
-            email: 'steven@cammy.com',
-            address: {
-              street: "483 George Street",
-              city: "Sydney",
-              postcode: "2000",
-              country: "Australia"
-            }
+            email: 'steven@cammy.com'
           }
         ],
         event: {
@@ -62,11 +52,7 @@ fs.readFile(input, function (err, data) {
         }
       };
 
-  json.event.snapshots[3].motion = 'persion';
-
-  console.log(JSON.stringify(json, null, 2));
-
-  fs.writeFile(output, JSON.stringify(json), function(err) {
+  fs.writeFile(output, util.format(command, JSON.stringify(json)), function(err) {
     if(!!err) { console.log(err); }
     process.exit();
   });

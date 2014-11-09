@@ -1,1 +1,0 @@
-curl -H "Content-Type: application/json" -H "Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InN0ZXZlbkBjYW1teS5jb20iLCJ0aW1lc3RhbXAiOjE0MTQ1NDI3MDEyMjB9.t1BJ0BiJq_h2EPQubX2Oo07Xog7U3758_uDsqjLZYe4" http://localhost:3000/incidents/timeline
