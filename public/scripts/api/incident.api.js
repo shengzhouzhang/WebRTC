@@ -25,7 +25,10 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
           authorization: store.get().access_token,
         },
         url: '/incidents/' + id + '/open',
-        success: dispatcher.dispatch.bind(undefined, actions.UPDATE_INCIDENT_STORE)
+        success: function (data) {
+          dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'incident open'});
+          dispatcher.dispatch(actions.UPDATE_INCIDENT_STORE, data);
+        }
       });
     },
 
@@ -38,7 +41,10 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
           authorization: store.get().access_token,
         },
         url: '/incidents/' + id + '/close',
-        success: dispatcher.dispatch.bind(undefined, actions.UPDATE_INCIDENT_STORE)
+        success: function (data) {
+          dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'incident close'});
+          dispatcher.dispatch(actions.UPDATE_INCIDENT_STORE, data);
+        }
       });
     }
   };
