@@ -23,19 +23,21 @@ var store = {
     }.bind(this));
   },
 
-  request: function (id) {
-    if(!id) { throw new Error ('invalid incident id'); }
+  request: function (ids) {
+    if(!ids) { throw new Error ('invalid incident ids'); }
 
     return new Promise(function (resolve, reject) {
 
-      redis.hget(this._DB, id, function (err, result) {
-        if(!!err) { logger.error(err.message || err); reject(err); return; }
-        try {
-          resolve(JSON.parse(result));
-        } catch (err) {
-          reject(err);
-        }
-      });
+        redis.hmget(this._DB, ids, function (err, result) {
+          if(!!err) { logger.error(err.message || err); reject(err); return; }
+
+          try {
+            resolve(_.map(result, function (data) { return JSON.parse(data); }));
+          } catch (err) {
+            reject(err);
+          }
+        });
+
     }.bind(this));
   },
 

@@ -14,24 +14,9 @@ var store = {
   create: function (incident) {
     if(!incident || !incident.id) { throw new Error ('invalid incident data'); }
 
-    var data = {
-      id: incident.id,
-      home: incident.home,
-      contact: _.find(incident.contact, function (contact) {
-        return !!contact.owner;
-      }),
-      event: {
-        id: incident.event.id,
-        start: incident.event.start,
-        end: incident.event.end,
-        cover: incident.event.cover
-      },
-      created_at: incident.created_at,
-    };
-
     return new Promise(function (resolve, reject) {
 
-      redis.zadd(this._DB, data.created_at, JSON.stringify(data), function (err, result) {
+      redis.zadd(this._DB, incident.created_at, incident.id, function (err, result) {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
         if(!result) { reject(new Error (result)); return; }
         resolve(result);
@@ -48,15 +33,7 @@ var store = {
 
       redis.zrangebyscore(this._DB, min, max, function (err, result) {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
-
-        try {
-          var incidents = _.map(result, function (item) {
-            return JSON.parse(item);
-          });
-          resolve(incidents);
-        } catch (err) {
-          reject(err);
-        }
+        resolve(result);
       });
     }.bind(this));
   }

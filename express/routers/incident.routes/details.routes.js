@@ -13,9 +13,9 @@ var details = function (req, res) {
   var id = req.params.id;
 
   dispatcher.dispatch(dispatcher.actions.REQUEST_INCIDENT, id).then(function (result) {
-    if(!result || !result.length || !result[0]) { res.status(404).json(); return; }
+    if(!result || !result.length || !result[0][0]) { res.status(404).json(); return; }
 
-    res.status(200).json(result[0]);
+    res.status(200).json(result[0][0]);
   }, res.status(500).json.bind(undefined));
 };
 
@@ -33,9 +33,9 @@ var open = function (req, res) {
   var id = req.params.id;
 
   dispatcher.dispatch(dispatcher.actions.REQUEST_INCIDENT, id).then(function (result) {
-    if(!result || !result.length || !result[0]) { res.status(404).json(); return; }
+    if(!result || !result.length || !result[0][0]) { res.status(404).json(); return; }
 
-    util.open(result[0], function (err, incident) {
+    util.open(result[0][0], function (err, incident) {
       if(!!err) { res.status(400).json({ error: err.message }); return; }
 
       update(incident, function (err, result) {
@@ -51,9 +51,9 @@ var close = function (req, res) {
   var id = req.params.id;
 
   dispatcher.dispatch(dispatcher.actions.REQUEST_INCIDENT, id).then(function (result) {
-    if(!result || !result.length || !result[0]) { res.status(404).json(); return; }
+    if(!result || !result.length || !result[0][0]) { res.status(404).json(); return; }
 
-    util.close(result[0], function (err, incident) {
+    util.close(result[0][0], function (err, incident) {
       if(!!err) { res.status(400).json({ error: err.message }); return; }
 
       update(incident, function (err, result) {
