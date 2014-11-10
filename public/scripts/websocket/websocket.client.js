@@ -44,6 +44,7 @@ define([
           _socket = new WebSocket(host + '/socket', 'json');
 
           _socket.onopen = function () {
+            dispatcher.dispatch(actions.CLEAR_MESSAGE);
             resolve();
           };
 
@@ -114,10 +115,11 @@ define([
       _socket = null;
       _conneciton = null;
       _authentication = null;
-      this.connect(3000);
+      this.connect(5000);
 
       dispatcher.dispatch(actions.UPDATE_MESSAGE, {
-        message: 'connection lost, trying to reconnect...'
+        message: 'connection lost, trying to reconnect...',
+        type: 'error'
       });
     },
   };

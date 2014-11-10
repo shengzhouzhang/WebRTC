@@ -37,7 +37,7 @@ define(['dispatcher', 'actions', 'message.store'],
 
     render: function () {
       return (
-        <div className='message'>
+        <div className={ this.state.type || 'message' }>
           {this.state.message}
           <a href="#"><i className="fa fa-times"></i></a>
         </div>

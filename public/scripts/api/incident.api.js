@@ -26,7 +26,7 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
         },
         url: '/incidents/' + id + '/open',
         success: function (data) {
-          dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'incident open'});
+          dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'incident open', type: 'success' });
           dispatcher.dispatch(actions.UPDATE_INCIDENT_STORE, data);
         }
       });
@@ -42,7 +42,7 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
         },
         url: '/incidents/' + id + '/close',
         success: function (data) {
-          dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'incident close'});
+          dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'incident close', type: 'success' });
           dispatcher.dispatch(actions.UPDATE_INCIDENT_STORE, data);
         }
       });

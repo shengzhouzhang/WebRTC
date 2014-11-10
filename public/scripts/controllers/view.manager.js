@@ -96,7 +96,7 @@ define([
   dispatcher.register(actions.NEW_CASE, function (incident) {
 
     var msg = 'New Incidents' + (!!incident ? ' at ' + moment(incident.created_at).format('HH:mm:ss') : '');
-    dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: msg })
+    dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: msg , type: 'warning' });
   });
 
   // header
