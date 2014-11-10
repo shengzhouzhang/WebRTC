@@ -123,7 +123,6 @@ define([
 
       dispatcher.dispatch(actions.REQUEST_TIMELINE, { history: true }).then(function () {
         setTimeout(function () { isLoading = false; }, 1000);
-        _fadeIn('#incident-container');
       });
     }
   }
