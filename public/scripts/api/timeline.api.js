@@ -11,7 +11,7 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
 
         if(!!options) {
           var oldest = _.last(timelineStore.get());
-          params = $.param({ max: !!oldest ? oldest.created_at : '+inf', min: '-inf', count: 3 });
+          params = $.param({ max: !!oldest ? oldest.created_at : '+inf', min: '-inf', count: 9 });
         } else {
           var latest = _.first(timelineStore.get());
           params = $.param({ max: '+inf', min: !!latest ? latest.created_at : '-inf', count: 9 });
