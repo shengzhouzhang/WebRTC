@@ -109,5 +109,24 @@ define([
 
   dispatcher.register(actions.APP_INIT, views.init.bind(views));
 
+
+  var isLoading = false;
+
+  window.onscroll = function (event) {
+
+    if(!isLoading &&
+       document.body.scrollHeight > window.innerHeight &&
+       document.body.scrollTop > (document.body.scrollHeight - window.innerHeight) &&
+       Backbone.history.fragment === 'incidents') {
+
+      isLoading = true;
+
+      dispatcher.dispatch(actions.REQUEST_TIMELINE, { history: true }).then(function () {
+        setTimeout(function () { isLoading = false; }, 1000);
+        _fadeIn('#incident-container');
+      });
+    }
+  }
+
   return views;
 });

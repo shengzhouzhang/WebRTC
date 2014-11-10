@@ -7,8 +7,17 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
 
       var _promise = new Promise(function (resolve, reject) {
 
-        var latest = timelineStore.get()[0],
-            params = $.param({ max: '+inf', min: !!latest ? latest.created_at : '-inf', count: 30 });
+        var params;
+
+        if(!!options) {
+          var oldest = _.last(timelineStore.get());
+          params = $.param({ max: !!oldest ? oldest.created_at : '+inf', min: '-inf', count: 3 });
+        } else {
+          var latest = _.first(timelineStore.get());
+          params = $.param({ max: '+inf', min: !!latest ? latest.created_at : '-inf', count: 9 });
+        }
+
+        console.log(params);
 
         $.ajax({
           type: 'GET',
