@@ -15,8 +15,6 @@ var timeline = function (req, res) {
         min: req.query.min
       };
 
-  console.log(options);
-
   dispatcher.dispatch(dispatcher.actions.REQUEST_TIMELINE, options).then(function (result) {
     if(!result.length) { res.status(200).json([]); return; }
 

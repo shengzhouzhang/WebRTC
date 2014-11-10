@@ -30,8 +30,6 @@ var store = {
         max = options.max || '+inf',
         count = options.count || 10;
 
-        console.log(max, min, count);
-
     return new Promise(function (resolve, reject) {
 
       redis.zrevrangebyscore(this._DB, max, min, 'LIMIT', 0, count, function (err, result) {
