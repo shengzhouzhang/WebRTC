@@ -7,18 +7,17 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
 
       var _promise = new Promise(function (resolve, reject) {
 
-          $.ajax({
-            type: 'GET',
-            headers: {
-              authorization: store.get().access_token,
-            },
-            url: '/incidents/timeline',
-            success: function (data) { resolve(data); },
-            error: function (xhr) { reject(xhr.status); }
-          });
+        $.ajax({
+          type: 'GET',
+          headers: {
+            authorization: store.get().access_token,
+          },
+          url: '/incidents/timeline',
+          success: function (data) { resolve(data); }
         });
+      });
 
-      _promise.then(function (data) {
+      return _promise.then(function (data) {
         dispatcher.dispatch(actions.UPDATE_TIMELINE_STORE, data);
       });
     }

@@ -6,13 +6,20 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
     request: function (id) {
       if(!id) throw new Error ('missing incident id');
 
-      $.ajax({
-        type: 'GET',
-        headers: {
-          authorization: store.get().access_token,
-        },
-        url: '/incidents/' + id,
-        success: dispatcher.dispatch.bind(undefined, actions.UPDATE_INCIDENT_STORE)
+      var _promise = new Promise(function (resolve, reject) {
+
+        $.ajax({
+          type: 'GET',
+          headers: {
+            authorization: store.get().access_token,
+          },
+          url: '/incidents/' + id,
+          success: function (data) { resolve(data); }
+        });
+      });
+
+      return _promise.then(function (data) {
+        dispatcher.dispatch(actions.UPDATE_INCIDENT_STORE, data);
       });
     },
 
