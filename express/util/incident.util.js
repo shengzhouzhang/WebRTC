@@ -104,7 +104,9 @@ var create = function (incident) {
         phone: contact.phone,
         email: contact.email
       };
-    })
+    }),
+
+    notes: []
   };
 };
 

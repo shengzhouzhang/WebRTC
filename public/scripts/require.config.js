@@ -37,6 +37,8 @@ require.config({
     'user.api': './api/user.api',
     'timeline.api': './api/timeline.api',
     'incident.api': './api/incident.api',
+    'notes.api': './api/notes.api',
+
 
     'websocket.client': './websocket/websocket.client',
 

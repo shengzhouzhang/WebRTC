@@ -12,12 +12,22 @@ define([
 
   var Notes = React.createClass({displayName: 'Notes',
 
-    render: function () {
+    _onClick: function (event) {
+      event.preventDefault();
+      dispatcher.dispatch(actions.ADD_NOTE, {
+        id: this.props.incidentId,
+        note: {
+          note: $('.notes textarea').val()
+        }
+      });
+    },
 
+    render: function () {
+      
       var notes = _.map(this.props.notes, function (note) {
 
         return (
-          Note({key: note.id, username: note.username, timestamp: note.timestamp, content: note.content})
+          Note({key: note.id, username: note.created_by, timestamp: moment(note.created_at).format('YYYY-MM-DD HH:mm:ss'), content: note.note})
         );
       });
 
@@ -26,7 +36,7 @@ define([
           React.DOM.div({className: "create"}, 
             React.DOM.label(null, "Create a Note"), 
             React.DOM.textarea({rows: "4", cols: "50"}), 
-            React.DOM.div(null, React.DOM.a({href: ""}, "Create"))
+            React.DOM.div(null, React.DOM.a({href: "", onClick: this._onClick}, "Create"))
           ), 
           React.DOM.div(null, notes)
         )

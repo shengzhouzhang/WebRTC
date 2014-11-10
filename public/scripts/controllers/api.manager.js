@@ -5,10 +5,11 @@ define([
   'user.api',
   'timeline.api',
   'incident.api',
+  'notes.api',
 
   'websocket.client',
-  
-  ], function (dispatcher, actions, userApi, incidentApi) {
+
+  ], function (dispatcher, actions, userApi, timelineApi, incidentApi, notesApi) {
   'use strict';
 
   dispatcher.register(actions.APP_INIT, function (options) {

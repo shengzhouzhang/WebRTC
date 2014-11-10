@@ -6,7 +6,8 @@ var _ = require('lodash'),
     routes = _.extend(
       require('./incident.routes/cammy.routes').routes,
       require('./incident.routes/timeline.routes').routes,
-      require('./incident.routes/details.routes').routes
+      require('./incident.routes/details.routes').routes,
+      require('./incident.routes/notes.routes').routes
     ),
     jwt = require('../util/jwt.token').token,
     parser = require('../util/incident.util').util,
@@ -52,5 +53,6 @@ router.get('/timeline', [_authenticate], routes.timeline);
 router.get('/:id', [_authenticate], routes.details);
 router.get('/:id/open', [_authenticate], routes.open);
 router.get('/:id/close', [_authenticate], routes.close);
+router.post('/:id/notes', [_authenticate], routes.notes.add);
 
 module.exports.router = router;

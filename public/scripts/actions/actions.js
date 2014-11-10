@@ -20,13 +20,16 @@ define(['dispatcher'],
     TO_TIMELINE_VIEW: 'TO_TIMELINE_VIEW',
     REQUEST_TIMELINE: 'REQUEST_TIMELINE',
 
-    // incident acitons
+    // incident actions
 
     REQUEST_INCIDENT: 'REQUEST_INCIDENT',
     UPDATE_INCIDENT_STORE: 'UPDATE_INCIDENT_STORE',
     TO_INCIDENT_VIEW: 'TO_INCIDENT_VIEW',
     CLOSE_INCIDENT: 'CLOSE_INCIDENT',
     OPEN_INCIDENT: 'OPEN_INCIDENT',
+
+    // notes actions
+    ADD_NOTE: 'ADD_NOTE',
 
     // authenticate actions
 
