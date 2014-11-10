@@ -82,11 +82,11 @@ var handlers = {
     dispatcher.dispatch(dispatcher.actions.REQUEST_UNPDATES, options)
       .then(function (result) {
 
-      if(!result || !result[0]) { _error(client, 'invalid result'); return; }
+      if(!result || !result) { _error(client, 'invalid result'); return; }
 
       var data = JSON.stringify({
         action: 'REQUEST_UNPDATES',
-        updates: result[0].length,
+        updates: result.length,
         timestamp: options.timestamp
       });
 

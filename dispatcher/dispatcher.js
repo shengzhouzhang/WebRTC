@@ -49,6 +49,8 @@ var dispatcher = {
 
     return Promise.all(_promises).then(function (result) {
       _clearPromises();
+      if(!result.length) { return null; }
+      if(result.length === 1) { return result[0]; }
       return result;
     }, function (error) {
       console.log('dispatcher', action, error);
