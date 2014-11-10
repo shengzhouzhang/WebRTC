@@ -28,6 +28,14 @@ define(['dispatcher', 'actions', 'message.store'],
 
       this.setState(data);
       $(_container).addClass('shown');
+
+      var timeout;
+
+      if(data.type === 'success') { timeout = 1500; }
+      if(data.type === 'warning') { timeout = 2000; }
+
+      if(!timeout) { return; }
+      setTimeout(dispatcher.dispatch.bind(undefined, actions.CLEAR_MESSAGE), timeout);
     },
 
     _onClose: function (event) {
