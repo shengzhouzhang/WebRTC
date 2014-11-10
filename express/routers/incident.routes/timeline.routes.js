@@ -9,11 +9,16 @@ var _ = require('lodash'),
 
 var timeline = function (req, res) {
 
-  var min = req.min,
-      max = req.max,
-      limit = req.limit || 30;
+  var options = {
+        count: req.query.count || 3,
+        max: req.query.max,
+        min: req.query.min
+      };
 
-  dispatcher.dispatch(dispatcher.actions.REQUEST_TIMELINE, {}).then(function (result) {
+  console.log(options);
+
+  dispatcher.dispatch(dispatcher.actions.REQUEST_TIMELINE, options).then(function (result) {
+    if(!result.length) { res.status(200).json([]); return; }
 
     dispatcher.dispatch(dispatcher.actions.REQUEST_INCIDENT, result).then(function (result) {
 

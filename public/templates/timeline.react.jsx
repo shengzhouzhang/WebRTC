@@ -51,11 +51,24 @@ define(['dispatcher', 'actions', 'timeline.store'],
     _onLoad: function () {
       var incidents = _.sortBy(store.get(), function (incident) { return -incident.created_at; });
 
+      var timestamp = !!this.state.timeline[0] ? this.state.timeline[0].created_at : Date.now();
+
+      var updates = _.filter(incidents, function (incident) {
+        return incident.created_at > timestamp;
+      });
+
+      if (!!updates.length) {
+        dispatcher.dispatch(actions.UPDATE_MESSAGE, {
+          message: updates.length + ' new incidents',
+          type: 'success'
+        });
+      }
+
       this.setState({
         timeline: incidents
       });
 
-      var timestamp = !!incidents && !!incidents[0] ? incidents[0].created_at: null;
+      timestamp = !!incidents && !!incidents[0] ? incidents[0].created_at: null;
 
       dispatcher.dispatch(actions.REQUEST_UNPDATES, { timestamp: timestamp });
     },

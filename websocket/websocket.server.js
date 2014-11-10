@@ -77,7 +77,7 @@ var handlers = {
     if(!client.username) { _error(client, 'unauthorized'); return; }
     if(!options.timestamp) { _error(client, 'missing timestamp'); return; }
 
-    var options = { min: options.timestamp };
+    var options = { min: options.timestamp, count: -1 };
 
     dispatcher.dispatch(dispatcher.actions.REQUEST_UNPDATES, options)
       .then(function (result) {

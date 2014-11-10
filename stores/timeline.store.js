@@ -27,11 +27,14 @@ var store = {
   request: function (options) {
 
     var min = !!options && !!options.min ? '(' + options.min : '-inf',
-        max = options.max || '+inf';
+        max = options.max || '+inf',
+        count = options.count || 10;
+
+        console.log(max, min, count);
 
     return new Promise(function (resolve, reject) {
 
-      redis.zrangebyscore(this._DB, min, max, function (err, result) {
+      redis.zrevrangebyscore(this._DB, max, min, 'LIMIT', 0, count, function (err, result) {
         if(!!err) { logger.error(err.message || err); reject(err); return; }
         resolve(result);
       });
