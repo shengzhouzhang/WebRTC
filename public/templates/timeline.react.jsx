@@ -28,6 +28,7 @@ define(['dispatcher', 'actions', 'timeline.store'],
               ].join(' ')
             }
           </div>
+          <div className="status">{this.props.status}</div>
         </div>
       );
     }
@@ -62,7 +63,7 @@ define(['dispatcher', 'actions', 'timeline.store'],
     render: function () {
       var incidents = _.map(this.state.timeline, function (incident) {
         return (
-          <Incident key={incident.id} home={incident.home} event={incident.event} createdAt={incident.created_at} />
+          <Incident key={incident.id} home={incident.home} status={incident.status} event={incident.event} createdAt={incident.created_at} />
         );
       });
 

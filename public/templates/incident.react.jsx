@@ -49,6 +49,23 @@ define([
       });
     },
 
+    _onAction: function (event) {
+      event.preventDefault();
+      switch(this.state.status) {
+        case 'OPEN':
+          dispatcher.dispatch(actions.CLOSE_INCIDENT, this.state.id);
+          break;
+        case 'CLOSE':
+          dispatcher.dispatch(actions.OPEN_INCIDENT, this.state.id);
+          break;
+      }
+    },
+
+    _actions: {
+      'OPEN': 'Close',
+      'CLOSE': 'Open'
+    },
+
     render: function () {
       if(!this.state || !this.state.event) { return (<div></div>); }
 
@@ -61,8 +78,6 @@ define([
           />
         );
       }.bind(this));
-
-      console.log(this.state.home);
 
       return (
         <div>
@@ -81,7 +96,7 @@ define([
               {contacts}
             </div>
             <div className="actions">
-              <a href="#">Close</a>
+              <a href="#" onClick={this._onAction}>{this._actions[this.state.status]}</a>
             </div>
           </div>
           <div className="taps">
