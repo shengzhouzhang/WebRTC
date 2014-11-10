@@ -25,9 +25,9 @@ define(['EventEmitter'], function (EventEmitter) {
       },
 
       set: function (json) {
+        console.log(json);
         if(!json || !this._data) { throw new Error ('missing values'); }
-        if(!!this._data.add) { this._data.add(json, { merge: true }); }
-        else { this._data.set(json); }
+        this._data.set(json, { remove: false });
         this.emitEvent(this.STORE_UPDATED);
       },
 

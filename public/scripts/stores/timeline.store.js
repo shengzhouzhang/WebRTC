@@ -10,11 +10,13 @@ define(['dispatcher', 'actions', 'flux'],
         defaults: {
           id: undefined
         }
-      })
+      }),
+      comparator: 'created_at'
     })
   });
 
   dispatcher.register(actions.UPDATE_TIMELINE_STORE, store.set.bind(store));
+  dispatcher.register(actions.UPDATE_INCIDENT_STORE, store.set.bind(store));
 
   return store;
 });
