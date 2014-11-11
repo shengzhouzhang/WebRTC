@@ -20,12 +20,14 @@ require.config({
     'incident.view': './views/incident.react',
     'message.view': './views/message.react',
 
+
     // component
     'contact.component': './views/components/contact.react',
     'snapshot.component': './views/components/snapshot.react',
     'event.component': './views/components/event.react',
     'note.component': './views/components/note.react',
     'notes.component': './views/components/notes.react',
+    'border.component': './views/components/border.react',
 
     // stores
     'user.store': './stores/user.store',
