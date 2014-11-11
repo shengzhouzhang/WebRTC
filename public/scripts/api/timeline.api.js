@@ -7,14 +7,20 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
 
       var _promise = new Promise(function (resolve, reject) {
 
-        var params;
+        var params, incidents = timelineStore.get();
 
         if(!!options) {
-          var oldest = _.min(timelineStore.get(), function (incident) { return incident.created_at });
-          params = $.param({ max: !!oldest ? oldest.created_at : '+inf', min: '-inf', count: 9 });
+          params = $.param({
+            max: !!incidents.length ? _.min(incidents, function (incident) { return incident.created_at }).created_at : undefined,
+            min: undefined,
+            count: 9
+          });
         } else {
-          var latest = _.max(timelineStore.get(), function (incident) { return incident.created_at });
-          params = $.param({ max: '+inf', min: !!latest ? latest.created_at : '-inf', count: 9 });
+          params = $.param({
+            max: undefined,
+            min: !!incidents.length ? _.max(incidents, function (incident) { return incident.created_at }).created_at : undefined,
+            count: 9
+          });
         }
 
         console.log(params);
@@ -29,8 +35,8 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
         });
       });
 
-      return _promise.then(function (data) {
-        dispatcher.dispatch(actions.UPDATE_TIMELINE_STORE, data);
+      return _promise.then(function (incidents) {        
+        dispatcher.dispatch(actions.UPDATE_TIMELINE_STORE, incidents);
       });
     }
   };

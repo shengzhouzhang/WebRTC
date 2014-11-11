@@ -74,6 +74,7 @@ var handlers = {
   },
 
   REQUEST_UNPDATES: function (client, options) {
+
     if(!client.username) { _error(client, 'unauthorized'); return; }
     if(!options.timestamp) { _error(client, 'missing timestamp'); return; }
 

@@ -19,11 +19,13 @@ define([
         note: {
           note: $('.notes textarea').val()
         }
+      }).then(function () {
+        $('.notes textarea').val('');
       });
     },
 
     render: function () {
-      
+
       var notes = _.map(this.props.notes, function (note) {
 
         return (

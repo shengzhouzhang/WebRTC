@@ -49,6 +49,7 @@ define(['dispatcher', 'actions', 'timeline.store'],
     },
 
     _onLoad: function () {
+
       var incidents = _.sortBy(store.get(), function (incident) { return -incident.created_at; });
 
       var timestamp = !!this.state.timeline[0] ? this.state.timeline[0].created_at : Date.now();
@@ -68,9 +69,11 @@ define(['dispatcher', 'actions', 'timeline.store'],
         timeline: incidents
       });
 
-      timestamp = !!incidents && !!incidents[0] ? incidents[0].created_at: null;
+      if(Backbone.history.fragment !== 'incidents' || !incidents.length) { return; }
 
-      dispatcher.dispatch(actions.REQUEST_UNPDATES, { timestamp: timestamp });
+      dispatcher.dispatch(actions.REQUEST_UNPDATES, {
+        timestamp: _.max(incidents, function (incident) { return incident.created_at; }).created_at
+      });
     },
 
     render: function () {
