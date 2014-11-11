@@ -17,8 +17,6 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
           });
         } else {
           params = $.param({
-            max: undefined,
-            min: !!incidents.length ? _.max(incidents, function (incident) { return incident.created_at }).created_at : undefined,
             count: 9
           });
         }
@@ -35,8 +33,11 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
         });
       });
 
-      return _promise.then(function (incidents) {        
-        dispatcher.dispatch(actions.UPDATE_TIMELINE_STORE, incidents);
+      return _promise.then(function (incidents) {
+        dispatcher.dispatch(actions.UPDATE_TIMELINE_STORE, {
+          incidents: incidents,
+          options: { remove: !options }
+        });
       });
     }
   };
