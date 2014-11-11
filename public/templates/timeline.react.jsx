@@ -52,7 +52,7 @@ define(['dispatcher', 'actions', 'timeline.store'],
 
       var incidents = _.sortBy(store.get(), function (incident) { return -incident.created_at; });
 
-      var timestamp = !!this.state.timeline[0] ? this.state.timeline[0].created_at : Date.now();
+      var timestamp = !!this.state.timeline[0] ? this.state.timeline[0].created_at : moment().valueOf();
 
       var updates = _.filter(incidents, function (incident) {
         return incident.created_at > timestamp;
@@ -95,6 +95,10 @@ define(['dispatcher', 'actions', 'timeline.store'],
         Incidents(null),
         _container
       );
+    },
+
+    render: function () {
+      $(_container).fadeIn('slow');
     }
   };
 });

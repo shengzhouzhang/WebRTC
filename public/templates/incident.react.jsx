@@ -37,7 +37,6 @@ define([
       $('div[data-target-tap=notes]').fadeOut('fast', function () {
         $('div[data-target-tap=event]').fadeIn('fast');
       });
-
     },
 
     _showNote: function (event) {
@@ -118,6 +117,11 @@ define([
         Incident(null),
         _container
       );
+    },
+
+    render: function () {
+      $(_container).fadeIn('slow');
+      $(_container).find('.taps a')[0].click();
     }
   };
 });

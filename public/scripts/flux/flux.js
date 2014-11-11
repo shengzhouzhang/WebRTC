@@ -24,9 +24,9 @@ define(['EventEmitter'], function (EventEmitter) {
         return this._data.toJSON();
       },
 
-      set: function (json) {
+      set: function (json, options) {
         if(!json || !this._data) { throw new Error ('missing values'); }
-        this._data.set(json, { remove: false });
+        this._data.set(json, options || { remove: false });
         this.emitEvent(this.STORE_UPDATED);
       },
 

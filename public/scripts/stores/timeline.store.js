@@ -16,7 +16,13 @@ define(['dispatcher', 'actions', 'flux'],
   });
 
   dispatcher.register(actions.UPDATE_TIMELINE_STORE, store.set.bind(store));
-  dispatcher.register(actions.UPDATE_INCIDENT_STORE, store.set.bind(store));
+  dispatcher.register(actions.UPDATE_INCIDENT_STORE, function (incident) {
+    try {
+      store.set(incident, { add: false, merge: true, remove: false });
+    } catch (err) {
+
+    }
+  });
 
   return store;
 });

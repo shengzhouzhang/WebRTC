@@ -45,10 +45,6 @@ define([
     return Promise.all(animates);
   };
 
-  var _fadeIn = function (container) {
-    _views.filter(container).fadeIn('slow');
-  };
-
   var _showComponents = function () {
 
     _views.filter('#header-container').show();
@@ -62,7 +58,7 @@ define([
 
         dispatcher.dispatch(actions.SOCKET_CONNECT);
         dispatcher.dispatch(actions.REQUEST_INCIDENT, options).then(function () {
-          _fadeIn('#incident-container');
+          incidentView.render();
         });
       });
     });
@@ -76,7 +72,7 @@ define([
 
         dispatcher.dispatch(actions.SOCKET_CONNECT);
         dispatcher.dispatch(actions.REQUEST_TIMELINE).then(function () {
-          _fadeIn('#timeline-container');
+          timelineView.render();
         });
       });
     });
