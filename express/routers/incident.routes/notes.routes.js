@@ -28,12 +28,14 @@ var add = function (req, res) {
       created_by: username
     });
 
+    result[0].notes = _.sortBy(result[0].notes, function (note) { return -note.created_at; });
+
     dispatcher.dispatch(dispatcher.actions.UPDATE_INCIDENT, result[0]).then(
-      res.status(200).json.bind(res, result[0]),
-      res.status(500).json.bind(res, undefined)
+      function () { res.status(200).json(result[0]); },
+      function () { res.status(500).json(); }
     );
 
-  }, res.status(500).json.bind(res, undefined));
+  }, function () { res.status(500).json(); });
 };
 
 module.exports.routes = {
