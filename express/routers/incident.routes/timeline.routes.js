@@ -10,36 +10,34 @@ var _ = require('lodash'),
 var timeline = function (req, res) {
 
   var options = {
-        count: req.query.count || 3,
-        max: req.query.max,
-        min: req.query.min
+        created_at:  {
+          $gt: req.query.min || 0,
+          $lt: req.query.max || moment().valueOf()
+        },
       };
 
   dispatcher.dispatch(dispatcher.actions.REQUEST_TIMELINE, options).then(function (result) {
     if(!result.length) { res.status(200).json([]); return; }
 
-    dispatcher.dispatch(dispatcher.actions.REQUEST_INCIDENT, result).then(function (result) {
+    res.status(200).json(_.map(result, function (incident) {
 
-      res.status(200).json(_.map(result, function (incident) {
+      return {
+        id: incident.id,
+        status: incident.status,
+        home: incident.home,
+        contact: _.find(incident.contact, function (contact) {
+          return !!contact.owner;
+        }),
+        event: {
+          id: incident.event.id,
+          start: incident.event.start,
+          end: incident.event.end,
+          cover: incident.event.cover
+        },
+        created_at: incident.created_at,
+      };
+    }));
 
-        return {
-          id: incident.id,
-          status: incident.status,
-          home: incident.home,
-          contact: _.find(incident.contact, function (contact) {
-            return !!contact.owner;
-          }),
-          event: {
-            id: incident.event.id,
-            start: incident.event.start,
-            end: incident.event.end,
-            cover: incident.event.cover
-          },
-          created_at: incident.created_at,
-        };
-      }));
-
-    }, res.status(500).json.bind(res, undefined));
   }, res.status(500).json.bind(res, undefined));
 };
 

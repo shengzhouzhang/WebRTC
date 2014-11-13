@@ -19,7 +19,7 @@ var Env = {
         env.REDIS_HOST = 'pub-redis-10023.us-east-1-4.3.ec2.garantiadata.com';
         env.REDIS_PASSWORD = 'PtxrZAx9qJUJqV4d';
 
-        env.MONGODB_URI = 'mongodb://ii-staging:ii-staging@kahana.mongohq.com:10092/ii';
+        env.MONGODB_URI = 'mongodb://cammy:cammy@dogen.mongohq.com:10086/cammy-irc-staging';
         break;
 
       default:
@@ -27,7 +27,7 @@ var Env = {
         env.REDIS_HOST = 'localhost';
         env.REDIS_PASSWORD = '';
 
-        env.MONGODB_URI = 'mongodb://ii-staging:ii-staging@kahana.mongohq.com:10092/ii';
+        env.MONGODB_URI = 'mongodb://cammy:cammy@dogen.mongohq.com:10086/cammy-irc-staging';
         break;
     }
   },

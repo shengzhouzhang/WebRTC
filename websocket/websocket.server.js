@@ -78,16 +78,18 @@ var handlers = {
     if(!client.username) { _error(client, 'unauthorized'); return; }
     if(!options.timestamp) { _error(client, 'missing timestamp'); return; }
 
-    var options = { min: options.timestamp, count: -1 };
+    var options = {
+      created_at:  {
+        $gt:  options.timestamp || moment().valueOf(),
+      },
+    }
 
     dispatcher.dispatch(dispatcher.actions.REQUEST_UNPDATES, options)
       .then(function (result) {
 
-      if(!result || !result) { _error(client, 'invalid result'); return; }
-
       var data = JSON.stringify({
         action: 'REQUEST_UNPDATES',
-        updates: result.length,
+        updates: result,
         timestamp: options.timestamp
       });
 

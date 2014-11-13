@@ -12,7 +12,7 @@ var create = function (req, res) {
   var data = req.incident;
   var incident = util.create(data);
 
-  dispatcher.dispatch(dispatcher.actions.UPDATE_INCIDENTS, incident).then(function () {
+  dispatcher.dispatch(dispatcher.actions.ADD_INCIDENT, incident).then(function () {
 
     res.status(201).json({ id: incident.id, created_at: incident.created_at });
 

@@ -5,7 +5,6 @@ require('./process/process.error');
 require('./process/process.env');
 
 require('./stores/user.store');
-require('./stores/timeline.store');
 require('./stores/incident.store');
 
 var express = require('./express/express.server').server,

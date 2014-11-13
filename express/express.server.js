@@ -5,7 +5,6 @@ var express = require('express'),
     http = require('http'),
     bodyParser = require('body-parser'),
     path = require('path'),
-    redis = require('../util/redis/redis.client').client,
     logger = require('../util/log/application.log').logger;
 
 var _express, _server;

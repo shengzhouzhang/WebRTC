@@ -21,7 +21,7 @@ var dispatcher = {
 
     // incidents
 
-    UPDATE_INCIDENTS: 'UPDATE_INCIDENTS',
+    ADD_INCIDENT: 'ADD_INCIDENT',
     REQUEST_TIMELINE: 'REQUEST_TIMELINE',
     REQUEST_INCIDENT: 'REQUEST_INCIDENT',
     UPDATE_INCIDENT: 'UPDATE_INCIDENT',
@@ -53,7 +53,10 @@ var dispatcher = {
       if(result.length === 1) { return result[0]; }
       return result;
     }, function (error) {
-      console.log('dispatcher', action, error);
+      _clearPromises();
+      console.log('error', JSON.stringify(error, null, 2));
+
+      // console.log('dispatcher', action, error);
       return error;
     });
   }
