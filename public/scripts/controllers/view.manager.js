@@ -46,8 +46,15 @@ define([
   };
 
   var _showComponents = function () {
-
     _views.filter('#header-container').show();
+  };
+
+  var _showBackground = function () {
+    $('#background-container').fadeIn();
+  };
+
+  var _hideBackground = function () {
+    $('#background-container').fadeOut();
   };
 
   var loading
@@ -71,9 +78,11 @@ define([
       _fadeOut().then(function () {
 
         _showComponents();
+        _showBackground();
 
         dispatcher.dispatch(actions.SOCKET_CONNECT);
         dispatcher.dispatch(actions.REQUEST_TIMELINE).then(function () {
+          _hideBackground();
           timelineView.render();
         });
       });
