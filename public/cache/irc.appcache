@@ -6,7 +6,7 @@ CACHE MANIFEST
 //cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js
 //cdnjs.cloudflare.com/ajax/libs/react/0.11.1/react.js
 
-http://fonts.googleapis.com/css?family=Lato
+http://fonts.googleapis.com/css?family=Lato:300
 //maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css
 
 NETWORK:

@@ -50,6 +50,8 @@ define([
     _views.filter('#header-container').show();
   };
 
+  var loading
+
   dispatcher.register(actions.TO_INCIDENT_VIEW, function (options) {
     dispatcher.dispatch(actions.REQUIRE_AUTH).then(function () {
       _fadeOut().then(function () {
@@ -98,6 +100,9 @@ define([
 
   dispatcher.register(actions.NEW_CASE, dispatcher.dispatch.bind(undefined, actions.ALARM_ON));
   dispatcher.register(actions.NO_NEW_CASE, dispatcher.dispatch.bind(undefined, actions.ALARM_OFF));
+
+  dispatcher.register(actions.START_LOADING, function () { $('.fa.fa-refresh').addClass('fa-spin'); });
+  dispatcher.register(actions.STOP_LOADING, function () { $('.fa.fa-refresh').removeClass('fa-spin'); });
 
   // sidebar
 

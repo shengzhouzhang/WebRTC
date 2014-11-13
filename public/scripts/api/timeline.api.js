@@ -9,6 +9,8 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
 
         var params, incidents = timelineStore.get();
 
+        dispatcher.dispatch(actions.START_LOADING);
+
         if(!!options) {
           params = $.param({
             max: !!incidents.length ? _.min(incidents, function (incident) { return incident.created_at }).created_at : undefined,
@@ -34,6 +36,7 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
       });
 
       return _promise.then(function (incidents) {
+        dispatcher.dispatch(actions.STOP_LOADING);
         dispatcher.dispatch(actions.UPDATE_TIMELINE_STORE, {
           incidents: incidents,
           options: { remove: !options }

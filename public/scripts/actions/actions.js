@@ -56,6 +56,8 @@ define(['dispatcher'],
 
     ALARM_ON: 'ALARM_ON',
     ALARM_OFF: 'ALARM_OFF',
+    START_LOADING: 'START_LOADING',
+    STOP_LOADING: 'STOP_LOADING',
 
     // error handler actions
 
