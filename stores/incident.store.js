@@ -27,11 +27,12 @@ var store = {
 
     return new Promise(function (resolve, reject) {
 
-      incidents.find(options, function (err, result) {
+      incidents.find(options)
+      .sort({ created_at: -1 })
+      .limit(9, function (err, result) {
         if(!!err) { reject(reject); return; }
         resolve(result);
-
-      }).sort({ created_at: -1 }).limit(9);
+      });
 
     }.bind(this));
   },

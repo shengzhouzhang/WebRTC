@@ -11,9 +11,9 @@ var timeline = function (req, res) {
 
   var options = {
         created_at:  {
-          $gt: req.query.min || 0,
-          $lt: req.query.max || moment().valueOf()
-        },
+          $gt: !!req.query.min ? parseInt(req.query.min) : 0,
+          $lt: !!req.query.max ? parseInt(req.query.max) : moment().valueOf()
+        }
       };
 
   dispatcher.dispatch(dispatcher.actions.REQUEST_TIMELINE, options).then(function (result) {

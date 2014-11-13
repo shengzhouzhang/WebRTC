@@ -47,18 +47,15 @@ var dispatcher = {
       _addPromise(handler, options);
     });
 
-    return Promise.all(_promises).then(function (result) {
-      _clearPromises();
-      if(!result.length) { return null; }
-      if(result.length === 1) { return result[0]; }
-      return result;
-    }, function (error) {
-      _clearPromises();
-      console.log('error', JSON.stringify(error, null, 2));
-
-      // console.log('dispatcher', action, error);
-      return error;
-    });
+    return Promise.all(_promises).then(
+      function (result) {
+        _clearPromises();
+        if(!result.length) { return null; }
+        if(result.length === 1) { return result[0]; }
+        return result;
+      },
+      function (error) { _clearPromises(); return error; }
+    );
   }
 };
 
