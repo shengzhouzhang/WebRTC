@@ -111,7 +111,11 @@ define([
   dispatcher.register(actions.NO_NEW_CASE, dispatcher.dispatch.bind(undefined, actions.ALARM_OFF));
 
   dispatcher.register(actions.START_LOADING, function () { $('.fa.fa-refresh').addClass('fa-spin'); });
-  dispatcher.register(actions.STOP_LOADING, function () { $('.fa.fa-refresh').removeClass('fa-spin'); });
+  dispatcher.register(actions.STOP_LOADING, function () {
+    setTimeout(function () {
+      $('.fa.fa-refresh').removeClass('fa-spin');
+    }, 1000);
+  });
 
   // sidebar
 
@@ -126,7 +130,7 @@ define([
 
     if(!isLoading &&
        document.body.scrollHeight > window.innerHeight &&
-       document.body.scrollTop >= (document.body.scrollHeight - window.innerHeight - 150) &&
+       document.body.scrollTop >= (document.body.scrollHeight - window.innerHeight - 160) &&
        Backbone.history.fragment === 'incidents') {
 
       isLoading = true;

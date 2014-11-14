@@ -74,29 +74,13 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
       this.setState({
         timeline: incidents
       });
-
-      if(Backbone.history.fragment !== 'incidents' || !incidents.length) { return; }
-
-      dispatcher.dispatch(actions.REQUEST_UNPDATES, {
-        timestamp: _.max(incidents, function (incident) { return incident.created_at; }).created_at
-      });
     },
 
     render: function () {
       var incidents = _.map(this.state.timeline, function (incident, index) {
 
-        // if(index === this.state.timeline.length - 1 || moment(incident.created_at).startOf('day').valueOf() !==
-        //    moment(this.state.timeline[index + 1].created_at).startOf('day').valueOf()) {
-        //
-        //   return (
-        //     <div key={incident.id}>
-        //       <Incident key={incident.id} home={incident.home} status={incident.status} event={incident.event} createdAt={incident.created_at} />
-        //       <Border date={moment(incident.created_at).startOf('day').valueOf()} />
-        //     </div>
-        //   );
-        // }
-
-        if(index === this.state.timeline.length - 1) {
+        if(index !== this.state.timeline.length - 1 && moment(incident.created_at).startOf('day').valueOf() !==
+           moment(this.state.timeline[index + 1].created_at).startOf('day').valueOf()) {
 
           return (
             <div key={incident.id}>
