@@ -126,7 +126,7 @@ define([
 
     if(!isLoading &&
        document.body.scrollHeight > window.innerHeight &&
-       document.body.scrollTop > (document.body.scrollHeight - window.innerHeight) &&
+       document.body.scrollTop >= (document.body.scrollHeight - window.innerHeight - 150) &&
        Backbone.history.fragment === 'incidents') {
 
       isLoading = true;

@@ -7,6 +7,12 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
 
   var Incident = React.createClass({
 
+    componentDidMount: function () {
+      setTimeout(function () {
+        $(this.getDOMNode()).removeClass('opacity');
+      }.bind(this), 100)
+    },
+
     _onClick: function (event) {
       event.preventDefault();
       if(!this.props.key) { return; }
@@ -15,7 +21,7 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
 
     render: function () {
       return (
-        <div className="incident" onClick={this._onClick} >
+        <div className="incident opacity" onClick={this._onClick} >
           <div className="cover" style={{backgroundImage: 'url(' + this.props.event.cover + ')'}}></div>
           <div className="timestamp">{moment(this.props.createdAt).format('YYYY-MM-DD HH:mm:ss')}</div>
           <div className="address">
@@ -79,8 +85,18 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
     render: function () {
       var incidents = _.map(this.state.timeline, function (incident, index) {
 
-        if(index === this.state.timeline.length - 1 || moment(incident.created_at).startOf('day').valueOf() !==
-           moment(this.state.timeline[index + 1].created_at).startOf('day').valueOf()) {
+        // if(index === this.state.timeline.length - 1 || moment(incident.created_at).startOf('day').valueOf() !==
+        //    moment(this.state.timeline[index + 1].created_at).startOf('day').valueOf()) {
+        //
+        //   return (
+        //     <div key={incident.id}>
+        //       <Incident key={incident.id} home={incident.home} status={incident.status} event={incident.event} createdAt={incident.created_at} />
+        //       <Border date={moment(incident.created_at).startOf('day').valueOf()} />
+        //     </div>
+        //   );
+        // }
+
+        if(index === this.state.timeline.length - 1) {
 
           return (
             <div key={incident.id}>
