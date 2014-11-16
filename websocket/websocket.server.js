@@ -102,8 +102,14 @@ var handlers = {
 
 // ping clients
 
-setInterval(dispatcher.dispatch.bind(undefined, dispatcher.actions.BROADCAST, { action: 'PING', timestamp: moment().valueOf() }), 10000);
+setInterval(function () {
+  broadcast({ action: 'PING', timestamp: moment().valueOf() });
+}, 10000);
 
-dispatcher.register(dispatcher.actions.BROADCAST, broadcast.bind(undefined));
+// adapter
+
+dispatcher.register(dispatcher.actions.NEW_INCIDENT, function (incident) {
+  broadcast({ action: 'NEW_CASE', incident: incident });
+});
 
 module.exports.server = server;

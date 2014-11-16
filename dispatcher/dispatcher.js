@@ -26,6 +26,8 @@ var dispatcher = {
     REQUEST_INCIDENT: 'REQUEST_INCIDENT',
     UPDATE_INCIDENT: 'UPDATE_INCIDENT',
 
+    NEW_INCIDENT: 'NEW_INCIDENT',
+
     // web socket server
 
     BROADCAST: 'BROADCAST',
