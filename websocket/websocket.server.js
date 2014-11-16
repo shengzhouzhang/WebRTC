@@ -44,7 +44,7 @@ var broadcast = function (data) {
   _.each(_server.clients, function (client) {
 
     client.send(JSON.stringify(data), function (err) {
-      if(!!err) { logger.error(err.message || err); return; }
+      if(!!err) { logger.error(err.stack || err); return; }
     });
   });
 };
@@ -67,7 +67,7 @@ var handlers = {
     var data = JSON.stringify({ action: 'AUTHENTICATE', username: token.username });
 
     client.send(data, function (err) {
-      if(!!err) { logger.error(err.message || err); return; }
+      if(!!err) { logger.error(err.stack || err); return; }
     });
 
     client.username = token.username;
@@ -94,7 +94,7 @@ var handlers = {
       });
 
       client.send(data, function (err) {
-        if(!!err) { logger.error(err.message || err); return; }
+        if(!!err) { logger.error(err.stack || err); return; }
       });
     });
   },

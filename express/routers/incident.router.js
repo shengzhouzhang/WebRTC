@@ -41,11 +41,17 @@ var _validate = function (req, res, next) {
 
   var incident = req.body;
 
-  parser.parse(incident, function (err) {
-    if(!!err) { res.status(400).json({ error: err.message || err }); return; }
-    req.incident = incident;
-    next();
-  });
+  try {
+    parser.parse(incident, function (err) {
+      if(!!err) { res.status(400).json({ error: err.stack || err }); return; }
+      req.incident = incident;
+      next();
+    });
+  } catch (err) {
+    logger.error('cammy', err.stack || err);
+    res.status(500).json();
+  }
+
 };
 
 router.post('/', [_authorize, _validate], routes.create);

@@ -39,7 +39,7 @@ var open = function (req, res) {
   var id = req.params.id;
 
   update({ id: id, status: status.OPEN }, function (err, result) {
-    if(!!err) { res.status(500).json({ error: err.message || err }); return; }
+    if(!!err) { res.status(500).json({ error: err.stack || err }); return; }
     res.status(200).json(result);
   });
 };
@@ -49,7 +49,7 @@ var close = function (req, res) {
   var id = req.params.id;
 
   update({ id: id, status: status.CLOSE }, function (err, result) {
-    if(!!err) { res.status(500).json({ error: err.message || err }); return; }
+    if(!!err) { res.status(500).json({ error: err.stack || err }); return; }
     res.status(200).json(result);
   });
 };

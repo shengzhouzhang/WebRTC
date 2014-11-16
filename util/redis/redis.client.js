@@ -6,6 +6,6 @@ var redis = require('redis'),
     logger = require('../log/application.log').logger;
 
 if(!!process.env.REDIS_PASSWORD) { client.auth(process.env.REDIS_PASSWORD); }
-client.on('error', function (err) { logger.error('redis', err.message); });
+client.on('error', function (err) { logger.error('redis', err.stack); });
 
 module.exports.client = client;

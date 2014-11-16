@@ -3,21 +3,31 @@
 
 var _ = require('lodash'),
     moment = require('moment'),
+    validator = require('validator'),
     uuid = require('node-uuid'),
     status = require('../../static/incident.status').status,
+    actions = require('../../static/incident.actions').actions,
     logger = require('../../util/log/application.log').logger;
 
 var parse = function (incident, cb) {
   if(!cb) { throw new Error ('missing cb'); }
   if(!incident) { cb(new Error ('invalid incident data')); }
 
+  if(!_.isString(incident.action) ||
+     !actions[incident.action.toUpperCase()]) {
+
+    cb(new Error ('invalid action type'));
+    return;
+  }
+
   if(!incident.home ||
      !incident.home.id ||
      !incident.home.address ||
-     !incident.home.address.city ||
-     !incident.home.address.country ||
-     !incident.home.address.postcode ||
-     !incident.home.address.street) {
+     !_.isString(incident.home.address.street) ||
+     !_.isString(incident.home.address.city) ||
+     !_.isString(incident.home.address.country) ||
+     _.isNull(incident.home.address.postcode) ||
+     _.isUndefined(incident.home.address.postcode)) {
 
     cb(new Error ('invalid home data'));
     return;
@@ -25,29 +35,26 @@ var parse = function (incident, cb) {
 
   if(!incident.event ||
      !incident.event.id ||
-     !incident.event.snapshots ||
-     !incident.event.snapshots.length ||
+     !_.isArray(incident.event.snapshots) ||
      !!_.find(incident.event.snapshots, function (snapshot) {
 
     return !snapshot.id ||
-           !snapshot.url ||
+           !validator.isURL(snapshot.url) ||
            !snapshot.timestamp ||
            isNaN(new Date(snapshot.timestamp).getTime());
-
   })) {
 
     cb(new Error ('invalid event data'));
     return;
   }
 
-  if(!incident.contacts ||
-     !incident.contacts.length ||
+  if(!_.isArray(incident.contacts) ||
      !!_.find(incident.contacts, function (contact) {
 
-      return !contact.first_name ||
-             !contact.last_name ||
-             !contact.phone ||
-             !contact.email;
+      return !_.isString(contact.first_name) ||
+             !_.isString(contact.last_name) ||
+             _.isNull(contact.phone) ||
+             _.isUndefined(contact.phone);
 
      }) ||
      _.filter(incident.contacts, function (contact) {
