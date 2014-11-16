@@ -13,12 +13,9 @@ var parse = function (incident, cb) {
   if(!cb) { throw new Error ('missing cb'); }
   if(!incident) { cb(new Error ('invalid incident data')); }
 
-  if(!incident.action) {
-    incident.action = actions.CALL_OWNERS;
-  }
-
-  if(!_.isString(incident.action) ||
-     !actions[incident.action.toUpperCase()]) {
+  if(!!incident.action &&
+     (!_.isString(incident.action) ||
+     !actions[incident.action.toUpperCase()])) {
 
     cb(new Error ('invalid action type'));
     return;
@@ -80,6 +77,7 @@ var create = function (incident) {
     id: uuid.v1(),
     created_at: moment().valueOf(),
     status: status.OPEN,
+    action: incident.action || actions.CALL_OWNERS,
 
     home: {
       id: incident.home.id,
