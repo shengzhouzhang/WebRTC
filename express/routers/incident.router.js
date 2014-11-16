@@ -5,8 +5,8 @@ var _ = require('lodash'),
     express = require('express'),
     routes = _.extend(
       require('./incident.routes/cammy.routes').routes,
-      require('./incident.routes/timeline.routes').routes,
-      require('./incident.routes/details.routes').routes,
+      require('./incident.routes/incidents.routes').routes,
+      require('./incident.routes/incident.routes').routes,
       require('./incident.routes/notes.routes').routes
     ),
     jwt = require('../util/jwt.token').token,
