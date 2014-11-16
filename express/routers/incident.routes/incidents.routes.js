@@ -24,6 +24,7 @@ var timeline = function (req, res) {
       return {
         id: incident.id,
         status: incident.status,
+        action: incident.action,
         home: incident.home,
         contact: _.find(incident.contact, function (contact) {
           return !!contact.owner;

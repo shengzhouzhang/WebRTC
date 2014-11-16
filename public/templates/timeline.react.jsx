@@ -35,6 +35,7 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
             }
           </div>
           <div className="status">{this.props.status}</div>
+          <div className="status">{this.props.action}</div>
         </div>
       );
     }
@@ -91,7 +92,7 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
         }
 
         return (
-          <Incident key={incident.id} home={incident.home} status={incident.status} event={incident.event} createdAt={incident.created_at} />
+          <Incident key={incident.id} home={incident.home} status={incident.status} action={incident.action} event={incident.event} createdAt={incident.created_at} />
         );
       }.bind(this));
 
