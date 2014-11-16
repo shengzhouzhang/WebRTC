@@ -13,6 +13,10 @@ var parse = function (incident, cb) {
   if(!cb) { throw new Error ('missing cb'); }
   if(!incident) { cb(new Error ('invalid incident data')); }
 
+  if(!incident.action) {
+    incident.action = actions.CALL_OWNERS;
+  }
+
   if(!_.isString(incident.action) ||
      !actions[incident.action.toUpperCase()]) {
 
