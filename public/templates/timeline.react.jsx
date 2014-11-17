@@ -27,7 +27,10 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
       return (
         <div className="incident opacity" onClick={this._onClick} >
           <div className="cover" style={{backgroundImage: 'url(' + this.props.event.cover + ')'}}></div>
-          <div className="timestamp">{moment(this.props.createdAt).format('YYYY-MM-DD HH:mm:ss')}</div>
+          <div className="timestamp">
+            <span className="time">{moment(this.props.createdAt).format('HH:mm:ss')}</span>
+            <span className="date">{moment(this.props.createdAt).format('MMM Do, YYYY')}</span>
+          </div>
           <div className="address">
             {
               [
