@@ -76,7 +76,7 @@ var create = function (incident) {
 
     id: uuid.v1(),
     created_at: moment().valueOf(),
-    status: status.OPEN,
+    status: [],
     action: !!incident.action ? actions[incident.action.toUpperCase()] : actions.CALL_OWNERS,
 
     home: {
