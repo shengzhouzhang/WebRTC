@@ -19,10 +19,18 @@
 }
 
 .transition (@arg: .25s) {
+  .hardware-accelerated;
   -webkit-transition: all @arg ease;
   -moz-transition: all @arg ease;
   -ms-transition: all @arg ease;
   transition: all @arg ease;
+}
+
+.hardware-accelerated {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .default-font (@arg: .16px) {
