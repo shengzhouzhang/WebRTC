@@ -8,7 +8,7 @@ define(['dispatcher', 'actions'],
   var Siderbar = React.createClass({
 
     componentDidMount: function () {
-      $(_container).click(this._onClose);
+      $(_container).click(this._close);
     },
 
     componentWillUnmount: function () {
