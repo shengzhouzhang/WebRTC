@@ -20,6 +20,10 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
     },
 
     render: function () {
+
+      var action = 'action ' + this.props.action || 'CONTACT_OWNERS';
+      var status = 'status ' + this.props.status || 'OPEN';
+
       return (
         <div className="incident opacity" onClick={this._onClick} >
           <div className="cover" style={{backgroundImage: 'url(' + this.props.event.cover + ')'}}></div>
@@ -34,8 +38,8 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
               ].join(' ')
             }
           </div>
-          <div className="status">{this.props.status}</div>
-          <div className="status">{this.props.action}</div>
+          <div className={action}></div>
+          <div className={status}></div>
         </div>
       );
     }

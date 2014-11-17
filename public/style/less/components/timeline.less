@@ -35,11 +35,62 @@
         background-color: #FFF;
       }
 
+
+      .action,
+      .status {
+        display: inline-block;
+        margin-top: 5px;
+        margin-right: 10px;
+        line-height: 30px;
+        .default-font(14px);
+        color: #FFF;
+        border-radius: 4px;
+      }
+
+      .status:before,
+      .action:before {
+        display: block;
+        padding: 0 10px;
+        border-radius: 4px;
+      }
+
+      .CONTACT_OWNERS {
+
+        &:before {
+          content: 'Contact Owner';
+          background-color: #f0ad4e;
+        }
+      }
+
+      .CONTACT_POLICE {
+
+        &:before {
+          content: 'Call Police';
+          background-color: #d9534f;
+        }
+      }
+
+      .OPEN {
+
+        &:before {
+          content: 'OPEN';
+          background-color: #5bc0de;
+        }
+      }
+
+      .CLOSE {
+
+        &:before {
+          content: 'DONE';
+          background-color: #5cb85c;
+        }
+      }
+
       .timestamp,
       .address {
         display: inline-block;
         width: 50%;
-        line-height: 20px;
+        line-height: 25px;
         margin-bottom: 5px;
       }
 
