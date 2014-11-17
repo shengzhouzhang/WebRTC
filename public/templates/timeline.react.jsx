@@ -21,8 +21,13 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
 
     render: function () {
 
+      console.log(this.props.status);
+
       var action = 'action ' + this.props.action || 'CONTACT_OWNERS';
-      var status = 'status ' + this.props.status || 'OPEN';
+
+      var status =_.map(this.props.status, function (status) {
+        return (<span className={status}></span>)
+      });
 
       return (
         <div className="incident opacity" onClick={this._onClick} >
@@ -42,7 +47,7 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
             }
           </div>
           <div className={action}></div>
-          <div className={status}></div>
+          <div className="status">{status}</div>
         </div>
       );
     }

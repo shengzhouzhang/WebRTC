@@ -37,7 +37,8 @@
 
 
       .action,
-      .status {
+      .status,
+      .status span {
         display: inline-block;
         margin-top: 5px;
         margin-right: 10px;
@@ -46,11 +47,11 @@
         color: #FFF;
       }
 
-      .status:before,
+      .status span:before,
       .action:before {
-        display: block;
-        padding: 0 10px;
+        display: inline-block;
         border-radius: 2px;
+        padding: 0 10px;
       }
 
       .CONTACT_OWNERS {
@@ -69,18 +70,18 @@
         }
       }
 
-      .OPEN {
+      .CALLED_POLICE {
 
         &:before {
-          content: 'OPEN';
-          background-color: #5bc0de;
+          content: 'Called Police';
+          background-color: #5cb85c;
         }
       }
 
-      .CLOSE {
+      .CALLED_OWNER {
 
         &:before {
-          content: 'CLOSE';
+          content: 'Called Owner';
           background-color: #5cb85c;
         }
       }

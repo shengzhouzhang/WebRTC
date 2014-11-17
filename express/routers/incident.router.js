@@ -59,8 +59,7 @@ var _validate = function (req, res, next) {
 router.post('/', [_authorize, _validate], routes.create);
 router.get('/timeline', [_authenticate], routes.timeline);
 router.get('/:id', [_authenticate], routes.details);
-router.get('/:id/open', [_authenticate], routes.open);
-router.get('/:id/close', [_authenticate], routes.close);
+router.put('/:id/status', [_authenticate], routes.updateStatus);
 router.post('/:id/notes', [_authenticate], routes.notes.add);
 
 module.exports.router = router;

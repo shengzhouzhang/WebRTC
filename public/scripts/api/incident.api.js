@@ -26,33 +26,19 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
       });
     },
 
-    open: function (id) {
-      if(!id) throw new Error ('missing incident id');
+    updateStatus: function (incident) {
+      if(!incident || !incident.id || !incident.status) throw new Error ('invalid incident');
 
       $.ajax({
-        type: 'GET',
+        type: 'PUT',
         headers: {
           authorization: store.get().access_token,
         },
-        url: '/incidents/' + id + '/open',
+        data: JSON.stringify(incident.status),
+        url: '/incidents/' + incident.id + '/status',
         success: function (data) {
-          dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'incident open', type: 'success' });
-          dispatcher.dispatch(actions.UPDATE_INCIDENT_STORE, data);
-        }
-      });
-    },
-
-    close: function (id) {
-      if(!id) throw new Error ('missing incident id');
-
-      $.ajax({
-        type: 'GET',
-        headers: {
-          authorization: store.get().access_token,
-        },
-        url: '/incidents/' + id + '/close',
-        success: function (data) {
-          dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'incident close', type: 'success' });
+          console.log(data);
+          dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'status changed', type: 'success' });
           dispatcher.dispatch(actions.UPDATE_INCIDENT_STORE, data);
         }
       });
@@ -60,8 +46,7 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
   };
 
   dispatcher.register(actions.REQUEST_INCIDENT, incident.request);
-  dispatcher.register(actions.CLOSE_INCIDENT, incident.close);
-  dispatcher.register(actions.OPEN_INCIDENT, incident.open);
+  dispatcher.register(actions.UPDATE_STATUS, incident.updateStatus);
 
   return incident;
 });

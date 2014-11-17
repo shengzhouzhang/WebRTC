@@ -50,19 +50,20 @@ define([
 
     _onAction: function (event) {
       event.preventDefault();
-      switch(this.state.status) {
-        case 'OPEN':
-          dispatcher.dispatch(actions.CLOSE_INCIDENT, this.state.id);
-          break;
-        case 'CLOSE':
-          dispatcher.dispatch(actions.OPEN_INCIDENT, this.state.id);
-          break;
-      }
-    },
 
-    _actions: {
-      'OPEN': 'Close',
-      'CLOSE': 'Open'
+      var value = event.target.value;
+      var index = this.state.status.indexOf(value);
+
+      if(index >= 0) {
+        this.state.status.splice(index, 1);
+      } else {
+        this.state.status.push(value);
+      }
+
+      dispatcher.dispatch(actions.UPDATE_STATUS, {
+        id: this.state.id,
+        status: this.state.status
+      });
     },
 
     render: function () {
@@ -95,7 +96,8 @@ define([
               {contacts}
             </div>
             <div className="actions">
-              <a href="#" onClick={this._onAction}>{this._actions[this.state.status]}</a>
+              <button className={!!_.contains(this.state.status, 'CALLED_POLICE') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_POLICE">Called Police</button>
+              <button className={!!_.contains(this.state.status, 'CALLED_OWNER') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_OWNER">Called Owner</button>
             </div>
           </div>
           <div className="taps">

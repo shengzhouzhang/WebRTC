@@ -34,21 +34,19 @@ var update = function (options, cb) {
   );
 };
 
-var open = function (req, res) {
+var updateStatus = function (req, res) {
 
-  var id = req.params.id;
+  var id = req.params.id,
+      status = req.body;
 
-  update({ id: id, status: status.OPEN }, function (err, result) {
-    if(!!err) { res.status(500).json({ error: err.stack || err }); return; }
-    res.status(200).json(result);
-  });
-};
+  console.log(status);
 
-var close = function (req, res) {
+  if(!status || !_.isArray(status)) {
+    res.status(400).json({ error: 'invalid status' });
+    return;
+  }
 
-  var id = req.params.id;
-
-  update({ id: id, status: status.CLOSE }, function (err, result) {
+  update({ id: id, status: status }, function (err, result) {
     if(!!err) { res.status(500).json({ error: err.stack || err }); return; }
     res.status(200).json(result);
   });
@@ -56,6 +54,5 @@ var close = function (req, res) {
 
 module.exports.routes = {
   details: details,
-  open: open,
-  close: close
+  updateStatus: updateStatus
 };
