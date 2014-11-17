@@ -33,12 +33,10 @@
     @media (min-width: 800px) {
       & {
 
-        height: 250px;
+        min-height: 250px;
 
         .cover,
-        .address,
-        .contact,
-        .acitons {
+        .info {
           display: inline-block;
         }
       }
@@ -87,9 +85,63 @@
       }
     }
 
+    .action,
+    .status {
+      display: inline-block;
+      margin-top: 5px;
+    }
+
+    .action,
+    .status span {
+      display: inline-block;
+      margin-right: 10px;
+      line-height: 30px;
+      .default-font(14px);
+      color: #FFF;
+    }
+
+    .status span:before,
+    .action:before {
+      display: inline-block;
+      border-radius: 2px;
+      padding: 0 10px;
+    }
+
+    .CONTACT_OWNERS {
+
+      &:before {
+        content: 'Contact Owner';
+        background-color: #f0ad4e;
+      }
+    }
+
+    .CONTACT_POLICE {
+
+      &:before {
+        content: 'Call Police';
+        background-color: #d9534f;
+      }
+    }
+
+    .CALLED_POLICE {
+
+      &:before {
+        content: 'Called Police';
+        background-color: #5cb85c;
+      }
+    }
+
+    .CALLED_OWNER {
+
+      &:before {
+        content: 'Called Owner';
+        background-color: #5cb85c;
+      }
+    }
+
     .actions {
 
-      margin-top: 20px;
+      margin-top: 15px;
 
       button {
         .transition;

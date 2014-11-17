@@ -21,8 +21,6 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
 
     render: function () {
 
-      console.log(this.props.status);
-
       var action = 'action ' + this.props.action || 'CONTACT_OWNERS';
 
       var status =_.map(this.props.status, function (status) {

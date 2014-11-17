@@ -69,6 +69,9 @@ define([
     render: function () {
       if(!this.state || !this.state.event) { return (<div></div>); }
 
+      this.state.contacts.push(this.state.contacts[0]);
+      this.state.contacts.push(this.state.contacts[0]);
+
       var contacts = _.map(this.state.contacts, function (contact, index) {
         return (
           <Contact key={this.state.id + '_contact_' + index}
@@ -79,25 +82,35 @@ define([
         );
       }.bind(this));
 
+      var action = 'action ' + this.state.action || 'CONTACT_OWNERS';
+
+      var status =_.map(this.state.status, function (status) {
+        return (<span className={status}></span>)
+      });
+
       return (
         <div>
           <div className="header">
             <div className="cover" style={{backgroundImage: 'url(' + this.state.event.cover + ')'}}></div>
-            <div className="address">
-              <div><span>{[
-                this.state.home.address.street,
-                this.state.home.address.city,
-                this.state.home.address.postcode,
-                this.state.home.address.country
-                ].join(' ')}</span></div>
-            </div>
-            <div className="contact">
-              <div><label>Contact Info</label></div>
-              {contacts}
-            </div>
-            <div className="actions">
-              <button className={!!_.contains(this.state.status, 'CALLED_POLICE') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_POLICE">Called Police</button>
-              <button className={!!_.contains(this.state.status, 'CALLED_OWNER') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_OWNER">Called Owner</button>
+            <div className="info">
+              <div className="address">
+                <div><span>{[
+                  this.state.home.address.street,
+                  this.state.home.address.city,
+                  this.state.home.address.postcode,
+                  this.state.home.address.country
+                  ].join(' ')}</span></div>
+              </div>
+              <div className="contact">
+                <div><label>Contact Info</label></div>
+                {contacts}
+              </div>
+              <div className={action}></div>
+              <div className="status">{status}</div>
+              <div className="actions">
+                <button className={!!_.contains(this.state.status, 'CALLED_POLICE') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_POLICE">Called Police</button>
+                <button className={!!_.contains(this.state.status, 'CALLED_OWNER') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_OWNER">Called Owner</button>
+              </div>
             </div>
           </div>
           <div className="taps">
