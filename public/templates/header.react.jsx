@@ -15,6 +15,8 @@ define(['dispatcher', 'actions'],
     _sidebar: function (event) {
       event.preventDefault();
       $('#sidebar-container').addClass('shown');
+      $('#timeline-container').addClass('blur');
+      $('#incident-container').addClass('blur');
     },
 
     alarmOn: function () {

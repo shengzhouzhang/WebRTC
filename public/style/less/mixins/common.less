@@ -33,6 +33,12 @@
   transform: translateZ(0);
 }
 
+.blur (@arg: 1px) {
+  -webkit-filter: blur(@arg);
+  -moz-filter: blur(@arg);
+  filter: blur(@arg);
+}
+
 .default-font (@arg: .16px) {
   font-family: "Lato", Arial;
   color: #3b545c;

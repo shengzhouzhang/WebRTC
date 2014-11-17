@@ -20,6 +20,8 @@ define(['dispatcher', 'actions'],
 
     _close: function () {
       $(_container).removeClass('shown');
+      $('#timeline-container').removeClass('blur');
+      $('#incident-container').removeClass('blur');
     },
 
     _toTimelineView: function (event) {
