@@ -69,9 +69,6 @@ define([
     render: function () {
       if(!this.state || !this.state.event) { return (<div></div>); }
 
-      this.state.contacts.push(this.state.contacts[0]);
-      this.state.contacts.push(this.state.contacts[0]);
-
       var contacts = _.map(this.state.contacts, function (contact, index) {
         return (
           <Contact key={this.state.id + '_contact_' + index}
