@@ -64,7 +64,8 @@ define([
       _fadeOut().then(function () {
 
         _showComponents();
-
+        _hideBackground();
+        
         dispatcher.dispatch(actions.SOCKET_CONNECT);
         dispatcher.dispatch(actions.REQUEST_INCIDENT, options).then(function () {
           incidentView.render();
