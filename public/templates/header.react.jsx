@@ -37,7 +37,10 @@ define(['dispatcher', 'actions'],
       return (
         <div className="header">
           <div className="menu"><a href="#" onClick={this._sidebar}><i className="fa fa-bars"></i></a></div>
-          <div className="brand icon--logo-text"></div>
+          <div className="brand">
+            <span className="icon--logo-text"></span>
+            <span>Incident Response Center</span>
+          </div>
           <div className="actions">
             <a href="#" className="alarm" onClick={this._alarm}><i className="fa fa-bell-o"></i></a>
             <a href="#" className="refresh" onClick={this._refresh}><i className="fa fa-refresh"></i></a>
