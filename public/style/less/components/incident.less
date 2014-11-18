@@ -8,8 +8,11 @@
   padding: 50px 0;
   margin: 0 auto;
   position: relative;
-  z-index: 5;
   background: #E4F3F8;
+
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  transform-style: preserve-3d;
 
   &.blur {
     .transition(.5s);

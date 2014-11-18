@@ -6,8 +6,11 @@
   padding: 80px 0 50px 0;
   margin: 0px auto;
   position: relative;
-  z-index: 5;
   background: #E4F3F8;
+
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  transform-style: preserve-3d;
 
   &.blur {
     .transition(.5s);
@@ -66,7 +69,7 @@
       .CONTACT_OWNERS {
 
         &:before {
-          content: 'Contact Owner';
+          content: 'Call Owner';
           background-color: #f0ad4e;
         }
       }
