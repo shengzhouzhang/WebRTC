@@ -2,7 +2,8 @@
 
 @login-width: 300px;
 
-@login-background: #3B545C;
+@login-background: #C9E7F1;
+@login-background2: #77C4DB;
 @login-color: white;
 
 @button-color: #FF5A4B;
@@ -19,7 +20,8 @@
   left: 0;
   z-index: 700;
 
-  background: @login-background;
+  .gradient(left top, @login-background, @login-background2);
+
   color: @login-color;
 
   text-align: center;
@@ -37,31 +39,29 @@
 
     display: none;
 
+    .brand {
+      display: block;
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
     .title {
       display: block;
-      margin-bottom: 10px;
-      .default-font (@arg: 26px);
+      margin-bottom: 30px;
+      .default-font (@arg: 24px);
+      text-transform: uppercase;
       color: white;
     }
-
-    .brand {
-      display: inline-block;
-      margin-right: 10px;
-      font-size: 16px;
-    }
-  }
-
-  img {
-    margin: 0 0 20px 0;
   }
 
   input {
     display: block;
     width: 100%;
     padding: 10px;
-
+    .default-font (@arg: 18px);
     color: #3b545c;
     background: #fff;
+    border-radius: 3px;
   }
 
   button {
@@ -70,11 +70,12 @@
     padding: 10px;
 
     text-align: right;
+    .default-font (@arg: 18px);
     color: @login-color;
     text-transform: uppercase;
 
     background: @button-color;
-    border: 1px solid @button-color;
+    border-radius: 3px;
 
     .transition(.3s);
 

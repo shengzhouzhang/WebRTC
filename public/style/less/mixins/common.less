@@ -33,6 +33,13 @@
   transform: translateZ(0);
 }
 
+.gradient (@start: top, @bg1, @bg2) {
+  background: -webkit-linear-gradient(@start, @bg1, @bg2);
+  background: -o-linear-gradient(@start, @bg1, @bg2);
+  background: -moz-linear-gradient(@start, @bg1, @bg2);
+  background: linear-gradient(@start, @bg1, @bg2);
+}
+
 .blur (@arg: 1px) {
   -webkit-filter: blur(@arg);
   -moz-filter: blur(@arg);
