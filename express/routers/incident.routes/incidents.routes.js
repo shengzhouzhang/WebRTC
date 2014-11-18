@@ -26,7 +26,7 @@ var timeline = function (req, res) {
         status: incident.status,
         action: incident.action,
         home: incident.home,
-        contact: _.find(incident.contact, function (contact) {
+        contacts: _.find(incident.contacts, function (contact) {
           return !!contact.owner;
         }),
         event: {

@@ -1,4 +1,7 @@
 
+@incident-width: 600px;
+@cover-width: 150px;
+@margin: 10px;
 
 #timeline-container {
   .hidden;
@@ -24,9 +27,9 @@
     .incident {
       margin-top: 0;
       margin-bottom: 3px;
-      padding: 10px;
-
       height: 150px;
+      border-radius: 5px;
+      overflow: hidden;
 
       background-color: #FFF;
       cursor: pointer;
@@ -43,85 +46,102 @@
         background-color: #FFF;
       }
 
-
-      .action,
-      .status {
-        display: inline-block;
-        margin-top: 5px;
-      }
-
-      .action,
-      .status span {
-        display: inline-block;
-        margin-right: 10px;
-        line-height: 25px;
-        .default-font(12px);
-        color: #FFF;
-      }
-
-      .status span:before,
-      .action:before {
-        display: inline-block;
-        border-radius: 2px;
-        padding: 0 10px;
-      }
-
-      .CONTACT_OWNERS {
-
-        &:before {
-          content: 'Call Owner';
-          background-color: #f0ad4e;
-        }
-      }
-
-      .CONTACT_POLICE {
-
-        &:before {
-          content: 'Call Police';
-          background-color: #d9534f;
-        }
-      }
-
-      .CALLED_POLICE {
-
-        &:before {
-          content: 'Called Police';
-          background-color: #5cb85c;
-        }
-      }
-
-      .CALLED_OWNER {
-
-        &:before {
-          content: 'Called Owner';
-          background-color: #5cb85c;
-        }
-      }
-
-      .timestamp {
-        .date {
-          float: right;
-        }
-      }
-
-      .timestamp,
-      .address {
-        display: inline-block;
-        width: 50%;
-        line-height: 25px;
-        margin-bottom: 5px;
-      }
-
       .cover {
         display: inline-block;
-        margin-right: 10px;
+        margin-right: @margin;
         float: left;
-        width: 130px;
-        height: 130px;
+        width: @cover-width;
+        height: @cover-width;
 
         background-repeat: no-repeat;
         background-position: bottom;
         background-size: cover;
+      }
+
+      .address {
+        display: inline-block;
+        width: @incident-width - @cover-width - 2 * @margin;
+        margin-top: 7px;
+        .default-font(18px);
+        color: #FF5A4B;
+        line-height: 23px;
+      }
+
+      .owner {
+        margin-top: 5px;
+        display: inline-block;
+        width: @incident-width - @cover-width - 2 * @margin;
+        height: 80px;
+      }
+
+      .timestamp {
+        display: inline-block;
+        margin-right: 10px;
+        float: right;
+        word-spacing: 2px;
+        .default-font(14px);
+        line-height: 20px;
+        .time:before {
+          content: '@';
+          padding: 0 3px;
+        }
+      }
+
+      .action {
+        display: inline-block;
+        min-width: 100px;
+        line-height: 20px;
+        .default-font(12px);
+        border-radius: 2px;
+        text-align: center;
+        text-transform: uppercase;
+        color: #FFF;
+        background-color: #FF5A4B;
+
+        &.CONTACT_OWNERS {
+
+          &:before {
+            content: 'Call Owner';
+          }
+        }
+
+        &.CONTACT_POLICE {
+
+          &:before {
+            content: 'Call Police';
+          }
+        }
+
+        &.CALLING_OWNERS {
+
+          &:before {
+            content: 'Calling Owner';
+          }
+        }
+
+        &.CALLING_POLICE {
+
+          &:before {
+            content: 'Calling Police';
+            background-color: #77C4DB;
+          }
+        }
+
+        &.CALLED_POLICE {
+
+          &:before {
+            content: 'Called Police';
+            background-color: #77C4DB;
+          }
+        }
+
+        &.CALLED_OWNER {
+
+          &:before {
+            content: 'Called Owner';
+            background-color: #77C4DB;
+          }
+        }
       }
     }
   }
@@ -132,11 +152,6 @@
 
       .incident {
         margin-bottom: 10px;
-
-        .timestamp,
-        .address {
-          width: 440px;
-        }
       }
     }
   }

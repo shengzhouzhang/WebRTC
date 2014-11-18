@@ -27,13 +27,11 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
         return (<span className={status}></span>)
       });
 
+      var owner = !!this.props.contacts ? [this.props.contacts.first_name, this.props.contacts.last_name].join(' ') : '';
+
       return (
         <div className="incident opacity" onClick={this._onClick} >
           <div className="cover" style={{backgroundImage: 'url(' + this.props.event.cover + ')'}}></div>
-          <div className="timestamp">
-            <span className="time">{moment(this.props.createdAt).format('HH:mm:ss')}</span>
-            <span className="date">{moment(this.props.createdAt).format('MMM Do, YYYY')}</span>
-          </div>
           <div className="address">
             {
               [
@@ -44,8 +42,12 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
               ].join(' ')
             }
           </div>
+          <div className="owner">{owner}</div>
           <div className={action}></div>
-          <div className="status">{status}</div>
+          <div className="timestamp">
+            <span className="date">{moment(this.props.createdAt).format('Do MMM YYYY')}</span>
+            <span className="time">{moment(this.props.createdAt).format('hh:mmA')}</span>
+          </div>
         </div>
       );
     }
@@ -90,19 +92,8 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
     render: function () {
       var incidents = _.map(this.state.timeline, function (incident, index) {
 
-        if(index !== this.state.timeline.length - 1 && moment(incident.created_at).startOf('day').valueOf() !==
-           moment(this.state.timeline[index + 1].created_at).startOf('day').valueOf()) {
-
-          return (
-            <div key={incident.id}>
-              <Incident key={incident.id} home={incident.home} status={incident.status} event={incident.event} createdAt={incident.created_at} />
-              <Border date={moment(incident.created_at).startOf('day').valueOf()} />
-            </div>
-          );
-        }
-
         return (
-          <Incident key={incident.id} home={incident.home} status={incident.status} action={incident.action} event={incident.event} createdAt={incident.created_at} />
+          <Incident key={incident.id} home={incident.home} status={incident.status} contacts={incident.contacts} action={incident.action} event={incident.event} createdAt={incident.created_at} />
         );
       }.bind(this));
 

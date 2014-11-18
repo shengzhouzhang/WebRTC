@@ -88,26 +88,22 @@ define([
       return (
         <div>
           <div className="header">
-            <div className="cover" style={{backgroundImage: 'url(' + this.state.event.cover + ')'}}></div>
-            <div className="info">
-              <div className="address">
-                <div><span>{[
-                  this.state.home.address.street,
-                  this.state.home.address.city,
-                  this.state.home.address.postcode,
-                  this.state.home.address.country
-                  ].join(' ')}</span></div>
-              </div>
-              <div className="contact">
-                <div><label>Contact Info</label></div>
-                {contacts}
-              </div>
-              <div className={action}></div>
-              <div className="status">{status}</div>
-              <div className="actions">
-                <button className={!!_.contains(this.state.status, 'CALLED_POLICE') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_POLICE">Called Police</button>
-                <button className={!!_.contains(this.state.status, 'CALLED_OWNER') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_OWNER">Called Owner</button>
-              </div>
+            <div className="address">
+              <div><span>{[
+                this.state.home.address.street,
+                this.state.home.address.city,
+                this.state.home.address.postcode,
+                this.state.home.address.country
+                ].join(' ')}</span></div>
+            </div>
+            <div className="contact">
+              {contacts}
+            </div>
+            <div className={action}></div>
+            <div className="actions">
+              <button className={!!_.contains(this.state.status, 'CALLED_OWNER') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_OWNER">Calling Owner</button>
+              <button className={!!_.contains(this.state.status, 'CALLED_OWNER') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_OWNER">Called Owner</button>
+              <button className={!!_.contains(this.state.status, 'CALLED_POLICE') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_POLICE">Called Police</button>
             </div>
           </div>
           <div className="taps">

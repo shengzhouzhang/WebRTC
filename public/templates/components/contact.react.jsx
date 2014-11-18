@@ -13,6 +13,7 @@ define(['dispatcher', 'actions'],
           <span className="phone">
             <a href={'tel:' + this.props.phone}>{this.props.phone}</a>
           </span>
+          <span className="email">{this.props.email}</span>
         </div>
       );
     }
