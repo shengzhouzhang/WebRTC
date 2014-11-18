@@ -21,11 +21,7 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
 
     render: function () {
 
-      var action = 'action ' + this.props.action;
-
-      var status =_.map(this.props.status, function (status) {
-        return (<span className={status}></span>)
-      });
+      var status = 'action ' + (this.props.status.join(' ') || this.props.action);
 
       var owner = !!this.props.contacts ? [this.props.contacts.first_name, this.props.contacts.last_name].join(' ') : '';
 
@@ -43,7 +39,7 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
             }
           </div>
           <div className="owner">{owner}</div>
-          <div className={action}></div>
+          <div className={status}></div>
           <div className="timestamp">
             <span className="date">{moment(this.props.createdAt).format('Do MMM YYYY')}</span>
             <span className="time">{moment(this.props.createdAt).format('hh:mmA')}</span>

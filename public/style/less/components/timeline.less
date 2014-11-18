@@ -89,33 +89,40 @@
 
       .action {
         display: inline-block;
-        min-width: 100px;
-        line-height: 20px;
-        .default-font(12px);
-        border-radius: 2px;
-        text-align: center;
-        text-transform: uppercase;
-        color: #FFF;
-        background-color: #FF5A4B;
 
-        &.CONTACT_OWNERS {
+
+        &:before {
+          display: inline-block;
+          min-width: 100px;
+          line-height: 20px;
+          .default-font(12px);
+          border-radius: 2px;
+          text-align: center;
+          text-transform: uppercase;
+          color: #FFF;
+        }
+
+        &.CALL_OWNER {
 
           &:before {
             content: 'Call Owner';
+            background-color: #FF5A4B;
           }
         }
 
-        &.CONTACT_POLICE {
+        &.CALL_POLICE {
 
           &:before {
             content: 'Call Police';
+            background-color: #FF5A4B;
           }
         }
 
-        &.CALLING_OWNERS {
+        &.CALLING_OWNER {
 
           &:before {
             content: 'Calling Owner';
+            background-color: #77C4DB;
           }
         }
 

@@ -51,18 +51,9 @@ define([
     _onAction: function (event) {
       event.preventDefault();
 
-      var value = event.target.value;
-      var index = this.state.status.indexOf(value);
-
-      if(index >= 0) {
-        this.state.status.splice(index, 1);
-      } else {
-        this.state.status.push(value);
-      }
-
       dispatcher.dispatch(actions.UPDATE_STATUS, {
         id: this.state.id,
-        status: this.state.status
+        status: [event.target.value]
       });
     },
 
@@ -101,8 +92,9 @@ define([
             </div>
             <div className={action}></div>
             <div className="actions">
-              <button className={!!_.contains(this.state.status, 'CALLED_OWNER') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_OWNER">Calling Owner</button>
+              <button className={!!_.contains(this.state.status, 'CALLING_OWNER') ? 'disabled' : '' } onClick={this._onAction} value="CALLING_OWNER">Calling Owner</button>
               <button className={!!_.contains(this.state.status, 'CALLED_OWNER') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_OWNER">Called Owner</button>
+              <button className={!!_.contains(this.state.status, 'CALLING_POLICE') ? 'disabled' : '' } onClick={this._onAction} value="CALLING_POLICE">Calling Police</button>
               <button className={!!_.contains(this.state.status, 'CALLED_POLICE') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_POLICE">Called Police</button>
             </div>
           </div>
