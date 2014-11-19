@@ -18,7 +18,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 700;
+  z-index: 4;
 
   .gradient(left top, @login-background, @login-background2);
 
@@ -27,6 +27,8 @@
   text-align: center;
 
   .login-window {
+    .transition(.75s);
+
     position: absolute;
     width: @login-width;
     height: 280px;
@@ -34,10 +36,13 @@
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 50px;
     margin: auto;
+    opacity: 0;
 
-    display: none;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    transform-style: preserve-3d;
 
     div {
       margin-bottom: @login-margin;
@@ -55,6 +60,14 @@
       .default-font (@arg: 24px);
       text-transform: uppercase;
       color: white;
+    }
+  }
+
+  &.shown {
+
+    .login-window {
+      opacity: 1;
+      bottom: 0;
     }
   }
 

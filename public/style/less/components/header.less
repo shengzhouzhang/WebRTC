@@ -1,12 +1,13 @@
 
-@header-height: 85px;
-@icon-width: 60px;
+@header-height: 80px;
+@icon-width: 50px;
 
 #header-container {
   .hidden;
 
   position: fixed;
   top: 0;
+  padding: 0 10px;
 
   width: 100%;
   height: @header-height;
@@ -33,25 +34,33 @@
 
   .header {
 
-    line-height: 80px;
+    height: @header-height;
+    line-height: @header-height;
 
     .menu {
       display: inline-block;
+      height: @header-height;
 
       a {
+        .transition;
         display: inline-block;
         width: @icon-width;
+
+        &:hover {
+          background-color: lighten(#77C4DB, 10%);
+        }
       }
     }
 
     .brand {
 
       position: absolute;
-      top: 12px;
+      top: 0;
       right: 0;
       left: 0;
       margin: auto;
 
+      padding: 10px;
       width: 300px;
       text-align: center;
 
@@ -67,10 +76,16 @@
     .actions {
       display: inline-block;
       float: right;
+      height: @header-height;
 
       a {
+        .transition;
         display: inline-block;
         width: @icon-width;
+
+        &:hover {
+          background-color: lighten(#77C4DB, 10%);
+        }
       }
 
       .alert {

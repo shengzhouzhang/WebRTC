@@ -93,8 +93,10 @@ define([
     _fadeOut().then(function () {
 
       _views.filter('#header-container').hide();
-      _views.filter('#login-container').show()
-      .find('div.login-window').fadeIn('slow');
+      _views.filter('#login-container').show();
+      setTimeout(function () {
+        _views.filter('#login-container').addClass('shown');
+      }, 100);
     });
   });
 
