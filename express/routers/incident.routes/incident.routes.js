@@ -39,8 +39,6 @@ var updateStatus = function (req, res) {
   var id = req.params.id,
       status = req.body;
 
-  console.log(status);
-
   if(!status || !_.isArray(status)) {
     res.status(400).json({ error: 'invalid status' });
     return;
