@@ -1,12 +1,12 @@
 
 @header-height: 85px;
+@icon-width: 60px;
 
 #header-container {
   .hidden;
 
   position: fixed;
   top: 0;
-  padding: 0 20px;
 
   width: 100%;
   height: @header-height;
@@ -37,7 +37,11 @@
 
     .menu {
       display: inline-block;
-      margin-right: 35px;
+
+      a {
+        display: inline-block;
+        width: @icon-width;
+      }
     }
 
     .brand {
@@ -65,8 +69,8 @@
       float: right;
 
       a {
-        margin: 0 0 0 40px;
-        text-align: center;
+        display: inline-block;
+        width: @icon-width;
       }
 
       .alert {
