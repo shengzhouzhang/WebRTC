@@ -34,18 +34,16 @@ define([
       event.preventDefault();
       $('div.taps a').removeClass('active');
       $(event.target).addClass('active');
-      $('div[data-target-tap=notes]').fadeOut('fast', function () {
-        $('div[data-target-tap=event]').fadeIn('fast');
-      });
+      $('div[data-target-tap=notes]').removeClass('shown');
+      $('div[data-target-tap=event]').addClass('shown');
     },
 
     _showNote: function (event) {
       event.preventDefault();
       $('div.taps a').removeClass('active');
       $(event.target).addClass('active');
-      $('div[data-target-tap=event]').fadeOut('fast', function () {
-        $('div[data-target-tap=notes]').fadeIn('fast');
-      });
+      $('div[data-target-tap=event]').removeClass('shown');
+      $('div[data-target-tap=notes]').addClass('shown');
     },
 
     _onAction: function (event) {
@@ -102,8 +100,8 @@ define([
             <a href="#" className="active" onClick={this._showEvent}>Event</a>
             <a href="#" onClick={this._showNote} >Notes</a>
           </div>
-          <div className="events" data-target-tap="event"><Event event={this.state.event} /></div>
-          <div className="notes" data-target-tap="notes" style={{display: 'none'}}><Notes incidentId={this.state.id} notes={this.state.notes} /></div>
+          <div className="event" data-target-tap="event"><Event event={this.state.event} /></div>
+          <div className="notes" data-target-tap="notes"><Notes incidentId={this.state.id} notes={this.state.notes} /></div>
         </div>
       );
     }
@@ -120,7 +118,7 @@ define([
     },
 
     render: function () {
-      $(_container).fadeIn('slow');
+      $(_container).addClass('shown');
       $(_container).find('.taps a')[0].click();
     }
   };

@@ -37,7 +37,8 @@ define([
     var animates = _.map(_views, function (view) {
       if(!$(view).attr('hidden')) { return; }
       return new Promise(function (resolve, reject) {
-        $(view).fadeOut('fast', resolve);
+        $(view).removeClass('shown');
+        resolve();
       });
     });
 

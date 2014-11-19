@@ -9,7 +9,7 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
 
     componentDidMount: function () {
       setTimeout(function () {
-        $(this.getDOMNode()).removeClass('opacity');
+        $(this.getDOMNode()).addClass('shown');
       }.bind(this), 100)
     },
 
@@ -26,7 +26,7 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
       var owner = !!this.props.contacts ? [this.props.contacts.first_name, this.props.contacts.last_name].join(' ') : '';
 
       return (
-        <div className="incident opacity" onClick={this._onClick} >
+        <div className="incident" onClick={this._onClick} >
           <div className="cover" style={{backgroundImage: 'url(' + this.props.event.cover + ')'}}></div>
           <div className="address">
             {
@@ -108,7 +108,7 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
     },
 
     render: function () {
-      $(_container).fadeIn('slow');
+      $(_container).addClass('shown');
     }
   };
 });

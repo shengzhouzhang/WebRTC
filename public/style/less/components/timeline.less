@@ -7,7 +7,7 @@
   .hidden;
   .transition(.5s);
 
-  padding: 100px 0 50px 0;
+  padding: 120px 0 50px 0;
   margin: 0px auto;
   position: relative;
   background: #E4F3F8;
@@ -27,21 +27,20 @@
     max-width: 100%;
 
     .incident {
+      .transition(.5s);
+
       margin-top: 0;
       margin-bottom: 3px;
       height: @incident-height;
 
       background-color: #FFF;
       cursor: pointer;
+      overflow: hidden;
+      opacity: 0;
 
-      // text-transform: uppercase;
-
-      .transition(.5s);
-      opacity: 1;
-
-      &.opacity {
-        margin-top: 10px;
-        opacity: 0;
+      &.shown {
+        opacity: 1;
+        transform: translate3d(0, -20px, 0);
       }
 
       &:hover {
@@ -91,13 +90,12 @@
       .action {
         display: inline-block;
 
-
         &:before {
           display: inline-block;
           min-width: 100px;
           line-height: 20px;
           .default-font(12px);
-          border-radius: 2px;
+          border-radius: 3px;
           text-align: center;
           text-transform: uppercase;
           color: #FFF;
