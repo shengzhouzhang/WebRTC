@@ -1,6 +1,6 @@
 
 @incident-width: 600px;
-@cover-width: 150px;
+@incident-height: 150px;
 @margin: 10px;
 
 #timeline-container {
@@ -27,7 +27,7 @@
     .incident {
       margin-top: 0;
       margin-bottom: 3px;
-      height: 150px;
+      height: @incident-height;
       border-radius: 5px;
       overflow: hidden;
 
@@ -50,8 +50,8 @@
         display: inline-block;
         margin-right: @margin;
         float: left;
-        width: @cover-width;
-        height: @cover-width;
+        width: @incident-height;
+        height: @incident-height;
 
         background-repeat: no-repeat;
         background-position: bottom;
@@ -60,7 +60,7 @@
 
       .address {
         display: inline-block;
-        width: @incident-width - @cover-width - 2 * @margin;
+        width: @incident-width - @incident-height - 2 * @margin;
         margin-top: 7px;
         .default-font(18px);
         color: #FF5A4B;
@@ -70,8 +70,8 @@
       .owner {
         margin-top: 5px;
         display: inline-block;
-        width: @incident-width - @cover-width - 2 * @margin;
-        height: 80px;
+        width: @incident-width - @incident-height - 2 * @margin;
+        height: @incident-height - 65px;
       }
 
       .timestamp {

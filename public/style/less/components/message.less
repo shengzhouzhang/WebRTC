@@ -1,6 +1,6 @@
 
 
-@message-height: 50px;
+@message-height: 45px;
 
 #message-container {
   .full-width;
@@ -10,7 +10,7 @@
   top: -@message-height;
   height: @message-height;
   line-height: @message-height;
-  z-index: 50;
+  z-index: 5;
   background: #77C4DB;
   color: #FFF;
 
@@ -21,7 +21,7 @@
   }
 
   .error {
-    background-color: #d9534f;
+    background-color: #FF5A4B;
   }
 
   .warning {
@@ -42,5 +42,9 @@
 
   &.shown {
     transform: translate3d(0, @message-height, 0);
+  }
+
+  &.shown-width-header {
+    transform: translate3d(0, @message-height + @header-height, 0);
   }
 }

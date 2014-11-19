@@ -24,10 +24,15 @@ define(['dispatcher', 'actions', 'message.store'],
     _onLoad: function () {
       var data = store.get();
 
-      if(!data || !data.message) { $(_container).removeClass('shown'); return; }
+      if(!data || !data.message) { this._close(); return; }
 
       this.setState(data);
-      $(_container).addClass('shown');
+
+      if($('#login-container').css('display') !== 'none') {
+        $(_container).addClass('shown');
+      } else {
+        $(_container).addClass('shown-width-header');
+      }
 
       var timeout;
 
@@ -38,9 +43,14 @@ define(['dispatcher', 'actions', 'message.store'],
       setTimeout(dispatcher.dispatch.bind(undefined, actions.CLEAR_MESSAGE), timeout);
     },
 
+    _close: function () {
+      $(_container).removeClass('shown');
+      $(_container).removeClass('shown-width-header');
+    },
+
     _onClose: function (event) {
       event.preventDefault();
-      $(_container).removeClass('shown');
+      this._close();
     },
 
     render: function () {
