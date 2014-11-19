@@ -45,12 +45,12 @@ define(['dispatcher', 'actions'],
     render: function () {
       return (
         <div className="login-window">
-          <p>
+          <div>
             <span className="icon--logo-text brand"></span>
             <span className="title">Incident Response Center</span>
-          </p>
-          <p><input id="login-username" type="email" placeholder="Email" /></p>
-          <p><input id="login-password" type="password" placeholder="Password" onInput={this._enable} onKeyPress={this._onKeyPress}/></p>
+          </div>
+          <div><input id="login-username" type="email" placeholder="Email" /></div>
+          <div><input id="login-password" type="password" placeholder="Password" onInput={this._enable} onKeyPress={this._onKeyPress}/></div>
           <button id="login-submit" disabled={this.state.disabled} onClick={this._login}>
             Go
           </button>

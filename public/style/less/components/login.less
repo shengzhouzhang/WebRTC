@@ -5,7 +5,7 @@
 @login-background: #C9E7F1;
 @login-background2: #77C4DB;
 @login-color: white;
-
+@login-margin: 12px;
 @button-color: #FF5A4B;
 
 #login-container {
@@ -29,7 +29,7 @@
   .login-window {
     position: absolute;
     width: @login-width;
-    height: 230px;
+    height: 300px;
 
     top: 0;
     left: 0;
@@ -39,15 +39,19 @@
 
     display: none;
 
+    div {
+      margin-bottom: @login-margin;
+    }
+
     .brand {
       display: block;
       font-size: 48px;
-      margin-bottom: 15px;
+      margin-bottom: @login-margin;
     }
 
     .title {
       display: block;
-      margin-bottom: 30px;
+      margin-bottom: @login-margin * 2;
       .default-font (@arg: 24px);
       text-transform: uppercase;
       color: white;
