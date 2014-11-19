@@ -30,8 +30,6 @@
       margin-top: 0;
       margin-bottom: 3px;
       height: @incident-height;
-      border-radius: 5px;
-      overflow: hidden;
 
       background-color: #FFF;
       cursor: pointer;
@@ -64,7 +62,7 @@
 
       .address {
         display: inline-block;
-        width: @incident-width - @incident-height - 2 * @margin;
+        width: 50%;
         margin-top: 7px;
         .default-font(18px);
         color: #FF5A4B;
@@ -74,8 +72,7 @@
       .owner {
         margin-top: 5px;
         display: inline-block;
-        width: @incident-width - @incident-height - 2 * @margin;
-        height: @incident-height - 65px;
+        width: 50%;
       }
 
       .timestamp {
@@ -163,6 +160,16 @@
 
       .incident {
         margin-bottom: 10px;
+        border-radius: 6px;
+
+        .address {
+          width: @incident-width - @incident-height - 2 * @margin;
+        }
+
+        .owner, {
+          width: @incident-width - @incident-height - 2 * @margin;
+          height: @incident-height - 65px;
+        }
       }
     }
   }
