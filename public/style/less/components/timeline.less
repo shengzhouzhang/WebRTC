@@ -5,6 +5,7 @@
 
 #timeline-container {
   .hidden;
+  .transition(.5s);
 
   padding: 100px 0 50px 0;
   margin: 0px auto;
@@ -15,9 +16,10 @@
   -webkit-perspective: 1000;
   transform-style: preserve-3d;
 
-  &.blur {
-    .transition(.5s);
-    .blur(1px);
+  @media (min-width: 600px) {
+    &.blur {
+      .blur(1px);
+    }
   }
 
   .timeline {
