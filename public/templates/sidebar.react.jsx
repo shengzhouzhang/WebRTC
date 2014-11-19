@@ -46,10 +46,10 @@ define(['dispatcher', 'actions'],
         <div className="sidebar">
           <div className="header">Menu</div>
           <div className="menu">
-            <a href="#" onClick={this._toTimelineView}>Home</a>
-            <a href="#" onClick={this._onClick}>My Cases</a>
-            <a href="#" onClick={this._onClick}>About</a>
-            <a href="#" onClick={this._logout}>Sign Out</a>
+            <a href="#" className="fa fa-home" onClick={this._toTimelineView}>Home</a>
+            <a href="#" className="fa fa-tags" onClick={this._onClick}>My Cases</a>
+            <a href="#" className="fa fa-info-circle" onClick={this._onClick}>About</a>
+            <a href="#" className="fa fa-sign-out" onClick={this._logout}>Sign Out</a>
           </div>
         </div>
       );
