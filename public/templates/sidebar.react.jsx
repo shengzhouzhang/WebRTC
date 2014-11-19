@@ -46,8 +46,8 @@ define(['dispatcher', 'actions'],
         <div className="sidebar">
           <div className="header">Menu</div>
           <div className="menu">
-            <a href="#" onClick={this._toTimelineView}>Incidents</a>
-            <a href="#" onClick={this._onClick}>Guide</a>
+            <a href="#" onClick={this._toTimelineView}>Home</a>
+            <a href="#" onClick={this._onClick}>My Cases</a>
             <a href="#" onClick={this._onClick}>About</a>
             <a href="#" onClick={this._logout}>Sign Out</a>
           </div>
