@@ -51,14 +51,6 @@ define([
     _views.filter('#header-container').addClass('shown');
   };
 
-  var _showBackground = function () {
-    $('#background-container').addClass('shown');
-  };
-
-  var _hideBackground = function () {
-    $('#background-container').removeClass('shown');
-  };
-
   var loading
 
   dispatcher.register(actions.TO_INCIDENT_VIEW, function (options) {
@@ -66,7 +58,6 @@ define([
       _fadeOut().then(function () {
 
         _showComponents();
-        _hideBackground();
 
         dispatcher.dispatch(actions.SOCKET_CONNECT);
         dispatcher.dispatch(actions.REQUEST_INCIDENT, options).then(function () {
@@ -84,7 +75,6 @@ define([
 
         dispatcher.dispatch(actions.SOCKET_CONNECT);
         dispatcher.dispatch(actions.REQUEST_TIMELINE).then(function () {
-          _hideBackground();
           timelineView.render();
         });
       });
@@ -96,6 +86,7 @@ define([
 
       _views.filter('#header-container').removeClass('shown');
       _views.filter('#login-container').addClass('shown');
+
       setTimeout(function () {
         _views.filter('#login-container').addClass('fadeIn');
       }, 100);
