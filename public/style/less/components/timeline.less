@@ -44,24 +44,27 @@
       background-color: #FFF;
       cursor: pointer;
       overflow: hidden;
-      opacity: 0;
+
 
       &.NET_CASE {
+        opacity: 0;
         transform: translate3d(0, -20px, 0);
       }
 
       &.OLD_CASE {
+        opacity: 0;
         transform: translate3d(0, 20px, 0);
       }
 
       &.shown {
-        opacity: 1;
 
         &.NET_CASE {
+          opacity: 1;
           transform: translate3d(0, 0, 0);
         }
 
         &.OLD_CASE {
+          opacity: 1;
           transform: translate3d(0, 0, 0);
         }
       }
