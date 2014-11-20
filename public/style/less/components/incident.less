@@ -60,16 +60,21 @@
     .action,
     .actions button {
       display: inline-block;
-      margin: 0 10px 0 0;
+      margin: 0 15px 0 0;
       padding: 0;
-      line-height: 30px;
+      line-height: 35px;
       min-width: 100px;
-      border-radius: 2px;
+      border-radius: 3px;
       .default-font(12px);
       text-align: center;
       text-transform: uppercase;
 
       &:hover {
+        color: white;
+        background-color: lighten(#77C4DB, 10%);
+      }
+
+      &.disabled {
         color: white;
         background-color: lighten(#77C4DB, 10%);
       }
@@ -275,7 +280,7 @@
         font-size: 14px;
         color: #3b545c;
         line-height: 36px;
-        border-radius: 2px;
+        border-radius: 3px;
         background-color: #C9E7F1;
 
         &:hover {
@@ -291,6 +296,7 @@
       background-color: white;
       min-height: 95px;
       line-height: 25px;
+      // border-radius: 6px;
 
       .timestamp,
       .username {

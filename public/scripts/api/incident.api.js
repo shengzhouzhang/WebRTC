@@ -29,6 +29,8 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
     updateStatus: function (incident) {
       if(!incident || !incident.id || !incident.status) throw new Error ('invalid incident');
 
+      dispatcher.dispatch(actions.START_LOADING);
+
       $.ajax({
         type: 'PUT',
         headers: {
@@ -38,6 +40,7 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
         url: '/incidents/' + incident.id + '/status',
         success: function (data) {
           console.log(data);
+          dispatcher.dispatch(actions.STOP_LOADING);
           dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'status changed', type: 'success' });
           dispatcher.dispatch(actions.UPDATE_INCIDENT_STORE, data);
         }

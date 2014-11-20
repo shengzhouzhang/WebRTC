@@ -8,6 +8,8 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
 
       var _promise = new Promise(function (resolve, reject) {
 
+        dispatcher.dispatch(actions.START_LOADING);
+
         $.ajax({
           type: 'POST',
           headers: {
@@ -20,6 +22,7 @@ define(['dispatcher', 'actions', 'user.store'], function (dispatcher, actions, s
       });
 
       return _promise.then(function (data) {
+        dispatcher.dispatch(actions.STOP_LOADING);
         dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'note added', type: 'success' });
         dispatcher.dispatch(actions.UPDATE_INCIDENT_STORE, data);
         return data;

@@ -109,7 +109,7 @@ define([
   dispatcher.register(actions.STOP_LOADING, function () {
     setTimeout(function () {
       $('.fa.fa-refresh').removeClass('fa-spin');
-    }, 1000);
+    }, 450);
   });
 
   // sidebar

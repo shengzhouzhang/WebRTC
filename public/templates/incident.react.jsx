@@ -55,6 +55,10 @@ define([
     _onAction: function (event) {
       event.preventDefault();
 
+      this.setState({
+        status: [event.target.value]
+      })
+
       dispatcher.dispatch(actions.UPDATE_STATUS, {
         id: this.state.id,
         status: [event.target.value]
