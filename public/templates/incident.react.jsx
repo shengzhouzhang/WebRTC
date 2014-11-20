@@ -34,16 +34,22 @@ define([
       event.preventDefault();
       $('div.taps a').removeClass('active');
       $(event.target).addClass('active');
-      $('div[data-target-tap=notes]').removeClass('shown');
+      $('div[data-target-tap=notes]').removeClass('shown').removeClass('fadeIn');
       $('div[data-target-tap=event]').addClass('shown');
+      setTimeout(function () {
+        $('div[data-target-tap=event]').addClass('fadeIn');
+      }, 100);
     },
 
     _showNote: function (event) {
       event.preventDefault();
       $('div.taps a').removeClass('active');
       $(event.target).addClass('active');
-      $('div[data-target-tap=event]').removeClass('shown');
+      $('div[data-target-tap=event]').removeClass('shown').removeClass('fadeIn');
       $('div[data-target-tap=notes]').addClass('shown');
+      setTimeout(function () {
+        $('div[data-target-tap=notes]').addClass('fadeIn');
+      }, 100);
     },
 
     _onAction: function (event) {
@@ -119,6 +125,7 @@ define([
 
     render: function () {
       $(_container).addClass('shown');
+      setTimeout(function () { $(_container).addClass('fadeIn'); }, 100);
       $(_container).find('.taps a')[0].click();
     }
   };

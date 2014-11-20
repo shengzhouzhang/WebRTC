@@ -109,6 +109,7 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
 
     render: function () {
       $(_container).addClass('shown');
+      setTimeout(function () { $(_container).addClass('fadeIn'); }, 100);
     }
   };
 });

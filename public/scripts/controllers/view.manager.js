@@ -35,9 +35,10 @@ define([
 
   var _fadeOut = function () {
     var animates = _.map(_views, function (view) {
-      if(!$(view).attr('hidden')) { return; }
+      if($(view).attr('page') === undefined) { return; }
       return new Promise(function (resolve, reject) {
-        $(view).removeClass('shown');
+        $(view).removeClass('shown')
+        .removeClass('fadeIn');
         resolve();
       });
     });
@@ -47,15 +48,15 @@ define([
   };
 
   var _showComponents = function () {
-    _views.filter('#header-container').show();
+    _views.filter('#header-container').addClass('shown');
   };
 
   var _showBackground = function () {
-    $('#background-container').fadeIn();
+    $('#background-container').addClass('shown');
   };
 
   var _hideBackground = function () {
-    $('#background-container').fadeOut();
+    $('#background-container').removeClass('shown');
   };
 
   var loading
@@ -93,10 +94,10 @@ define([
   dispatcher.register(actions.TO_LOGIN_VIEW, function (options) {
     _fadeOut().then(function () {
 
-      _views.filter('#header-container').hide();
-      _views.filter('#login-container').show();
+      _views.filter('#header-container').removeClass('shown');
+      _views.filter('#login-container').addClass('shown');
       setTimeout(function () {
-        _views.filter('#login-container').addClass('shown');
+        _views.filter('#login-container').addClass('fadeIn');
       }, 100);
     });
   });
