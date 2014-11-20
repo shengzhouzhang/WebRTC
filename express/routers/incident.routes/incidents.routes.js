@@ -16,6 +16,8 @@ var timeline = function (req, res) {
         }
       };
 
+  logger.info('incidents', options);
+
   dispatcher.dispatch(dispatcher.actions.REQUEST_TIMELINE, options).then(function (result) {
     if(!result.length) { res.status(200).json([]); return; }
 

@@ -12,6 +12,8 @@ var create = function (req, res) {
   var data = req.incident;
   var incident = util.create(data);
 
+  logger.info('create', incident);
+
   dispatcher.dispatch(dispatcher.actions.ADD_INCIDENT, incident).then(function () {
 
     res.status(201).json({ id: incident.id, created_at: incident.created_at });

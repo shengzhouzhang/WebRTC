@@ -13,6 +13,8 @@ var details = function (req, res) {
   var id = req.params.id,
       options = { id: id };
 
+  logger.info('incident', id);
+
   dispatcher.dispatch(dispatcher.actions.REQUEST_INCIDENT, options).then(function (result) {
     if(!result || !result.length || !result[0]) { res.status(404).json(); return; }
 
@@ -38,6 +40,8 @@ var updateStatus = function (req, res) {
 
   var id = req.params.id,
       status = req.body;
+
+  logger.info('status', id, status);
 
   if(!status || !_.isArray(status)) {
     res.status(400).json({ error: 'invalid status' });
