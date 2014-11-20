@@ -31,4 +31,22 @@ define([
     console.log('APIS_READY');
   });
 
+  dispatcher.register(actions.BAD_REQUEST, function () {
+    dispatcher.dispatch(actions.UPDATE_MESSAGE, {
+      message: 'action failed, please try again...' , type: 'error'
+    });
+  });
+
+  dispatcher.register(actions.NOT_FOUND, function () {
+    dispatcher.dispatch(actions.UPDATE_MESSAGE, {
+      message: 'action failed, please try again...' , type: 'error'
+    });
+  });
+
+  dispatcher.register(actions.REQUEST_TIMEOUT, function () {
+    dispatcher.dispatch(actions.UPDATE_MESSAGE, {
+      message: 'action failed, please try again...' , type: 'error'
+    });
+  });
+
 });

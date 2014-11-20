@@ -41,7 +41,7 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
           incidents: incidents,
           options: { remove: !options }
         });
-        
+
         if(!!options) { return; }
         dispatcher.dispatch(actions.REQUEST_UNPDATES, {
           timestamp: _.max(timelineStore.get(), function (incident) { return incident.created_at; }).created_at
