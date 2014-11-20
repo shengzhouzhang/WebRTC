@@ -15,7 +15,7 @@ var add = function (req, res) {
       note = req.body.note,
       username = req.username;
 
-  logger.info('note', id, note, username);
+  logger.info('note', id, note, req.username);
 
   if(!note || !username) { res.status(400).json({ error: 'missing note content'}); return; }
 

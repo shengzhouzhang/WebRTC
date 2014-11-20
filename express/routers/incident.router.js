@@ -20,6 +20,8 @@ var _authorize = function (req, res, next) {
   var access_token = req.headers['authorization'] || req.query.access_token;
 
   if(!!access_token && access_token.toLowerCase() ===  'bXlVc2VybmFtZTpteVBhc3N3b3Jk'.toLowerCase()) { next(); return; }
+
+  logger.error('cammy', 'invalid access token');
   res.status(401).json({ error: 'invalid access token' });
 };
 
@@ -29,6 +31,7 @@ var _authenticate = function (req, res, next) {
       token = jwt.decode(access_token);
 
   if (!token || jwt.isExpired(token.timestamp)) {
+    logger.error('user', 'token is invalid or expired');
     res.status(401).json({ error: 'token is invalid or expired' });
     return;
   }
@@ -44,7 +47,14 @@ var _validate = function (req, res, next) {
   try {
 
     parser.parse(incident, function (err) {
-      if(!!err) { res.status(400).json({ error: err.stack || err }); return; }
+      
+      if(!!err) {
+
+        logger.error('validate', err);
+        res.status(400).json({ error: err.stack || err });
+        return;
+      }
+
       req.incident = incident;
       next();
     });

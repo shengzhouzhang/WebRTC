@@ -13,6 +13,8 @@ var authenticate = function (req, res) {
   var username = req.body.username,
       password = req.body.password;
 
+  logger.info('authenticate', username);
+
   users.find(username, function (err, user) {
     if(!!err) { logger.error(err); res.status(500).json({}); return; }
     if(!user) { res.status(401).json({}); return; }
