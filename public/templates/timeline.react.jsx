@@ -13,6 +13,12 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
       }.bind(this), 100)
     },
 
+    componentDidUpdate: function () {
+      setTimeout(function () {
+        $(this.getDOMNode()).addClass('shown');
+      }.bind(this), 100)
+    },
+
     _onClick: function (event) {
       event.preventDefault();
       if(!this.props.key) { return; }
@@ -25,8 +31,10 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
 
       var owner = !!this.props.contacts ? [this.props.contacts.first_name, this.props.contacts.last_name].join(' ') : '';
 
+      var style = 'incident ' + this.props.style;
+
       return (
-        <div className="incident" onClick={this._onClick} >
+        <div className={style} onClick={this._onClick} >
           <div className="cover" style={{backgroundImage: 'url(' + this.props.event.cover + ')'}}></div>
           <div className="address">
             {
@@ -67,10 +75,16 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
 
       var incidents = _.sortBy(store.get(), function (incident) { return -incident.created_at; });
 
-      var timestamp = !!this.state.timeline[0] ? this.state.timeline[0].created_at : moment().valueOf();
+      var newest = !!this.state.timeline.length ?
+        _.max(this.state.timeline, function (incident) { return incident.created_at; }).created_at :
+        moment().valueOf();
+
+      var oldest = !!this.state.timeline.length ?
+        _.min(this.state.timeline, function (incident) { return incident.created_at; }).created_at :
+        moment().valueOf();
 
       var updates = _.filter(incidents, function (incident) {
-        return incident.created_at > timestamp;
+        return incident.created_at > newest;
       });
 
       if (!!updates.length) {
@@ -79,6 +93,16 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
           type: 'success'
         });
       }
+
+      _.each(incidents, function (incident) {
+        if(incident.created_at > newest) {
+          incident.style = 'NET_CASE';
+        } else if (incident.created_at < oldest) {
+          incident.style = 'OLD_CASE';
+        } else {
+          incident.style = 'NORMAL';
+        }
+      });
 
       this.setState({
         timeline: incidents
@@ -89,7 +113,7 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
       var incidents = _.map(this.state.timeline, function (incident, index) {
 
         return (
-          <Incident key={incident.id} home={incident.home} status={incident.status} contacts={incident.contacts} action={incident.action} event={incident.event} createdAt={incident.created_at} />
+          <Incident key={incident.id} style={incident.style} home={incident.home} status={incident.status} contacts={incident.contacts} action={incident.action} event={incident.event} createdAt={incident.created_at} />
         );
       }.bind(this));
 

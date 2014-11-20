@@ -47,11 +47,11 @@ var _validate = function (req, res, next) {
   try {
 
     parser.parse(incident, function (err) {
-      
+
       if(!!err) {
 
-        logger.error('validate', err);
-        res.status(400).json({ error: err.stack || err });
+        logger.error('validate', err.stack || err);
+        res.status(400).json({ error: err.message || err });
         return;
       }
 
