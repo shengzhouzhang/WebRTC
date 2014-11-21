@@ -19,21 +19,17 @@ var Env = {
         break;
 
       case 'staging':
-        env.REDIS_PORT = 10023;
-        env.REDIS_HOST = 'pub-redis-10023.us-east-1-4.3.ec2.garantiadata.com';
-        env.REDIS_PASSWORD = 'PtxrZAx9qJUJqV4d';
+        env.REDIS_PORT = 12640;
+        env.REDIS_HOST = 'pub-redis-12640.us-east-1-2.5.ec2.garantiadata.com';
+        env.REDIS_PASSWORD = 'P2T7UKYJUwagTxRX';
 
         env.MONGODB_URI = 'mongodb://cammy:cammy@dogen.mongohq.com:10086/cammy-irc-staging';
         break;
 
       default:
-        // env.REDIS_PORT = 6379;
-        // env.REDIS_HOST = 'localhost';
-        // env.REDIS_PASSWORD = '';
-
-        env.REDIS_PORT = 10023;
-        env.REDIS_HOST = 'pub-redis-10023.us-east-1-4.3.ec2.garantiadata.com';
-        env.REDIS_PASSWORD = 'PtxrZAx9qJUJqV4d';
+        env.REDIS_PORT = 12640;
+        env.REDIS_HOST = 'pub-redis-12640.us-east-1-2.5.ec2.garantiadata.com';
+        env.REDIS_PASSWORD = 'P2T7UKYJUwagTxRX';
 
         env.MONGODB_URI = 'mongodb://cammy:cammy@dogen.mongohq.com:10086/cammy-irc-staging';
         break;
