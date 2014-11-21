@@ -20,8 +20,6 @@ define([
 
       return (
         React.DOM.div(null, 
-          React.DOM.div({className: "event-attr"}, React.DOM.label(null, "In:"), React.DOM.span(null, moment(this.props.event.start).format('YYYY-MM-DD HH:mm:ss'))), 
-          React.DOM.div({className: "event-attr"}, React.DOM.label(null, "Out:"), React.DOM.span(null, moment(this.props.event.end).format('YYYY-MM-DD HH:mm:ss'))), 
           React.DOM.div({className: "event-snapshots"}, snapshots)
         )
       );

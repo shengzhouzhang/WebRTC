@@ -78,7 +78,7 @@ define([
         );
       }.bind(this));
 
-      var action = 'action ' + this.state.action || 'CONTACT_OWNERS';
+      var action = this.state.action || 'CALL_OWNER';
 
       var status =_.map(this.state.status, function (status) {
         return (<span className={status}></span>)
@@ -98,8 +98,8 @@ define([
             <div className="contact">
               {contacts}
             </div>
-            <div className={action}></div>
             <div className="actions">
+              <button className={!!_.contains(this.state.status, action) ? 'disabled' : '' } onClick={this._onAction} value={action}>{ action === 'CALL_OWNER' ? 'Call Owner' : 'Call Police'}</button>
               <button className={!!_.contains(this.state.status, 'CALLING_OWNER') ? 'disabled' : '' } onClick={this._onAction} value="CALLING_OWNER">Calling Owner</button>
               <button className={!!_.contains(this.state.status, 'CALLED_OWNER') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_OWNER">Called Owner</button>
               <button className={!!_.contains(this.state.status, 'CALLING_POLICE') ? 'disabled' : '' } onClick={this._onAction} value="CALLING_POLICE">Calling Police</button>
@@ -126,7 +126,6 @@ define([
     render: function () {
       $(_container).addClass('shown');
       setTimeout(function () { $(_container).addClass('fadeIn'); }, 100);
-      // $(_container).find('.taps a')[0].click();
     }
   };
 });
