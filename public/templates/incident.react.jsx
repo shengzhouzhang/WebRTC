@@ -80,9 +80,9 @@ define([
 
       var action = this.state.action || 'CALL_OWNER';
 
-      var status =_.map(this.state.status, function (status) {
-        return (<span className={status}></span>)
-      });
+      if(!this.state.status || !this.state.status.length) {
+        this.state.status = [action];
+      }
 
       return (
         <div>

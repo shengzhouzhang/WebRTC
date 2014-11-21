@@ -37,7 +37,7 @@ var update = function (options, cb) {
       $push: {
         notes: {
           id: uuid.v1(),
-          note: _.map(options.status, function (status) { return status.replace('_', ' ') }).join(' '),
+          note: 'Set status to ' + options.status[0].replace('_', ' '),
           created_at: moment().valueOf(),
           created_by: options.username
         }
