@@ -50,8 +50,11 @@ var dispatcher = {
     if(!action) { throw new Error ('missing values'); }
 
     _.each(_handlers[action], function (handler) {
-      if(!handler) { return; }
-      _addPromise(handler, options);
+      try {
+        _addPromise(handler, options);
+      } catch (err) {
+        console.log(err.stack || err);
+      }
     });
 
     return Promise.all(_promises).then(

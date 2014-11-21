@@ -3,6 +3,7 @@
 
 var _ = require('lodash'),
     moment = require('moment'),
+    Promise = require('promise'),
     Server = require('ws').Server,
     jwt = require('../express/util/jwt.token').token,
     dispatcher = require('../dispatcher/dispatcher').dispatcher,
@@ -45,6 +46,7 @@ var broadcast = function (data) {
 
     client.send(JSON.stringify(data), function (err) {
       if(!!err) { logger.error(err.stack || err); return; }
+      // logger.info('broadcast', data);
     });
   });
 };
@@ -107,10 +109,6 @@ setInterval(function () {
 }, 10000);
 
 // adapter
-
-dispatcher.register(dispatcher.actions.NEW_INCIDENT, function (incident) {
-  broadcast({ action: 'NEW_CASE', incident: incident });
-});
 
 dispatcher.register(dispatcher.actions.CHANNEL_MESSAGE, function (action) {
   if(!action || action.action !== 'NEW_CASE' || !action.incident) { return; }

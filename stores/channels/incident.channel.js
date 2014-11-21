@@ -3,17 +3,28 @@
 
 var _ = require('lodash'),
     Promise = require('promise'),
-    redis = require('../../util/redis/redis.client').client,
     dispatcher = require('../../dispatcher/dispatcher').dispatcher,
     logger = require('../../util/log/application.log').logger;
+
+
+var redis = require('redis'),
+    receive = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_HOST, {});
+
+if(!!process.env.REDIS_PASSWORD) { client.auth(process.env.REDIS_PASSWORD); }
+receive.on('error', function (err) { logger.error('redis', err.stack); });
+
+var send = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_HOST, {});
+
+if(!!process.env.REDIS_PASSWORD) { client.auth(process.env.REDIS_PASSWORD); }
+send.on('error', function (err) { logger.error('redis', err.stack); });
 
 var channel = {
 
   _id: 'INCIDENT_CHANNEL',
 
-  init: function () {
-    redis.subscribe(this._id);
-    redis.on('message', function (channel, message) {
+  subscribe: function () {
+    receive.subscribe(this._id);
+    receive.on('message', function (channel, message) {
 
       var action;
 
@@ -23,21 +34,25 @@ var channel = {
 
       }
 
-      if(!aciton || !aciton.incident) { return; }
-      logger.info('channel received', channel, aciton);
-      dispatcher.dispatch(dispatcher.actions.CHANNEL_MESSAGE, aciton);
+      if(!action || !action.incident) { return; }
+      logger.info('subscribe', channel, action);
+      dispatcher.dispatch(dispatcher.actions.CHANNEL_MESSAGE, action);
     });
   },
 
-  post: function (data) {
+  publish: function (data) {
     if(!data) { return; }
-    logger.info('channel sent', this._id, data);
-    client2.publish(this._id, JSON.stringify(data));
+    send.publish(this._id, JSON.stringify(data), function (err, result) {
+      if(!!err) { return; }
+      logger.info('publish', this._id, err, result);
+    }.bind(this));
   }
 };
 
+channel.subscribe();
+
 dispatcher.register(dispatcher.actions.NEW_INCIDENT, function (incident) {
-  channel.post({ action: 'NEW_CASE', incident: incident });
+  channel.publish({ action: 'NEW_CASE', incident: incident });
 });
 
 module.exports.channel = channel;
