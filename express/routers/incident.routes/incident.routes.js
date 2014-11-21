@@ -2,6 +2,7 @@
 'use strict';
 
 var _ = require('lodash'),
+    uuid = require('node-uuid'),
     moment = require('moment'),
     express = require('express'),
     status = require('../../../static/incident.status').status,
@@ -27,7 +28,21 @@ var update = function (options, cb) {
 
   options = {
     query: { id: options.id },
-    update: { $set: { status: options.status } }
+    update: {
+
+      $set: {
+        status: options.status
+      },
+
+      $push: {
+        notes: {
+          id: uuid.v1(),
+          note: _.map(options.status, function (status) { return status.replace('_', ' ') }).join(' '),
+          created_at: moment().valueOf(),
+          created_by: options.username
+        }
+      }
+    }
   };
 
   dispatcher.dispatch(dispatcher.actions.UPDATE_INCIDENT, options).then(
@@ -48,7 +63,7 @@ var updateStatus = function (req, res) {
     return;
   }
 
-  update({ id: id, status: status }, function (err, result) {
+  update({ id: id, status: status, username: req.username}, function (err, result) {
     if(!!err) { res.status(500).json({ error: err.stack || err }); return; }
     res.status(200).json(result);
   });
