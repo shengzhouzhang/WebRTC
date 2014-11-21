@@ -34,7 +34,7 @@ define([
 
     _scrollToBottom: function () {
       setTimeout(function () {
-        $('.notes-wrap').scrollTop($('.notes-wrap').height());
+        $('.notes-window').scrollTop($('.notes-window').height());
       }, 100);
     },
 
