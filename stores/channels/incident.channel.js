@@ -10,12 +10,12 @@ var _ = require('lodash'),
 var redis = require('redis'),
     receive = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_HOST, {});
 
-if(!!process.env.REDIS_PASSWORD) { client.auth(process.env.REDIS_PASSWORD); }
+if(!!process.env.REDIS_PASSWORD) { receive.auth(process.env.REDIS_PASSWORD); }
 receive.on('error', function (err) { logger.error('redis', err.stack); });
 
 var send = redis.createClient(process.env.REDIS_PORT, process.env.REDIS_HOST, {});
 
-if(!!process.env.REDIS_PASSWORD) { client.auth(process.env.REDIS_PASSWORD); }
+if(!!process.env.REDIS_PASSWORD) { send.auth(process.env.REDIS_PASSWORD); }
 send.on('error', function (err) { logger.error('redis', err.stack); });
 
 var channel = {
