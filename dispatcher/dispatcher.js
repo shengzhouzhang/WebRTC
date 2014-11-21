@@ -28,6 +28,11 @@ var dispatcher = {
 
     NEW_INCIDENT: 'NEW_INCIDENT',
 
+
+    // channels
+
+    CHANNEL_MESSAGE: 'CHANNEL_MESSAGE',
+
     // web socket server
 
     BROADCAST: 'BROADCAST',

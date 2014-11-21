@@ -112,4 +112,9 @@ dispatcher.register(dispatcher.actions.NEW_INCIDENT, function (incident) {
   broadcast({ action: 'NEW_CASE', incident: incident });
 });
 
+dispatcher.register(dispatcher.actions.CHANNEL_MESSAGE, function (action) {
+  if(!action || action.action !== 'NEW_CASE' || !action.incident) { return; }
+  broadcast({ action: 'NEW_CASE', incident: action.incident });
+});
+
 module.exports.server = server;
