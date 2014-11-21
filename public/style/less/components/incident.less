@@ -26,11 +26,25 @@
   }
 
   .header {
-
-    margin-right: 420px;
+    position: relative;
+    margin-right: 220px;
     padding: 20px 30px;
     color: #4B676F;
     background-color: #C9E7F1;
+    height: 230px;
+    overflow: scroll;
+
+    @media (min-width: 800px) {
+      & {
+        margin-right: 320px;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      & {
+        margin-right: 420px;
+      }
+    }
 
     .address,
     .contact {
@@ -54,13 +68,17 @@
 
     .contact {
       font-size: 18px;
-      min-height: 115px;
     }
 
-    .action,
+    .actions {
+      position: absolute;
+      left: 30px;
+      bottom: 10px;
+    }
+
     .actions button {
       display: inline-block;
-      margin: 0 15px 0 0;
+      margin: 0 15px 10px 0;
       padding: 0;
       line-height: 35px;
       min-width: 100px;
@@ -68,29 +86,17 @@
       .default-font(12px);
       text-align: center;
       text-transform: uppercase;
+      background-color: #FFF;
 
       &.disabled {
         color: white;
         background-color: #FF5A4B;
       }
-    }
 
-    .action {
-      color: #FFF;
-      background-color: #FF5A4B;
-    }
-
-    .actions {
-      display: inline-block;
-
-      & button:hover {
+      &:hover {
         color: white;
         background-color: #FF5A4B;
       }
-    }
-
-    .actions button {
-      background-color: #FFF;
     }
 
     .CALL_OWNER {
@@ -119,7 +125,7 @@
 
     overflow: scroll;
 
-    margin-right: 420px;
+    margin-right: 220px;
     padding: 20px;
 
     &.shown {
@@ -167,6 +173,11 @@
     }
 
     @media (min-width: 800px) {
+
+      & {
+        margin-right: 320px;
+      }
+
       .snapshot {
         width: (100 - 4 * 2 * @thumbnail-margin) / 4;
         height: (100 - 4 * 2 * @thumbnail-margin) / 4 / 4 * 3;
@@ -174,6 +185,11 @@
     }
 
     @media (min-width: 1280px) {
+
+      & {
+        margin-right: 420px;
+      }
+
       .snapshot {
         width: (100 - 5 * 2 * @thumbnail-margin) / 5;
         height: (100 - 5 * 2 * @thumbnail-margin) / 5 / 4 * 3;
@@ -214,7 +230,7 @@
     bottom: 0;
 
     margin: auto;
-    width: 420px;
+    width: 220px;
 
     background-color: #FFF;
 
@@ -224,6 +240,18 @@
 
     &.fadeIn {
       opacity: 1;
+    }
+
+    @media (min-width: 800px) {
+      & {
+        width: 320px;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      & {
+        width: 420px;
+      }
     }
 
     .create {
