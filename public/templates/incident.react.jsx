@@ -106,10 +106,6 @@ define([
               <button className={!!_.contains(this.state.status, 'CALLED_POLICE') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_POLICE">Called Police</button>
             </div>
           </div>
-          <div className="taps">
-            <a href="#" className="active" onClick={this._showEvent}>Event</a>
-            <a href="#" onClick={this._showNote} >Notes</a>
-          </div>
           <div className="event" data-target-tap="event"><Event event={this.state.event} /></div>
           <div className="notes" data-target-tap="notes"><Notes incidentId={this.state.id} notes={this.state.notes} /></div>
         </div>
@@ -130,7 +126,7 @@ define([
     render: function () {
       $(_container).addClass('shown');
       setTimeout(function () { $(_container).addClass('fadeIn'); }, 100);
-      $(_container).find('.taps a')[0].click();
+      // $(_container).find('.taps a')[0].click();
     }
   };
 });
