@@ -66,11 +66,6 @@
       text-align: center;
       text-transform: uppercase;
 
-      &:hover {
-        color: white;
-        background-color: lighten(#77C4DB, 10%);
-      }
-
       &.disabled {
         color: white;
         background-color: lighten(#77C4DB, 10%);
@@ -84,6 +79,11 @@
 
     .actions {
       display: inline-block;
+
+      & button:hover {
+        color: white;
+        background-color: lighten(#77C4DB, 10%);
+      }
     }
 
     .actions button {
