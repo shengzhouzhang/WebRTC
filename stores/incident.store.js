@@ -7,7 +7,7 @@ var _ = require('lodash'),
     dispatcher = require('../dispatcher/dispatcher').dispatcher,
     logger = require('../util/log/application.log').logger;
 
-// require('./channels/incident.channel');
+require('./channels/incident.channel');
 
 var store = {
 
