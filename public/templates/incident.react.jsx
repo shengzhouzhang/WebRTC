@@ -108,7 +108,7 @@ define([
           </div>
           <div className="taps">
             <a href="#" className="active" onClick={this._showEvent}>Event</a>
-            <a href="#" onClick={this._showNote} >Notes</a>
+            <a href="#" className="notes-tap" onClick={this._showNote} >Notes</a>
           </div>
           <div className="event" data-target-tap="event"><Event event={this.state.event} /></div>
           <div className="notes" data-target-tap="notes"><Notes incidentId={this.state.id} notes={this.state.notes} /></div>
