@@ -20,6 +20,11 @@ define(['dispatcher'],
     TO_TIMELINE_VIEW: 'TO_TIMELINE_VIEW',
     REQUEST_TIMELINE: 'REQUEST_TIMELINE',
 
+    // my cases
+    
+    TO_MYCASES_VIEW: 'TO_MYCASES_VIEW',
+    REQUEST_MYCASES: 'REQUEST_MYCASES',
+
     // incident actions
 
     REQUEST_INCIDENT: 'REQUEST_INCIDENT',

@@ -16,6 +16,14 @@ var timeline = function (req, res) {
         }
       };
 
+  if(!!req.query.created_by) {
+    options.notes = {
+      $elemMatch: {
+        created_by: req.query.created_by
+      }
+    }
+  }
+
   logger.info('incidents', options, req.username);
 
   dispatcher.dispatch(dispatcher.actions.REQUEST_TIMELINE, options).then(function (result) {

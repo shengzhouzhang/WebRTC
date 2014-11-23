@@ -81,6 +81,20 @@ define([
     });
   });
 
+  dispatcher.register(actions.TO_MYCASES_VIEW, function (options) {
+    dispatcher.dispatch(actions.REQUIRE_AUTH).then(function () {
+      _fadeOut().then(function () {
+
+        _showComponents();
+
+        dispatcher.dispatch(actions.SOCKET_CONNECT);
+        dispatcher.dispatch(actions.REQUEST_MYCASES).then(function () {
+          timelineView.render();
+        });
+      });
+    });
+  });
+
   dispatcher.register(actions.TO_LOGIN_VIEW, function (options) {
     _fadeOut().then(function () {
 
