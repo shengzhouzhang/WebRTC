@@ -34,7 +34,7 @@ define([
 
     _scrollToBottom: function () {
       setTimeout(function () {
-        $('.notes-window').scrollTop($('.notes-window').height());
+        $('.notes-wrap').scrollTop($('.notes-wrap').height());
       }, 100);
     },
 
@@ -53,10 +53,8 @@ define([
 
       return (
         React.DOM.div(null, 
-          React.DOM.div({className: "notes-window"}, 
-            React.DOM.div({className: "notes-wrap"}, 
-              notes
-            )
+          React.DOM.div({className: "notes-wrap"}, 
+            notes
           ), 
           React.DOM.div({className: "create"}, 
             React.DOM.textarea({rows: "4", cols: "50"}), 

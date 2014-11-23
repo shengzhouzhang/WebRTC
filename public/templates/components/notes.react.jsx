@@ -34,7 +34,7 @@ define([
 
     _scrollToBottom: function () {
       setTimeout(function () {
-        $('.notes-window').scrollTop($('.notes-window').height());
+        $('.notes-wrap').scrollTop($('.notes-wrap').height());
       }, 100);
     },
 
@@ -53,10 +53,8 @@ define([
 
       return (
         <div>
-          <div className="notes-window">
-            <div className="notes-wrap">
-              {notes}
-            </div>
+          <div className="notes-wrap">
+            {notes}
           </div>
           <div className="create">
             <textarea rows="4" cols="50"></textarea>

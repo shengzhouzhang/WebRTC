@@ -1,19 +1,19 @@
 
 @thumbnail-margin: .3%;
+@incident-header-height: 230px;
+@min-width: 1024px;
+@notes-width: 350px;
 
 
 #incident-container {
   .hidden;
+  .transition(.5s);
 
   padding: 80px 0 50px 0;
-  margin: 0 auto;
-
-  background: #E4F3F8;
   height: 100vh;
   line-height: 30px;
 
   &.blur {
-    .transition(.5s);
     .blur(1px);
   }
 
@@ -26,25 +26,8 @@
   }
 
   .header {
-    position: relative;
-    margin-right: 220px;
-    padding: 20px 30px;
-    color: #4B676F;
+    padding: 20px;
     background-color: #C9E7F1;
-    height: 230px;
-    overflow: scroll;
-
-    @media (min-width: 800px) {
-      & {
-        margin-right: 320px;
-      }
-    }
-
-    @media (min-width: 1280px) {
-      & {
-        margin-right: 420px;
-      }
-    }
 
     .address,
     .contact {
@@ -52,7 +35,7 @@
 
       span {
         display: inline-block;
-        margin-right: 7px;
+        margin-right: 10px;
       }
 
       margin-bottom: 5px;
@@ -70,21 +53,13 @@
       font-size: 18px;
     }
 
-    .actions {
-      position: absolute;
-      left: 30px;
-      bottom: 10px;
-    }
-
     .actions button {
-      display: inline-block;
-      margin: 0 15px 10px 0;
-      padding: 0;
-      line-height: 35px;
-      min-width: 100px;
-      border-radius: 3px;
       .default-font(12px);
-      text-align: center;
+      display: inline-block;
+      margin: 10px 15px 0 0;
+      padding: 0 20px;
+      line-height: 35px;
+      border-radius: 3px;
       text-transform: uppercase;
       background-color: #FFF;
 
@@ -98,35 +73,76 @@
         background-color: #FF5A4B;
       }
     }
+  }
 
-    .CALL_OWNER {
+  .taps{
 
-      &:before {
-        content: 'Call Owner';
+    border-bottom: 1px solid #C9E7F1;
+
+    a {
+      .transition;
+
+      display: inline-block;
+      width: 50%;
+      text-align: center;
+      line-height: 35px;
+      padding-bottom: 5px;
+
+      &:hover {
+        background-color: #C9E7F1;
       }
     }
 
-    .CALL_POLICE {
+    a.active {
+      box-shadow: inset 0px -5px 0px #77C4DB;
+    }
+  }
 
-      &:before {
-        content: 'Call Police';
+
+  @media (min-width: @min-width) {
+
+    .header {
+      position: relative;
+      margin-right: @notes-width;
+      height: @incident-header-height;
+      overflow: scroll;
+
+      .actions {
+        position: absolute;
+        left: 30px;
+        bottom: 10px;
       }
+    }
+
+    .taps {
+      display: none;
+    }
+
+    .event {
+      position: absolute;
+      top: @incident-header-height + @header-height;
+      left: 0;
+      right: auto;
+      bottom: 0;
+      overflow: scroll;
+      border-top: 2px solid #E4F3F8;
+      margin-right: @notes-width;
+    }
+
+    .notes {
+      position: fixed;
+      top: @header-height;
+      left: auto;
+      right: 0;
+      bottom: 0;
+      width: @notes-width;
     }
   }
 
   .event {
     .transition;
-
-    position: absolute;
-    top: 310px;
-    left: 0;
-    right: auto;
-    bottom: 0;
-
-    overflow: scroll;
-
-    margin-right: 220px;
-    padding: 20px;
+    padding: 10px;
+    line-height: 0;
 
     &.shown {
       opacity: 0;
@@ -136,103 +152,34 @@
       opacity: 1;
     }
 
-    .event-attr {
-      line-height: 20px;
-      margin-bottom: 5px;
-
-      label {
-        display: inline-block;
-        margin-right: 10px;
-        width: 50px;
-        text-align: right;
-      }
-    }
-
     .snapshot {
       display: inline-block;
       margin: @thumbnail-margin;
+      width: (100 - 2 * 2 * @thumbnail-margin) / 2;
+      line-height: 0;
 
       img {
         width: 100%;
       }
     }
 
-    @media (min-width: 320px) {
-      .snapshot {
-        width: (100 - 2 * 2 * @thumbnail-margin) / 2;
-        height: (100 - 2 * 2 * @thumbnail-margin) / 2 / 4 * 3;
-      }
-    }
-
-
     @media (min-width: 480px) {
       .snapshot {
         width: (100 - 3 * 2 * @thumbnail-margin) / 3;
-        height: (100 - 3 * 2 * @thumbnail-margin) / 3 / 4 * 3;
-      }
-    }
-
-    @media (min-width: 800px) {
-
-      & {
-        margin-right: 320px;
-      }
-
-      .snapshot {
-        width: (100 - 4 * 2 * @thumbnail-margin) / 4;
-        height: (100 - 4 * 2 * @thumbnail-margin) / 4 / 4 * 3;
       }
     }
 
     @media (min-width: 1280px) {
-
-      & {
-        margin-right: 420px;
-      }
-
       .snapshot {
-        width: (100 - 5 * 2 * @thumbnail-margin) / 5;
-        height: (100 - 5 * 2 * @thumbnail-margin) / 5 / 4 * 3;
-      }
-    }
-
-    @media (min-width: 1680px) {
-      .snapshot {
-        width: (100 - 6 * 2 * @thumbnail-margin) / 6;
-        height: (100 - 6 * 2 * @thumbnail-margin) / 6 / 4 * 3;
-      }
-    }
-
-    @media (min-width: 1920px) {
-      .snapshot {
-        width: (100 - 7 * 2 * @thumbnail-margin) / 7;
-        height: (100 - 7 * 2 * @thumbnail-margin) / 7 / 4 * 3;
-      }
-    }
-
-    @media (min-width: 2560px) {
-      .snapshot {
-        width: (100 - 8 * 2 * @thumbnail-margin) / 8;
-        height: (100 - 8 * 2 * @thumbnail-margin) / 8 / 4 * 3;
+        width: (100 - 4 * 2 * @thumbnail-margin) / 4;
       }
     }
   }
 
   .notes {
     .transition;
-
-    display: block;
-
-    position: fixed;
-    top: @header-height;
-    left: auto;
-    right: 0;
-    bottom: 0;
-
-    margin: auto;
-    width: 220px;
-
     background-color: #FFF;
+    padding: 10px;
 
     &.shown {
       opacity: 0;
@@ -242,30 +189,10 @@
       opacity: 1;
     }
 
-    @media (min-width: 800px) {
-      & {
-        width: 320px;
-      }
-    }
-
-    @media (min-width: 1280px) {
-      & {
-        width: 420px;
-      }
-    }
-
     .create {
       position: absolute;
+      border-top: 2px solid #FFF;
       bottom: 10px;
-      padding: 10px;
-      width: 100%;
-      background-color: white;
-
-      label {
-        display: block;
-        line-height: 20px;
-        margin-bottom: 10px;
-      }
 
       textarea {
         width: 100%;
@@ -277,11 +204,8 @@
       }
 
       a {
-        .transition;
-
         display: block;
         margin-top: 5px;
-        padding: 0 30px;
         font-size: 14px;
         color: #3b545c;
         line-height: 35px;
@@ -290,62 +214,50 @@
         background-color: #FF5A4B;
         text-align: center;
         text-transform: uppercase;
-
-        &:hover {
-          color: white;
-          background-color: #FF5A4B;
-        }
       }
     }
 
-    .notes-window {
+    .notes-wrap {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 210px;
-      width: 100%;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 200px;
       overflow: scroll;
 
-      .notes-wrap {
-        position: absolute;
-        top: auto;
-        left: 0;
-        right: 0;
-        // bottom: 0;
-        margin: auto;
-        padding: 10px 10px 0 10px;
+      .note {
+        display: block;
+        margin-bottom: 5px;
+        padding: 10px 0;
+        line-height: 25px;
+        border-top: 1px solid #C9E7F1;
 
-        .note {
+        &:first-child {
+          padding: 0 0 10px 0;
+          border: none;
+        }
+
+        .username {
           display: block;
-          margin-bottom: 5px;
-          padding: 15px 0;
-          min-height: 120px;
-          line-height: 25px;
-          border-top: 1px solid #C9E7F1;
+          color: #FF5A4B;
+          text-transform: uppercase;
+          font-size: 18px;
+        }
 
-          .username {
-            display: block;
-            color: #FF5A4B;
-            text-transform: uppercase;
-            font-size: 18px;
+        .timestamp {
+          display: block;
+          text-transform: uppercase;
+          font-size: 14px;
+          .time:before {
+            content: '@';
+            padding: 0 3px;
           }
+        }
 
-          .timestamp {
-            display: block;
-            text-transform: uppercase;
-            font-size: 14px;
-            .time:before {
-              content: '@';
-              padding: 0 3px;
-            }
-          }
-
-          .content {
-            display: block;
-            margin-top: 10px;
-            font-size: 16px;
-          }
+        .content {
+          display: block;
+          margin-top: 10px;
+          font-size: 16px;
         }
       }
     }
