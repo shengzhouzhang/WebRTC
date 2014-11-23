@@ -130,6 +130,7 @@ define([
     render: function () {
       $(_container).addClass('shown');
       setTimeout(function () { $(_container).addClass('fadeIn'); }, 100);
+      $(_container).find('.taps a')[0].click();
     }
   };
 });

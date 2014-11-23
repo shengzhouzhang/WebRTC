@@ -53,12 +53,12 @@ define([
 
       return (
         React.DOM.div(null, 
-          React.DOM.div({className: "notes-wrap"}, 
-            notes
-          ), 
           React.DOM.div({className: "create"}, 
             React.DOM.textarea({rows: "4", cols: "50"}), 
             React.DOM.div(null, React.DOM.a({href: "", onClick: this._onClick}, "Add Note"))
+          ), 
+          React.DOM.div({className: "notes-wrap"}, 
+            notes
           )
         )
       );

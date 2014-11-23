@@ -96,16 +96,6 @@
     a.active {
       box-shadow: inset 0px -5px 0px #77C4DB;
     }
-
-    a.notes-tap.active {
-      position: absolute;
-      z-index: 100;
-      top: 80px;
-      right: 0;
-      bottom: 0;
-      width: 300px;
-      background-color: #FFF;
-    }
   }
 
 
@@ -147,11 +137,27 @@
       right: 0;
       bottom: 0;
       width: @notes-width;
+
+      .create {
+        position: absolute;
+        border-top: 2px solid #FFF;
+        bottom: 10px;
+      }
+
+      .notes-wrap {
+        position: absolute;
+        top: 2px;
+        left: 10px;
+        right: 10px;
+        bottom: 200px;
+        overflow: scroll;
+      }
     }
   }
 
   .event {
     .transition;
+    display: none;
     padding: 10px;
     line-height: 0;
 
@@ -202,9 +208,7 @@
     }
 
     .create {
-      position: absolute;
-      border-top: 2px solid #FFF;
-      bottom: 10px;
+      padding-top: 10px;
 
       textarea {
         width: 100%;
@@ -230,12 +234,7 @@
     }
 
     .notes-wrap {
-      position: absolute;
-      top: 2px;
-      left: 10px;
-      right: 10px;
-      bottom: 200px;
-      overflow: scroll;
+      margin-top: 20px;
 
       .note {
         display: block;

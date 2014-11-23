@@ -53,12 +53,12 @@ define([
 
       return (
         <div>
-          <div className="notes-wrap">
-            {notes}
-          </div>
           <div className="create">
             <textarea rows="4" cols="50"></textarea>
             <div><a href="" onClick={this._onClick} >Add Note</a></div>
+          </div>
+          <div className="notes-wrap">
+            {notes}
           </div>
         </div>
       );
