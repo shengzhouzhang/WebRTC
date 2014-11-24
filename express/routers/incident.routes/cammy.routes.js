@@ -17,7 +17,7 @@ var create = function (req, res) {
   dispatcher.dispatch(dispatcher.actions.ADD_INCIDENT, incident).then(function () {
 
     res.status(201).json({ id: incident.id, created_at: incident.created_at });
-    
+
     dispatcher.dispatch(dispatcher.actions.NEW_INCIDENT, {
       id: incident.id,
       action: incident.action,
