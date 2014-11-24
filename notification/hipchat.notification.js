@@ -12,7 +12,13 @@ var hipchat = function (incident) {
   if(!process.env.HIPCHAT) { return; }
 
   var messages =  [
-    'New Incident: ' + !!incident.action ? incident.action.replace('_', ' ') : '',
+    [
+      incident.home.address.street,
+      incident.home.address.city,
+      incident.home.address.postcode,
+      incident.home.address.country
+    ].join(' '),
+    !!incident.action ? incident.action.replace('_', ' ') : '',
     moment(incident.created_at).format('YYYY-MM-DD HH:mm:ss')
   ];
 

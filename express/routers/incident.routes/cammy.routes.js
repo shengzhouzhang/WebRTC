@@ -21,7 +21,8 @@ var create = function (req, res) {
     dispatcher.dispatch(dispatcher.actions.NEW_INCIDENT, {
       id: incident.id,
       action: incident.action,
-      created_at: incident.created_at
+      created_at: incident.created_at,
+      home: incident.home
     });
 
     logger.info('incident', incident.id);
