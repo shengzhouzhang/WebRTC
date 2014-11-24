@@ -89,10 +89,10 @@ define([
           <div className="header">
             <div className="address">
               <div><span>{[
-                this.state.home.address.street,
-                this.state.home.address.city,
-                this.state.home.address.postcode,
-                this.state.home.address.country
+                this.state.home.address.street || 'Unknown Street',
+                this.state.home.address.city || 'Unknown City',
+                this.state.home.address.postcode || 'Unknown Postcode',
+                this.state.home.address.country || 'Unknown Country'
                 ].join(' ')}</span></div>
             </div>
             <div className="contact">

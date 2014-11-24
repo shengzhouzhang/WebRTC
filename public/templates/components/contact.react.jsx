@@ -9,11 +9,11 @@ define(['dispatcher', 'actions'],
 
       return (
         <div>
-          <span className="name">{this.props.name}</span>
-          <span className="phone">
+          <span className={!!this.props.name ? "name" : "hidden"}>{this.props.name}</span>
+          <span className={!!this.props.phone ? "phone" : "hidden"}>
             <a href={'tel:' + this.props.phone}>{this.props.phone}</a>
           </span>
-          <span className="email">{this.props.email}</span>
+          <span className={!!this.props.email ? "email" : "hidden"}>{this.props.email}</span>
         </div>
       );
     }

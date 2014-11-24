@@ -35,13 +35,30 @@
 
       span {
         display: inline-block;
-        margin-right: 10px;
+
+
+        &.hidden {
+          display: none;
+        }
       }
 
-      margin-bottom: 5px;
+      margin: 5px 0;
 
       .name {
-        text-transform: capitalize;
+        text-transform: uppercase;
+        font-size: 18px;
+        margin-right: 15px;
+      }
+
+      .phone {
+        margin-right: 15px;
+        a {
+          font-size: 18px;
+        }
+      }
+
+      .email {
+        font-size: 18px;
       }
     }
 

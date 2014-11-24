@@ -9,11 +9,11 @@ define(['dispatcher', 'actions'],
 
       return (
         React.DOM.div(null, 
-          React.DOM.span({className: "name"}, this.props.name), 
-          React.DOM.span({className: "phone"}, 
+          React.DOM.span({className: !!this.props.name ? "name" : "hidden"}, this.props.name), 
+          React.DOM.span({className: !!this.props.phone ? "phone" : "hidden"}, 
             React.DOM.a({href: 'tel:' + this.props.phone}, this.props.phone)
           ), 
-          React.DOM.span({className: "email"}, this.props.email)
+          React.DOM.span({className: !!this.props.email ? "email" : "hidden"}, this.props.email)
         )
       );
     }
