@@ -11,16 +11,21 @@ var hipchat = function (incident) {
   if(!incident) { return; }
   if(!process.env.HIPCHAT) { return; }
 
-  var messages =  [
-    [
-      incident.home.address.street,
-      incident.home.address.city,
-      incident.home.address.postcode,
-      incident.home.address.country
-    ].join(' '),
-    !!incident.action ? incident.action.replace('_', ' ') : '',
-    moment(incident.created_at).format('YYYY-MM-DD HH:mm:ss')
-  ];
+  var messages = [];
+
+  var address = [
+    incident.home.address.street,
+    incident.home.address.city,
+    incident.home.address.postcode,
+    incident.home.address.country
+  ].join(' ').trim();
+
+  if(!!address) {
+    messages.push(address);
+  }
+
+  messages.push(!!incident.action ? incident.action.replace('_', ' ') : '');
+  messages.push(moment(incident.created_at).format('YYYY-MM-DD HH:mm:ss'));
 
   hc.sendMessage(messages.join('<br/>'), function (err, result) {
     if(!!err) { logger.error(err.stack || err); }
