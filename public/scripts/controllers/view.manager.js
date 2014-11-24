@@ -47,17 +47,13 @@ define([
     return Promise.all(animates);
   };
 
-  var _showComponents = function () {
-    _views.filter('#header-container').addClass('shown');
-  };
-
   var loading
 
   dispatcher.register(actions.TO_INCIDENT_VIEW, function (options) {
     dispatcher.dispatch(actions.REQUIRE_AUTH).then(function () {
       _fadeOut().then(function () {
 
-        _showComponents();
+        headerView.render('INCIDENT_VIEW');
 
         dispatcher.dispatch(actions.SOCKET_CONNECT);
         dispatcher.dispatch(actions.REQUEST_INCIDENT, options).then(function () {
@@ -71,7 +67,7 @@ define([
     dispatcher.dispatch(actions.REQUIRE_AUTH).then(function () {
       _fadeOut().then(function () {
 
-        _showComponents();
+        headerView.render('TIMELINE_VIEW');
 
         dispatcher.dispatch(actions.SOCKET_CONNECT);
         dispatcher.dispatch(actions.REQUEST_TIMELINE).then(function () {
@@ -85,7 +81,7 @@ define([
     dispatcher.dispatch(actions.REQUIRE_AUTH).then(function () {
       _fadeOut().then(function () {
 
-        _showComponents();
+        headerView.render('MYCASES_VIEW');
 
         dispatcher.dispatch(actions.SOCKET_CONNECT);
         dispatcher.dispatch(actions.REQUEST_MYCASES).then(function () {

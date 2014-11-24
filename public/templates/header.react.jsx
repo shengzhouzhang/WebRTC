@@ -19,6 +19,11 @@ define(['dispatcher', 'actions'],
       $('#incident-container').addClass('blur');
     },
 
+    _back: function (event) {
+      event.preventDefault();
+      dispatcher.dispatch(actions.NAVIGATE_TO_VIEW, { uri: 'incidents', refresh: true });
+    },
+
     alarmOn: function () {
       $(_container).find('a.alarm i').removeClass('fa-bell-o')
         .addClass('fa-bell');
@@ -33,10 +38,16 @@ define(['dispatcher', 'actions'],
       event.preventDefault();
     },
 
+    _click: function (event) {
+      event.preventDefault();
+    },
+
     render: function () {
+
       return (
         <div className="header">
           <div className="menu"><a href="#" onClick={this._sidebar}><i className="fa fa-bars"></i></a></div>
+          <div className="backbtn"><a href="#" onClick={this._back}><i className="fa fa-chevron-left"></i></a></div>
           <div className="brand">
             <span className="icon--logo-text"></span>
             <span>Incident Response Center</span>
@@ -61,6 +72,24 @@ define(['dispatcher', 'actions'],
 
       dispatcher.register(actions.ALARM_ON, _component.alarmOn);
       dispatcher.register(actions.ALARM_OFF, _component.alarmOff);
+    },
+
+    render: function (page) {
+      $(_container).addClass('shown');
+      switch(page) {
+        case 'TIMELINE_VIEW':
+          $(_container).find('.menu').show();
+          $(_container).find('.backbtn').hide();
+          break;
+        case 'INCIDENT_VIEW':
+          $(_container).find('.menu').hide();
+          $(_container).find('.backbtn').show();
+          break;
+        case 'MYCASES_VIEW':
+          $(_container).find('.menu').show();
+          $(_container).find('.backbtn').hide();
+          break;
+      }
     }
   };
 
