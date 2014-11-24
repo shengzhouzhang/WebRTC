@@ -128,14 +128,13 @@ define([
 
   dispatcher.register(actions.APP_INIT, views.init.bind(views));
 
-
   var isLoading = false;
 
   window.onscroll = function (event) {
 
     if(!isLoading &&
        document.body.scrollHeight > window.innerHeight &&
-       document.body.scrollTop >= (document.body.scrollHeight - window.innerHeight - 160)) {
+       (document.body.scrollTop || event.pageY) >= (document.body.scrollHeight - window.innerHeight - 160)) {
 
       isLoading = true;
 

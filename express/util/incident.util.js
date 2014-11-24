@@ -37,6 +37,7 @@ var parse = function (incident, cb) {
   if(!incident.event ||
      !incident.event.id ||
      !_.isArray(incident.event.snapshots) ||
+     !incident.event.snapshots.length ||
      !!_.find(incident.event.snapshots, function (snapshot) {
 
     return !snapshot.id ||
@@ -50,6 +51,7 @@ var parse = function (incident, cb) {
   }
 
   if(!_.isArray(incident.contacts) ||
+     !incident.contacts.length ||
      !!_.find(incident.contacts, function (contact) {
 
       return !_.isString(contact.first_name) ||
@@ -72,6 +74,10 @@ var parse = function (incident, cb) {
 
 var create = function (incident) {
 
+  var motion = _.find(incident.event.snapshots, function (snapshot) {
+    return !!snapshot.motion;
+  });
+
   return {
 
     id: uuid.v1(),
@@ -93,7 +99,7 @@ var create = function (incident) {
       id: incident.event.id,
       start: _.min(incident.event.snapshots, 'timestamp').timestamp,
       end: _.max(incident.event.snapshots, 'timestamp').timestamp,
-      cover: _.first(incident.event.snapshots).url,
+      cover: !!motion ? motion.url : _.first(incident.event.snapshots).url,
       snapshots: _.map(incident.event.snapshots, function (snapshot) {
 
         return {
