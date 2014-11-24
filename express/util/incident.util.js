@@ -88,10 +88,10 @@ var create = function (incident) {
     home: {
       id: incident.home.id,
       address: {
-        street: incident.home.address.street,
-        city: incident.home.address.city,
+        street: incident.home.address.street.trim(),
+        city: incident.home.address.city.trim(),
         postcode: incident.home.address.postcode,
-        country: incident.home.address.country
+        country: incident.home.address.country.trim()
       }
     },
 
@@ -113,11 +113,11 @@ var create = function (incident) {
     contacts: _.map(incident.contacts, function (contact) {
 
       return {
-        first_name: contact.first_name,
-        last_name: contact.last_name,
+        first_name: contact.first_name.trim(),
+        last_name: contact.last_name.trim(),
         owner: contact.owner,
         phone: contact.phone,
-        email: contact.email
+        email: _.isString(contact.email) ? contact.email.trim() : undefined
       };
     }),
 
