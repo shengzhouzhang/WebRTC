@@ -3,7 +3,7 @@ define(['dispatcher', 'actions'],
        function (dispatcher, actions) {
   'use strict';
 
-  var _container, _component;
+  var _container, _component, _previous;
 
   var Message = React.createClass({
 
@@ -21,7 +21,7 @@ define(['dispatcher', 'actions'],
 
     _back: function (event) {
       event.preventDefault();
-      dispatcher.dispatch(actions.NAVIGATE_TO_VIEW, { uri: 'incidents', refresh: true });
+      dispatcher.dispatch(actions.NAVIGATE_TO_VIEW, { uri: Backbone.history._back || 'incidents', refresh: true });
     },
 
     alarmOn: function () {
@@ -74,7 +74,7 @@ define(['dispatcher', 'actions'],
       dispatcher.register(actions.ALARM_OFF, _component.alarmOff);
     },
 
-    render: function (page) {
+    render: function (page, back) {
       $(_container).addClass('shown');
       switch(page) {
         case 'TIMELINE_VIEW':
@@ -90,6 +90,7 @@ define(['dispatcher', 'actions'],
           $(_container).find('.backbtn').hide();
           break;
       }
+      _previous = back;
     }
   };
 

@@ -32,7 +32,8 @@ define([
     if(!router) { throw new Error ('router is not available')};
 
     if(!!options.refresh) { Backbone.history.fragment = null; }
-    console.log(options);
+
+    Backbone.history._back = Backbone.history.fragment;
     router.navigate(options.uri, {trigger: true});
   });
 });

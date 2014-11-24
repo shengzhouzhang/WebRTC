@@ -27,7 +27,7 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
 
     render: function () {
 
-      var status = 'action ' + (this.props.status.join(' ') || this.props.action);
+      var status = 'action ' + (!!this.props.status.join && this.props.status.join(' ') || this.props.action);
 
       var owner = !!this.props.contacts ? [this.props.contacts.first_name, this.props.contacts.last_name].join(' ') : '';
 

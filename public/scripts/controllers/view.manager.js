@@ -135,14 +135,22 @@ define([
 
     if(!isLoading &&
        document.body.scrollHeight > window.innerHeight &&
-       document.body.scrollTop >= (document.body.scrollHeight - window.innerHeight - 160) &&
-       Backbone.history.fragment === 'incidents') {
+       document.body.scrollTop >= (document.body.scrollHeight - window.innerHeight - 160)) {
 
       isLoading = true;
 
-      dispatcher.dispatch(actions.REQUEST_TIMELINE, { history: true }).then(function () {
-        setTimeout(function () { isLoading = false; }, 1000);
-      });
+      switch(Backbone.history.fragment)  {
+        case 'incidents':
+          dispatcher.dispatch(actions.REQUEST_TIMELINE, { history: true }).then(function () {
+            setTimeout(function () { isLoading = false; }, 1000);
+          });
+          break;
+        case 'mycases':
+          dispatcher.dispatch(actions.REQUEST_MYCASES, { history: true }).then(function () {
+            setTimeout(function () { isLoading = false; }, 1000);
+          });
+          break;
+      }
     }
   }
 
