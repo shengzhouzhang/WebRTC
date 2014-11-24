@@ -27,6 +27,7 @@ var dispatcher = {
     UPDATE_INCIDENT: 'UPDATE_INCIDENT',
 
     NEW_INCIDENT: 'NEW_INCIDENT',
+    STATUS_UPDATED: 'STATUS_UPDATED',
 
 
     // channels

@@ -63,9 +63,10 @@ var updateStatus = function (req, res) {
     return;
   }
 
-  update({ id: id, status: status, username: req.username}, function (err, result) {
+  update({ id: id, status: status, username: req.username}, function (err, incident) {
     if(!!err) { res.status(500).json({ error: err.stack || err }); return; }
-    res.status(200).json(result);
+    res.status(200).json(incident);
+    dispatcher.dispatch(dispatcher.actions.STATUS_UPDATED, incident);
   });
 };
 
