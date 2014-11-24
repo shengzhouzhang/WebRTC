@@ -36,7 +36,7 @@ dispatcher.register(dispatcher.actions.NEW_INCIDENT, function (incident) {
 
 dispatcher.register(dispatcher.actions.STATUS_UPDATED, function (incident) {
   if(!incident) { return; }
-  if(!process.env.HIPCHAT) { return; }
+  // if(!process.env.HIPCHAT) { return; }
 
   var messages = [];
 
@@ -54,7 +54,7 @@ dispatcher.register(dispatcher.actions.STATUS_UPDATED, function (incident) {
   var note = _.last(incident.notes);
 
   if(!!note) {
-    messages.push(note.note);
+    messages.push(incident.status.join(' ').replace('_', ' '));
     messages.push(note.created_by);
     messages.push(moment(note.created_at).format('YYYY-MM-DD HH:mm:ss'));
   }
