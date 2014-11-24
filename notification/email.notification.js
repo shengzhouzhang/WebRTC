@@ -3,9 +3,9 @@
 
 var _ = require('lodash'),
     moment = require('moment'),
-    dispatcher = require('../../dispatcher/dispatcher').dispatcher,
-    email = require('../../util/email/email.sender').emailer,
-    logger = require('../../util/log/application.log').logger;
+    dispatcher = require('../dispatcher/dispatcher').dispatcher,
+    email = require('../util/email/email.sender').emailer,
+    logger = require('../util/log/application.log').logger;
 
 var options = {
   from: 'steven@cammy.com',

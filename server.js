@@ -7,7 +7,8 @@ require('./process/process.env');
 require('./stores/user.store');
 require('./stores/incident.store');
 
-require('./notification/email/email.notification');
+require('./notification/email.notification');
+require('./notification/hipchat.notification');
 
 var express = require('./express/express.server').server,
     websocket = require('./websocket/websocket.server').server;
