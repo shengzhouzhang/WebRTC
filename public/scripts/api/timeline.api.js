@@ -35,6 +35,8 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
       });
 
       return _promise.then(function (incidents) {
+        _.each(incidents, function (incident) { incident.type = 'TIMELINE'; });
+
         dispatcher.dispatch(actions.STOP_LOADING);
         dispatcher.dispatch(actions.UPDATE_TIMELINE_STORE, {
           incidents: incidents,
@@ -82,6 +84,8 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
       });
 
       return _promise.then(function (incidents) {
+        _.each(incidents, function (incident) { incident.type = 'MY_CASES'; });
+
         dispatcher.dispatch(actions.STOP_LOADING);
         dispatcher.dispatch(actions.UPDATE_TIMELINE_STORE, {
           incidents: incidents,

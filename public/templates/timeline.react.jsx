@@ -33,8 +33,6 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
 
       var style = 'incident ' + this.props.style;
 
-      console.log(this.props.home.address);
-
       return (
         <div className={style} onClick={this._onClick} >
           <div className="cover" style={{backgroundImage: 'url(' + this.props.event.cover + ')'}}></div>
@@ -77,11 +75,18 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
 
       var incidents = _.sortBy(store.get(), function (incident) { return -incident.created_at; });
 
-      var newest = !!this.state.timeline.length ?
+      var iType = !!incidents.length ? incidents[0].type : undefined;
+      var tType = !!this.state.timeline.length ? this.state.timeline[0].type : undefined;
+
+      if(iType !== tType) {
+        this.setState({ timeline: [] });
+      }
+
+      var newest = !!this.state.timeline.length?
         _.max(this.state.timeline, function (incident) { return incident.created_at; }).created_at :
         moment().valueOf();
 
-      var oldest = !!this.state.timeline.length ?
+      var oldest = !!this.state.timeline.length?
         _.min(this.state.timeline, function (incident) { return incident.created_at; }).created_at :
         moment().valueOf();
 
