@@ -21,10 +21,14 @@ var send = function (incident) {
 
     var current = moment().startOf('minute');
 
-    var inShifts = _.filter(shifts, function (shift) {
-      return shift.start.valueOf() < current.valueOf() &&
-        shift.end.valueOf() > current.valueOf();
-    });
+    var inShifts = [];
+
+    if(!!shifts && !!shifts.length) {
+      inShifts = _.filter(shifts, function (shift) {
+        return shift.start.valueOf() < current.valueOf() &&
+          shift.end.valueOf() > current.valueOf();
+      });
+    }
 
     var options = {
       from: 'irc@cammy.com',
@@ -33,12 +37,14 @@ var send = function (incident) {
       template: 'new-incident'
     };
 
-    if(!!inShifts) {
+    if(!!inShifts && !!inShifts.length) {
       _.each(inShifts, function (inshift) {
         if(!inshift || !inshift.username) { return; }
         options.to.push(inshift.username);
       });
-    } else if (!!process.env.BACKUP_EMAIL) {
+    }
+
+    if (options.to.length === 1 && !!process.env.BACKUP_EMAIL) {
       options.to.push(process.env.BACKUP_EMAIL);
     }
 
@@ -77,7 +83,7 @@ var fetchShifts = function (cb) {
       cb(err);
     }
 
-    if(!data || !data.feed || !data.feed.entry.length) { cb(new Error('invalid format')); return; }
+    if(!data || !data.feed || !data.feed.entry || !data.feed.entry.length) { cb(new Error('invalid format')); return; }
 
     var shifts = _.map(data.feed.entry, function (entry) {
 
