@@ -18,7 +18,7 @@ define([
       contentType: 'application/json',
       dataType: 'json',
       cache: false,
-      timeout: 1000,
+      timeout: 10000,
       statusCode: {
         400: dispatcher.dispatch.bind(undefined, actions.BAD_REQUEST),
         401: dispatcher.dispatch.bind(undefined, actions.UNAUTHORIZED),
