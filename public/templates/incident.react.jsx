@@ -104,6 +104,7 @@ define([
               <button className={!!_.contains(this.state.status, 'CALLED_OWNER') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_OWNER">Called Owner</button>
               <button className={!!_.contains(this.state.status, 'CALLING_POLICE') ? 'disabled' : '' } onClick={this._onAction} value="CALLING_POLICE">Calling Police</button>
               <button className={!!_.contains(this.state.status, 'CALLED_POLICE') ? 'disabled' : '' } onClick={this._onAction} value="CALLED_POLICE">Called Police</button>
+              <button className={!!_.contains(this.state.status, 'FALSE_ALARM') ? 'disabled' : '' } onClick={this._onAction} value="FALSE_ALARM">False Alarm</button>
             </div>
           </div>
           <div className="taps">
