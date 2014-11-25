@@ -1,6 +1,8 @@
 define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (dispatcher, actions, store, timelineStore) {
   'use strict';
 
+  var _xhr;
+
   var timeline = {
 
     fetchTimeline: function (options) {
@@ -23,14 +25,16 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
         }
 
         console.log(params);
+        if(!!_xhr) { _xhr.abort(); }
 
-        $.ajax({
+        _xhr = $.ajax({
           type: 'GET',
           headers: {
             authorization: store.get().access_token,
           },
           url: '/incidents/timeline?' + params,
-          success: function (data) { resolve(data); }
+          success: function (data) { resolve(data); },
+          error: reject
         });
       });
 
@@ -47,6 +51,19 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
         dispatcher.dispatch(actions.REQUEST_UNPDATES, {
           timestamp: _.max(timelineStore.get(), function (incident) { return incident.created_at; }).created_at
         });
+      }, function (error) {
+        console.log(error);
+        if(!error) { return; }
+        switch(error.statusText) {
+          case 'timeout':
+            dispatcher.dispatch(actions.REQUEST_TIMEOUT);
+            break;
+          case 'abort':
+            break;
+          default:
+            dispatcher.dispatch(actions.CONNECTION_LOST);
+            break;
+        }
       });
     },
 
@@ -73,13 +90,16 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
 
         console.log(params);
 
-        $.ajax({
+        if(!!_xhr) { _xhr.abort(); }
+
+        _xhr = $.ajax({
           type: 'GET',
           headers: {
             authorization: store.get().access_token,
           },
           url: '/incidents/timeline?' + params,
-          success: function (data) { resolve(data); }
+          success: function (data) { resolve(data); },
+          error: reject
         });
       });
 
@@ -91,6 +111,19 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
           incidents: incidents,
           options: { remove: !options }
         });
+      }, function (error) {
+        console.log(error);
+        if(!error) { return; }
+        switch(error.statusText) {
+          case 'timeout':
+            dispatcher.dispatch(actions.REQUEST_TIMEOUT);
+            break;
+          case 'abort':
+            break;
+          default:
+            dispatcher.dispatch(actions.CONNECTION_LOST);
+            break;
+        }
       });
     },
   };

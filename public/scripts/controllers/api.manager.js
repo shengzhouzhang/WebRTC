@@ -18,6 +18,7 @@ define([
       contentType: 'application/json',
       dataType: 'json',
       cache: false,
+      timeout: 10000,
       statusCode: {
         400: dispatcher.dispatch.bind(undefined, actions.BAD_REQUEST),
         401: dispatcher.dispatch.bind(undefined, actions.UNAUTHORIZED),
@@ -45,8 +46,13 @@ define([
 
   dispatcher.register(actions.REQUEST_TIMEOUT, function () {
     dispatcher.dispatch(actions.UPDATE_MESSAGE, {
-      message: 'action failed, please try again...' , type: 'error'
+      message: 'request timeout, please try again...' , type: 'error'
     });
   });
 
+  dispatcher.register(actions.CONNECTION_LOST, function () {
+    dispatcher.dispatch(actions.UPDATE_MESSAGE, {
+      message: 'connection lost, please try again...' , type: 'error'
+    });
+  });
 });
