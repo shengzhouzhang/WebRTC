@@ -71,6 +71,15 @@
         & {
           display: inline-block;
         }
+
+        &.shown-title {
+          .icon--logo-text {
+            display: none;
+          }
+          .title {
+            line-height: @header-height - 20;
+          }
+        }
       }
 
       span {

@@ -42,7 +42,7 @@ define(['dispatcher', 'actions'],
           <div className="backbtn"><a href="#" onClick={this._back}><i className="fa fa-chevron-left"></i></a></div>
           <div className="brand">
             <span className="icon--logo-text"></span>
-            <span>Incident Response Center</span>
+            <span className="title">Incident Response Center</span>
           </div>
           <div className="actions">
             <a href="#" className="alarm" onClick={this._refresh}><i className="fa fa-bell-o"></i></a>
@@ -66,12 +66,14 @@ define(['dispatcher', 'actions'],
       dispatcher.register(actions.ALARM_OFF, _component.alarmOff);
     },
 
-    render: function (page, back) {
+    render: function (page) {
       $(_container).addClass('shown');
       switch(page) {
         case 'TIMELINE_VIEW':
           $(_container).find('.menu').show();
           $(_container).find('.backbtn').hide();
+          $(_container).find('.brand').removeClass('shown-title');
+          $(_container).find('.brand .title').html('Incident Response Center');
           break;
         case 'INCIDENT_VIEW':
           $(_container).find('.menu').hide();
@@ -80,9 +82,10 @@ define(['dispatcher', 'actions'],
         case 'MYCASES_VIEW':
           $(_container).find('.menu').show();
           $(_container).find('.backbtn').hide();
+          $(_container).find('.brand ').addClass('shown-title');
+          $(_container).find('.brand .title').html('My Cases');
           break;
       }
-      _previous = back;
     }
   };
 
