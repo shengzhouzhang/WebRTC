@@ -71,8 +71,8 @@ var fetchShifts = function (cb) {
     url: 'https://spreadsheets.google.com/feeds/list/14x1aLp9a6_Lwai0TI-lA46F7ROsGlCQ19I0wJ60Kn78/od6/public/values?alt=json',
     method: 'GET',
   }, function (err, response, body) {
-    if(!!err) { logger.error('fetch shifts', err); cb(err); }
-    if(!body) { cb(new Error ('empty data')); }
+    if(!!err) { logger.error('fetch shifts', err); cb(err); return; }
+    if(!body) { cb(new Error ('empty data')); return; }
 
     var data;
 
@@ -80,7 +80,7 @@ var fetchShifts = function (cb) {
       data = JSON.parse(body)
     } catch (err) {
       logger.error('fetch shifts', err);
-      cb(err);
+      cb(err); return;
     }
 
     if(!data || !data.feed || !data.feed.entry || !data.feed.entry.length) { cb(new Error('invalid format')); return; }
