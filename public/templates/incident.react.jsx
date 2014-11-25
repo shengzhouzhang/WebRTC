@@ -84,20 +84,22 @@ define([
         this.state.status = [action];
       }
 
+      var address = [
+        this.state.home.address.street || '',
+        this.state.home.address.city || '',
+        this.state.home.address.postcode || '',
+        this.state.home.address.country || ''
+      ].join(' ').trim();
+
+      if(!address) {
+        address = 'unknown address';
+      }
+
       return (
         <div>
           <div className="header">
-            <div className="address">
-              <div><span>{[
-                this.state.home.address.street || 'Unknown Street',
-                this.state.home.address.city || 'Unknown City',
-                this.state.home.address.postcode || 'Unknown Postcode',
-                this.state.home.address.country || 'Unknown Country'
-                ].join(' ')}</span></div>
-            </div>
-            <div className="contact">
-              {contacts}
-            </div>
+            <div className="address">{address}</div>
+            <div className="contact">{contacts}</div>
             <div className="actions">
               <button className={!!_.contains(this.state.status, action) ? 'disabled' : '' } onClick={this._onAction} value={action}>{ action === 'CALL_OWNER' ? 'Call Owner' : 'Call Police'}</button>
               <button className={!!_.contains(this.state.status, 'CALLING_OWNER') ? 'disabled' : '' } onClick={this._onAction} value="CALLING_OWNER">Calling Owner</button>

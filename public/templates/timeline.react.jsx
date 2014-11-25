@@ -33,19 +33,21 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
 
       var style = 'incident ' + this.props.style;
 
+      var address = [
+        this.props.home.address.street || '',
+        this.props.home.address.city || '',
+        this.props.home.address.postcode || '',
+        this.props.home.address.country || ''
+      ].join(' ').trim();
+
+      if(!address) {
+        address = 'unknown address';
+      }
+
       return (
         <div className={style} onClick={this._onClick} >
           <div className="cover" style={{backgroundImage: 'url(' + this.props.event.cover + ')'}}></div>
-          <div className="address">
-            {
-              [
-                this.props.home.address.street || 'Unknown Street',
-                this.props.home.address.city || 'Unknown City',
-                this.props.home.address.postcode || 'Unknown Postcode',
-                this.props.home.address.country || 'Unknown Country'
-              ].join(' ')
-            }
-          </div>
+          <div className="address">{address}</div>
           <div className="owner">{owner}</div>
           <div className={status}></div>
           <div className="timestamp">
