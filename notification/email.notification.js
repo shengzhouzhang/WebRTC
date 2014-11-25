@@ -8,8 +8,8 @@ var _ = require('lodash'),
     logger = require('../util/log/application.log').logger;
 
 var options = {
-  from: 'steven@cammy.com',
-  to: 'steven@cammy.com',
+  from: 'irc@cammy.com',
+  to: 'team@cammy.com',
   subject: '[Cammy-IRC] New Incident Notification',
   template: 'new-incident'
 };
