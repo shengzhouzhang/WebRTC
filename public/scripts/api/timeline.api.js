@@ -53,6 +53,7 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
         });
       }, function (error) {
         console.log(error);
+        dispatcher.dispatch(actions.STOP_LOADING);
         if(!error) { return; }
         switch(error.statusText) {
           case 'timeout':
@@ -113,6 +114,7 @@ define(['dispatcher', 'actions', 'user.store', 'timeline.store'], function (disp
         });
       }, function (error) {
         console.log(error);
+        dispatcher.dispatch(actions.STOP_LOADING);
         if(!error) { return; }
         switch(error.statusText) {
           case 'timeout':
