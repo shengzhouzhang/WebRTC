@@ -31,8 +31,32 @@ var authenticate = function (req, res) {
   });
 };
 
+var create = function (req, res) {
+
+  var access_token = req.query.access_token,
+  user = req.body;
+
+  if(!access_token || access_token !== '542222e11fe800ef1332a6a6') {
+    res.header('Access-Control-Allow-Origin', '*')
+    .status(401)
+    .json({error: 'invalid access token'});
+    return;
+  }
+
+  users.add(user, function (err, result) {
+    if(!!err || !result) {
+      logger.error('create user', err.stack, result);
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    res.status(200).json(result);
+    logger.info('create user', result);
+  });
+};
+
 var router = express.Router();
 
 router.post('/authenticate', authenticate);
+router.post('/', create);
 
 module.exports.router = router;
