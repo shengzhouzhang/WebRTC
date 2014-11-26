@@ -26,7 +26,7 @@ define([
   });
 
   dispatcher.register(actions.LOGIN_FAILED, function (options) {
-    dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'invalid username or password' });
+    dispatcher.dispatch(actions.UPDATE_MESSAGE, { message: 'invalid username or password', type: 'error' });
   });
 
   dispatcher.register(actions.UNAUTHORIZED, dispatcher.dispatch.bind(undefined, actions.TO_LOGIN_VIEW));

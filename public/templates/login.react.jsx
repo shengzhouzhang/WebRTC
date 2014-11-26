@@ -67,6 +67,8 @@ define(['dispatcher', 'actions'],
         Login(null),
         _container
       );
+
+      dispatcher.register(actions.LOGIN_FAILED, _component._enable.bind(undefined));
     }
   };
 
