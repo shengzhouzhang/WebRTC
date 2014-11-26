@@ -13,7 +13,8 @@ define(['dispatcher', 'actions'],
           React.DOM.span({className: !!this.props.phone && this.props.phone.trim() ? "phone" : "hidden"}, 
             React.DOM.a({href: 'tel:' + this.props.phone}, this.props.phone)
           ), 
-          React.DOM.span({className: !!this.props.email && this.props.email.trim() ? "email" : "hidden"}, this.props.email)
+          React.DOM.span({className: !!this.props.email && this.props.email.trim() ? "email" : "hidden"}, 
+            React.DOM.a({href: 'mailto:' + this.props.email}, this.props.email))
         )
       );
     }

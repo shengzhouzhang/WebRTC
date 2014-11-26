@@ -116,7 +116,7 @@ var create = function (incident) {
         first_name: contact.first_name.trim(),
         last_name: contact.last_name.trim(),
         owner: contact.owner,
-        phone: contact.phone,
+        phone: _.isString(contact.phone) ? contact.phone.trim() : contact.phone,
         email: _.isString(contact.email) ? contact.email.trim() : undefined
       };
     }),
