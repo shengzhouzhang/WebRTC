@@ -34,13 +34,13 @@ define([
 
   dispatcher.register(actions.BAD_REQUEST, function () {
     dispatcher.dispatch(actions.UPDATE_MESSAGE, {
-      message: 'action failed, please try again...' , type: 'error'
+      message: 'server error, please try again...' , type: 'error'
     });
   });
 
   dispatcher.register(actions.NOT_FOUND, function () {
     dispatcher.dispatch(actions.UPDATE_MESSAGE, {
-      message: 'action failed, please try again...' , type: 'error'
+      message: 'couldn\'t find resource, please try again...' , type: 'error'
     });
   });
 
