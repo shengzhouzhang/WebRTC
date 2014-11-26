@@ -12,7 +12,7 @@ CACHE MANIFEST
 //cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js
 //cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.map
 
-//cdnjs.cloudflare.com/ajax/libs/react/0.11.1/react.js
+//cdnjs.cloudflare.com/ajax/libs/react/0.11.1/react.min.js
 //cdnjs.cloudflare.com/ajax/libs/require.js/2.1.15/require.min.js
 
 http://fonts.googleapis.com/css?family=Dosis:300
