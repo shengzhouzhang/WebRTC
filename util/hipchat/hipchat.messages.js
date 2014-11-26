@@ -15,10 +15,7 @@ var sendMessage = function (msg, cb) {
         method: 'POST',
       };
 
-  console.log(options);
-
   request(options, function (err, response, body) {
-    console.log(err, body);
     if(!!err) { logger.error('hipchat', err); }
     if(!!cb) { cb(err, response); }
   });
