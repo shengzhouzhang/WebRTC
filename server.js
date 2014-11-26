@@ -18,4 +18,7 @@ websocket.bind(server);
 
 server.listen(process.env.PORT || 3000, function () {
   console.log('Servers listening on ' + (process.env.PORT || 3000));
+  console.log('environment ' + (process.env.NODE_ENV || 'development'));
+  console.log('mongodb ' + (process.env.MONGODB_URI || ''));
+  console.log('redis ' + [process.env.REDIS_HOST, process.env.REDIS_PORT].join(':'));
 });
