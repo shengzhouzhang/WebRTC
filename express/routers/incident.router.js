@@ -15,6 +15,16 @@ var _ = require('lodash'),
 
 var router = express.Router();
 
+var _headers = function (req, res, next) {
+
+  res.header('Access-Control-Allow-Origin' , '*')
+  .header('Cache-Control' , 'no-cache, no-store, must-revalidate')
+  .header('Pragma' , 'no-cache')
+  .header('Expires' , 0);
+
+  next();
+};
+
 var _authorize = function (req, res, next) {
 
   var access_token = req.headers['authorization'] || req.query.access_token;
@@ -66,10 +76,10 @@ var _validate = function (req, res, next) {
   }
 };
 
-router.post('/', [_authorize, _validate], routes.create);
-router.get('/timeline', [_authenticate], routes.timeline);
-router.get('/:id', [_authenticate], routes.details);
-router.put('/:id/status', [_authenticate], routes.updateStatus);
-router.post('/:id/notes', [_authenticate], routes.notes.add);
+router.post('/', [_authorize, _validate, _headers], routes.create);
+router.get('/timeline', [_authenticate, _headers], routes.timeline);
+router.get('/:id', [_authenticate, _headers], routes.details);
+router.put('/:id/status', [_authenticate, _headers], routes.updateStatus);
+router.post('/:id/notes', [_authenticate, _headers], routes.notes.add);
 
 module.exports.router = router;

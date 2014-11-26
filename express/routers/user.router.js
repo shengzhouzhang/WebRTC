@@ -37,9 +37,7 @@ var create = function (req, res) {
   user = req.body;
 
   if(!access_token || access_token !== '542222e11fe800ef1332a6a6') {
-    res.header('Access-Control-Allow-Origin', '*')
-    .status(401)
-    .json({error: 'invalid access token'});
+    res.status(401).json({error: 'invalid access token'});
     return;
   }
 
@@ -54,9 +52,19 @@ var create = function (req, res) {
   });
 };
 
+var _headers = function (req, res, next) {
+
+  res.header('Access-Control-Allow-Origin' , '*')
+  .header('Cache-Control' , 'no-cache, no-store, must-revalidate')
+  .header('Pragma' , 'no-cache')
+  .header('Expires' , 0);
+
+  next();
+};
+
 var router = express.Router();
 
-router.post('/authenticate', authenticate);
-router.post('/', create);
+router.post('/authenticate', [_headers], authenticate);
+router.post('/', [_headers], create);
 
 module.exports.router = router;
