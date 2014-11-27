@@ -2,6 +2,7 @@
 'use strict';
 
 var _ = require('lodash'),
+    moment = require('moment'),
     Promise = require('promise'),
     incidents = require('../util/mongo/mongo.client').db.incidents,
     dispatcher = require('../dispatcher/dispatcher').dispatcher,
@@ -28,10 +29,14 @@ var store = {
     if(!options) { throw new Error ('missing options'); }
 
     return new Promise(function (resolve, reject) {
+      var start, end;
+
+      if(!!process.env.SPEED_TEST) { start = Date.now(); }
 
       incidents.find(options)
       .sort({ created_at: -1 })
       .limit(9, function (err, result) {
+        if(!!process.env.SPEED_TEST) { end = Date.now(); logger.info('find', (end - start) / 1000); }
         if(!!err) { reject(reject); return; }
         resolve(result);
       });
