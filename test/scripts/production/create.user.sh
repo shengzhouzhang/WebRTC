@@ -6,3 +6,4 @@ curl -H "Content-Type: application/json" -d '{"username": "jason@cammy.com", "pa
 curl -H "Content-Type: application/json" -d '{"username": "sarah@cammy.com", "password": "Amyrose4"}' http://irc.cammy.com/user?access_token=542222e11fe800ef1332a6a6
 curl -H "Content-Type: application/json" -d '{"username": "jonathan@cammy.com", "password": "cYyNkA"}' http://irc.cammy.com/user?access_token=542222e11fe800ef1332a6a6
 curl -H "Content-Type: application/json" -d '{"username": "tony@cammy.com", "password": "5KbWCn"}' http://irc.cammy.com/user?access_token=542222e11fe800ef1332a6a6
+curl -H "Content-Type: application/json" -d '{"username": "dom@cammy.com", "password": "rubymay2"}' http://irc.cammy.com/user?access_token=542222e11fe800ef1332a6a6
