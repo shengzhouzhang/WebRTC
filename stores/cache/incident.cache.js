@@ -17,7 +17,7 @@ var cache = {
     return new Promise(function (resolve, reject) {
 
       redis.zadd(_DB, incident.created_at, JSON.stringify(incident), function (err, result) {
-        if(!!err) { reject(reject); return; }
+        if(!!err) { reject(err); return; }
         resolve(result);
       });
     }.bind(this));
