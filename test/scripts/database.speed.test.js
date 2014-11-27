@@ -30,7 +30,7 @@ var from = 0, to = Date.now();
 Promise.all([
   call({
     query: { created_at:  { $gt: from, $lt: to } },
-    mongodb: 'mongodb://cammy:cammy@galaga.2.mongolayer.com:10011,galaga.3.mongolayer.com:10008/cammy-irc-production'
+    mongodb: 'mongodb://cammy:cammy@galaga.2.mongolayer.com:10011,galaga.3.mongolayer.com:10008/cammy-irc-us'
   }),
   call({
     query: { created_at:  { $gt: from, $lt: to } },
