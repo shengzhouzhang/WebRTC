@@ -82,20 +82,20 @@ dispatcher.register(dispatcher.actions.UPDATE_INCIDENT, store.update.bind(store)
 
 dispatcher.register(dispatcher.actions.REQUEST_TIMELINE, function (options) {
 
-  if(!options.notes) {
-    return cache.find({
-      max: options.created_at['$lt'],
-      min: options.created_at['$gt'],
-      count: 9
-    }).then(function (result) {
-      logger.info('cache', result.length);
-      return result;
-    }, function (err) {
-      return store.find(options);
-    });
-  } else {
-    return store.find(options);
-  }
+  // if(!options.notes) {
+  //   return cache.find({
+  //     max: options.created_at['$lt'],
+  //     min: options.created_at['$gt'],
+  //     count: 9
+  //   }).then(function (result) {
+  //     logger.info('cache', result.length);
+  //     return result;
+  //   }, function (err) {
+  //     return store.find(options);
+  //   });
+  // }
+
+  return store.find(options);
 });
 
 module.exports.store = store;
