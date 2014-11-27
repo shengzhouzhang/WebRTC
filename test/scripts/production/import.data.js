@@ -1,0 +1,36 @@
+
+'use strict';
+
+
+process.env.NODE_ENV = 'production';
+
+require('../../../process/process.env');
+
+
+var _ = require('lodash'),
+    moment = require('moment'),
+    store = require('../../../stores/incident.store').store,
+    cache = require('../../../stores/cache/incident.cache').cache;
+
+store.find({
+  created_at:  {
+    $gt: moment().subtract(1, 'day').valueOf(),
+    $lt: moment().valueOf()
+  }
+}).then(function (incidents) {
+  console.log(incidents.length);
+
+  var _promise = [];
+
+  _.each(incidents, function (incident) {
+    _promise.push(cache.add(incident));
+  });
+
+  Promise.all(_promise).then(function (result) {
+    console.log('result', result);
+    process.eixt();
+  }, function (err) {
+    console.log('err', err);
+    process.eixt();
+  })
+});
