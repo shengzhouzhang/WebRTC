@@ -9,7 +9,6 @@ var _ = require('lodash'),
     logger = require('../util/log/application.log').logger;
 
 require('./channels/incident.channel');
-var cache = require('./cache/incident.cache').cache;
 
 var store = {
 
