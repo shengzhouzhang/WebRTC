@@ -14,7 +14,7 @@ var _ = require('lodash'),
 
 store.find({
   created_at:  {
-    $gt: moment().subtract(1, 'day').valueOf(),
+    $gt: moment().subtract(7, 'days').valueOf(),
     $lt: moment().valueOf()
   }
 }).then(function (incidents) {
@@ -23,7 +23,7 @@ store.find({
   var _promise = [];
 
   _.each(incidents, function (incident) {
-    _promise.push(cache.add(incident));
+    _promise.push(cache.update(incident));
   });
 
   Promise.all(_promise).then(function (result) {
