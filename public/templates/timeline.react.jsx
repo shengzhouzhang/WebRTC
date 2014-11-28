@@ -120,7 +120,7 @@ define(['dispatcher', 'actions', 'timeline.store', 'border.component'],
 
     render: function () {
       var incidents = _.map(this.state.timeline, function (incident, index) {
-
+        console.log('source', incident.source);
         return (
           <Incident key={incident.id} style={incident.style} home={incident.home} status={incident.status} contacts={incident.contacts} action={incident.action} event={incident.event} createdAt={incident.created_at} />
         );

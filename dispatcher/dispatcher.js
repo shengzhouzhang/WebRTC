@@ -20,6 +20,9 @@ var dispatcher = {
     NEW_INCIDENT: 'NEW_INCIDENT',
     STATUS_UPDATED: 'STATUS_UPDATED',
 
+    // cache
+    UPDATE_CACHE: 'UPDATE_CACHE',
+
 
     // channels
 

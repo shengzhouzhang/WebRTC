@@ -12,17 +12,6 @@ var _DB = 'INCIDENTS_CACHE';
 
 var cache = {
 
-  add: function (incident) {
-    if(!incident || !incident.id) { throw new Error ('invalid incident data'); }
-    return new Promise(function (resolve, reject) {
-
-      redis.zadd(_DB, incident.created_at, JSON.stringify(incident), function (err, result) {
-        if(!!err) { reject(err); return; }
-        resolve(result);
-      });
-    }.bind(this));
-  },
-
   find: function (options) {
     if(!options) { throw new Error ('missing options'); }
 
@@ -34,6 +23,7 @@ var cache = {
 
       redis.zrevrangebyscore(_DB, '(' + max, min, 'LIMIT', 0, count, function (err, result) {
         if(!!err) { logger.error(err.stack || err); reject(err); return; }
+        if(_.isNumber(max) && result.length !== count) { reject(); return; }
 
         var incidents = [];
 
@@ -45,19 +35,38 @@ var cache = {
             incident = JSON.parse(item);
           } catch (err) {
           }
-          
-          if(!!incident) { incidents.push(incident) }
-        })
 
-        if(!incidents.length) { reject(); return; }
+          if(!!incident) { incident.source = _DB; incidents.push(incident); }
+        });
+
         resolve(incidents);
       });
 
     }.bind(this));
+  },
+
+  update: function (incident) {
+    if(!incident || !incident.id) { throw new Error ('invalid incident data'); }
+
+    return new Promise(function (resolve, reject) {
+      if(!this.isCached(incident)) { resolve(); return; }
+
+      redis.multi()
+      .zremrangebyscore(_DB, incident.created_at, incident.created_at)
+      .zadd(_DB, incident.created_at, JSON.stringify(incident))
+      .exec(function (err, result) {
+        if(!!err) { logger.error(err.stack || err); reject(err); return; }
+        resolve();
+      }.bind(this));
+    }.bind(this));
+  },
+
+  isCached: function (incident) {
+    if(!incident || !incident.created_at) { throw new Error ('invalid incident data'); }
+    return moment(incident.created_at).valueOf() > moment().subtract(7, 'days').valueOf();
   }
 };
 
-
-dispatcher.register(dispatcher.actions.ADD_INCIDENT, cache.add.bind(cache));
+dispatcher.register(dispatcher.actions.UPDATE_CACHE, cache.update.bind(cache));
 
 module.exports.cache = cache;

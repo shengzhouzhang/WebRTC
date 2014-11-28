@@ -46,6 +46,7 @@ var timeline = function (req, res) {
           cover: incident.event.cover
         },
         created_at: incident.created_at,
+        source: incident.source || 'DB'
       };
     }));
 
