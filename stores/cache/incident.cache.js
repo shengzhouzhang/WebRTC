@@ -4,6 +4,7 @@
 var _ = require('lodash'),
     moment = require('moment'),
     Promise = require('promise'),
+    status = require('../../static/incident.store').status,
     redis = require('../../util/redis/redis.client').client,
     dispatcher = require('../../dispatcher/dispatcher').dispatcher,
     logger = require('../../util/log/application.log').logger;
@@ -61,9 +62,20 @@ var cache = {
     }.bind(this));
   },
 
+  clear: function (date) {
+    if(!date) { throw new Error ('missing options'); }
+
+    return new Promise(function (resolve, reject) {
+      redis.zremrangebyscore(_DB, '-inf', date, function (err, result) {
+        if(!!err) { logger.error(err.stack || err); reject(err); return; }
+        resolve(result);
+      }.bind(this));
+    }.bind(this));
+  },
+
   isCached: function (incident) {
     if(!incident || !incident.created_at) { throw new Error ('invalid incident data'); }
-    return moment(incident.created_at).valueOf() > moment().subtract(7, 'days').valueOf();
+    return moment(incident.created_at).valueOf() > moment().subtract(status.CACHE_DAYS || 7, 'days').valueOf();
   }
 };
 
